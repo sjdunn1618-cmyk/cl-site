@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brooks Customer Loyalty</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#111315">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Brooks CL">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a dark scoreboard in Brooks colors. A pending-cancel banner, a sticky top bar
+   (Leaderboard, Tiers, Agents), then continuous ranked tables: one surface per board,
+   rows separated by hairlines, tier shown by a colored edge and a quiet pill. */
+:root{
+  --bg:#111315; --panel:#171a1d; --panel-2:#1e2327; --line:#262c31; --line-2:#323a40;
+  --fg:#ece7da; --muted:#8e989e; --accent:#8fb3c8; --accent-ink:#0f1a20;
+  --gold:#d9b86a; --silver:#b9c3c9; --bronze:#c08a62;
+  --t1:#4fbf72; --t2:#a9dca0; --t3:#5d676d;
+  --good:#7fc79a; --bad:#e08a7c; --warn:#e2c068;
+  --display:"Saira Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:0 calc(64px + env(safe-area-inset-bottom,0px))}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Banner */
+.banner{background:var(--accent);color:var(--accent-ink)}
+.banner-in{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:7px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.banner b{font-family:var(--display);font-size:20px;letter-spacing:.02em;line-height:1}
+
+/* Top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:12px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;margin-right:auto}
+.brand img{width:38px;height:38px}
+.brand-name{font-family:var(--display);font-weight:700;font-size:24px;letter-spacing:.08em;line-height:1}
+.brand-sub{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-top:3px}
+nav{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px}
+nav button{background:none;border:0;padding:7px 16px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14px;color:var(--muted)}
+nav button[aria-current="page"]{background:var(--accent);color:var(--accent-ink)}
+nav button:hover:not([aria-current="page"]){color:var(--fg)}
+
+.status{font-size:12px;color:var(--muted);padding-block:14px 0;display:flex;gap:8px;align-items:center}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--good)}
+.dot.off{background:var(--warn)}
+
+/* Section headers */
+.sec{margin-top:40px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin-bottom:14px}
+h2{font-family:var(--display);font-weight:700;font-size:34px;letter-spacing:.02em;line-height:1;margin:0;text-transform:uppercase;text-wrap:balance}
+.range{font-size:13px;color:var(--muted);margin-top:6px}
+.seg{display:flex;gap:2px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:3px;flex-wrap:wrap}
+.seg button{background:none;border:0;padding:6px 12px;border-radius:7px;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--panel-2);color:var(--fg);box-shadow:inset 0 0 0 1px var(--line-2)}
+.how{font-size:12.5px;color:var(--muted);margin:10px 2px 0;max-width:72ch}
+.empty{border:1px dashed var(--line-2);border-radius:12px;padding:26px;text-align:center;color:var(--muted)}
+
+/* One continuous table */
+.board{background:var(--panel);border-radius:14px;overflow-x:auto}
+.board table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+.board th,.board td{padding:8px 14px;text-align:right;white-space:nowrap}
+.board thead th{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;padding-block:12px 10px;border-bottom:1px solid var(--line-2)}
+.board tbody tr + tr td{border-top:1px solid var(--line)}
+.board th.l,.board td.l{text-align:left}
+.board td.rk{width:44px;text-align:center;font-family:var(--display);font-weight:700;font-size:16px;color:var(--muted)}
+.board tr.m1 td.rk{color:var(--gold)} .board tr.m2 td.rk{color:var(--silver)} .board tr.m3 td.rk{color:var(--bronze)}
+.board td.nm{font-weight:600;white-space:normal;min-width:140px;font-size:14px}
+.board td.nm small{display:block;font-weight:500;font-size:12px;color:var(--muted);margin-top:1px}
+.board td.big{font-family:var(--display);font-size:18px;font-weight:700}
+.board td .pts{display:block;font-size:11.5px;color:var(--muted);font-weight:500}
+.board td .pts b{color:var(--accent);font-weight:700}
+.board tr.total td{background:var(--panel-2);color:var(--muted);font-weight:600;border-top:1px solid var(--line-2)}
+.board tr.total td.nm{text-transform:uppercase;letter-spacing:.1em;font-size:12px}
+.board td.bar-cell{width:30%;min-width:120px}
+.bar{height:6px;border-radius:99px;background:var(--panel-2);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:var(--accent)}
+
+/* Tier rows: colored left edge, leader tint, heavier line where a tier starts */
+.tiers tbody tr td:first-child{box-shadow:inset 4px 0 0 var(--tc)}
+.tiers tr.lead{--tc:var(--gold);background:color-mix(in srgb,var(--gold) 13%,transparent)}
+.tiers tr.t1{--tc:var(--t1);background:color-mix(in srgb,var(--t1) 11%,transparent)} .tiers tr.t2{--tc:var(--t2);background:color-mix(in srgb,var(--t2) 6%,transparent)} .tiers tr.t3{--tc:var(--t3)}
+.tiers tr.lead td.rk,.tiers tr.t1 td.rk,.tiers tr.t2 td.rk{color:var(--tc)}
+.tiers tbody tr.brk td{border-top:1px solid var(--line-2)}
+.tiers tr.lead td.nm{font-size:15px}
+.pill{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:99px;color:var(--tc);background:color-mix(in srgb,var(--tc) 14%,transparent)}
+.reward{font-family:var(--display);font-size:16px;font-weight:700;color:var(--tc)}
+.legend{display:flex;gap:6px 12px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;align-items:center}
+.legend > span{--tc:var(--muted)}
+.legend > .lead{--tc:var(--gold)} .legend > .t1{--tc:var(--t1)} .legend > .t2{--tc:var(--t2)} .legend > .t3{--tc:var(--t3)}
+
+/* Save % trio: three ranked lists side by side */
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.slist{background:var(--panel);border-radius:12px;overflow:hidden;min-width:0}
+.slist h4{margin:0;padding:9px 12px 8px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;border-bottom:1px solid var(--line-2);display:flex;justify-content:space-between;gap:6px}
+.slist h4 span{color:var(--fg);letter-spacing:0;font-family:var(--display);font-size:13px}
+.srow{display:grid;grid-template-columns:22px minmax(0,1fr) auto;align-items:center;gap:6px;padding:6px 12px;font-variant-numeric:tabular-nums}
+.srow + .srow{border-top:1px solid var(--line)}
+.srow .r{font-family:var(--display);font-weight:700;font-size:14px;color:var(--muted);text-align:center}
+.srow.m1 .r{color:var(--gold)} .srow.m2 .r{color:var(--silver)} .srow.m3 .r{color:var(--bronze)}
+.srow .n{font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow .n .short{display:none}
+.srow .v{font-family:var(--display);font-weight:700;font-size:16px;text-align:right}
+.srow .v small{display:block;font-family:var(--body);font-size:10.5px;font-weight:500;color:var(--muted);line-height:1.1}
+
+/* Prizes */
+.plist{margin-top:10px}
+.board td.gold{color:var(--gold);width:56px}
+.board tr.next td{background:var(--panel-2)}
+.board tr.next td.big{color:var(--muted)}
+
+/* Highlights */
+.hl{background:var(--panel);border-radius:14px;padding:22px 24px;max-width:72ch}
+.hl h3{font-family:var(--display);font-size:26px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;margin:0 0 12px;text-wrap:balance;line-height:1.05}
+.hl p{margin:0 0 12px;font-size:15.5px;line-height:1.6}
+.hl p:last-child{margin-bottom:0}
+.hl b.tok{color:var(--gold);font-weight:700}
+
+/* Agents */
+.agents{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--line);border-radius:14px;overflow:hidden}
+.agent{display:flex;align-items:center;gap:12px;background:var(--panel);border:0;padding:14px 16px;cursor:pointer;text-align:left;min-width:0}
+.agent:hover{background:var(--panel-2)}
+.ini{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--panel-2);font-family:var(--display);font-weight:700;font-size:17px;color:var(--accent);letter-spacing:.04em}
+.agent .an{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.agent .as{font-size:12px;color:var(--muted);display:block}
+.lock{margin-left:auto;color:var(--muted);flex:none}
+
+/* PIN pad */
+.scrim{position:fixed;inset:0;background:rgba(5,7,8,.72);display:grid;place-items:center;z-index:20;padding:16px}
+.pad{background:var(--panel);border:1px solid var(--line-2);border-radius:18px;padding:24px;width:min(320px,100%);text-align:center}
+.pad h3{font-family:var(--display);font-size:26px;margin:0;text-transform:uppercase;letter-spacing:.03em}
+.pad p{color:var(--muted);font-size:13px;margin:6px 0 0}
+.dots{display:flex;justify-content:center;gap:12px;margin:20px 0}
+.dots i{width:14px;height:14px;border-radius:50%;border:2px solid var(--muted)}
+.dots i.on{background:var(--accent);border-color:var(--accent)}
+.dots.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.keys button{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 0;font-family:var(--display);font-size:24px;font-weight:600;cursor:pointer}
+.keys button:active{background:var(--line)}
+.keys .ghost{background:none;border-color:transparent;font-family:var(--body);font-size:13px;color:var(--muted)}
+.pad .err{color:var(--bad);font-size:13px;min-height:18px;margin-top:10px}
+.pad .mgr{background:none;border:0;color:var(--accent);font-size:12.5px;cursor:pointer;margin-top:4px}
+
+/* Rep page */
+.board td.hitv{color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent);font-weight:600}
+.board td.missv{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent);font-weight:600}
+.mins-note{margin:6px 0 0;font-size:13px;color:var(--muted)}
+.mins-note .g{color:var(--good);font-weight:700} .mins-note .r{color:var(--bad);font-weight:700}
+.mins-week{font-size:12px;color:var(--muted);margin-top:10px;letter-spacing:.04em}
+.mins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:8px}
+.min{--mc:var(--line-2);background:var(--panel);border:2px solid var(--mc);border-radius:12px;padding:12px 14px;min-width:0}
+.min.ok{--mc:var(--good);background:color-mix(in srgb,var(--good) 13%,var(--panel))}
+.min.bad{--mc:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--panel))}
+.min-k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.min-v{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.1;margin-top:4px;font-variant-numeric:tabular-nums}
+.min.ok .min-v{color:var(--good)} .min.bad .min-v{color:var(--bad)}
+.min-t{font-size:12.5px;color:var(--fg);margin-top:2px} .min-t b{font-weight:700}
+.min-s{font-size:12px;font-weight:700;margin-top:6px;color:var(--muted)}
+.min.ok .min-s{color:var(--good)} .min.bad .min-s{color:var(--bad)}
+.back{background:none;border:0;color:var(--accent);cursor:pointer;padding:0;font-weight:600;margin-top:28px}
+.rep-head{display:flex;align-items:center;gap:16px;margin-top:14px;flex-wrap:wrap}
+.rep-head .ini{width:56px;height:56px;font-size:24px}
+.rep-head h2{font-size:40px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border-radius:14px;overflow:hidden;margin-top:14px}
+.tiles.one{grid-template-columns:1fr}
+.tile{background:var(--panel);padding:14px 16px;min-width:0}
+.tile .k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.tile .v{font-family:var(--display);font-size:28px;font-weight:700;line-height:1.1;margin-top:6px;font-variant-numeric:tabular-nums}
+.tile .v small{font-size:15px;color:var(--muted)}
+.tile .s{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.chip{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--panel-2);color:var(--accent);margin-left:6px;vertical-align:middle;letter-spacing:.03em}
+.chip.hit{color:var(--good)} .chip.miss{color:var(--bad)}
+.soon{border:1px dashed var(--line-2);border-radius:12px;padding:18px;color:var(--muted);font-size:14px;margin-top:14px}
+.soon b{color:var(--fg)}
+.hist{display:grid;gap:1px;background:var(--line);border-radius:12px;overflow:hidden;margin-top:12px}
+.hist details{background:var(--panel)}
+.hist summary{cursor:pointer;padding:10px 14px;font-weight:600;display:flex;justify-content:space-between;gap:10px}
+.hist .hrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;padding:0 14px 12px}
+.hist .hrow div{font-size:13px;color:var(--muted)} .hist .hrow b{display:block;color:var(--fg);font-size:16px}
+h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter-spacing:.03em;margin:30px 0 0}
+
+@media (max-width:640px){
+  .wrap,.top-in,.banner-in{padding-inline:16px}
+  h2{font-size:28px}
+  nav{width:100%;justify-content:space-between} nav button{flex:1;padding-inline:4px;font-size:13px}
+  .hl{padding:18px}
+  .hl h3{font-size:22px}
+  .hl p{font-size:14.5px}
+  .board th,.board td{padding:7px 5px}
+  .board th:first-child,.board td:first-child{padding-left:10px}
+  .board th:last-child,.board td:last-child{padding-right:12px}
+  .board .hide-sm{display:none}
+  .board td.rk{width:26px;font-size:14px}
+  .board td.nm{min-width:0;font-size:13px}
+  .board td .pts{font-size:10.5px}
+  .board td{font-size:13px}
+  .board thead th{font-size:9.5px;letter-spacing:.08em}
+  .board td.nm small{font-size:11px}
+  .board td.big{font-size:16px}
+  .tiers tr.lead td.nm{font-size:13.5px}
+  .trio{gap:5px}
+  .slist h4{padding:8px 7px 7px;font-size:9px;letter-spacing:.06em;flex-direction:column;gap:1px}
+  .slist h4{padding-inline:5px}
+  .srow{grid-template-columns:13px minmax(0,1fr) auto;gap:3px;padding:5px 5px}
+  .srow .r{font-size:11.5px}
+  .srow .n{font-size:11.5px}
+  .srow .n .full{display:none} .srow .n .short{display:inline}
+  .srow .v{font-size:12.5px}
+  .srow .v small{display:none}
+  .rep-head h2{font-size:28px}
+  .rep-head .ini{width:44px;height:44px;font-size:19px}
+  h3.sub{font-size:19px;margin-top:22px}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:10px}
+  .tiles.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .mins{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+  .min{padding:9px 8px;border-width:2px}
+  .min-k{font-size:9px;letter-spacing:.06em}
+  .min-v{font-size:21px}
+  .min-t{font-size:10.5px}
+  .min-s{font-size:10px;margin-top:4px;line-height:1.25}
+  .tiles.three .tile .v{font-size:19px}
+  .tiles.three .tile{padding:9px 8px}
+  .tile{padding:10px 11px}
+  .tile .k{font-size:9.5px;letter-spacing:.08em}
+  .tile .v{font-size:23px}
+  .tile .v small{font-size:12px}
+  .tile .s{font-size:11px;line-height:1.3}
+  .chip{font-size:9.5px;padding:1px 6px;margin-left:4px}
+}
+@media (prefers-reduced-motion:reduce){.dots.shake{animation:none}}
+</style>
+
+<div class="banner" id="banner"><div class="banner-in"><span id="banner-label">Pending Cancel Count</span><b id="banner-val">–</b></div></div>
+
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <img alt="Brooks Pest Control" src="icon-192.png">
+      <div><div class="brand-name">BROOKS</div><div class="brand-sub">Customer Loyalty</div></div>
+    </div>
+    <nav aria-label="Sections">
+      <button id="nav-board" data-view="board" aria-current="page">Leaderboard</button>
+      <button id="nav-highlights" data-view="highlights">Highlights</button>
+      <button id="nav-tiers" data-view="tiers">Tiers</button>
+      <button id="nav-agents" data-view="agents">Agents</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="status" id="status"><span class="dot off"></span><span>Loading the latest numbers…</span></div>
+
+  <!-- LEADERBOARD -->
+  <section id="view-board">
+    <div class="sec">
+      <div class="sec-head">
+        <div><h2>Tier Rankings</h2><div class="range" id="tier-range">This week</div></div>
+        <div class="legend"><span class="lead"><span class="pill">Leader</span> +7</span><span class="t1"><span class="pill">Tier 1</span> +5</span><span class="t2"><span class="pill">Tier 2</span> +3</span><span class="t3"><span class="pill">Tier 3</span> +0</span></div>
+      </div>
+      <div id="tier-body"><div class="empty">This week's tiers appear here once the first sync runs.</div></div>
+      <p class="how">Rev/hr is worth up to 60 points and drops 3 per spot. Save % is worth up to 40 and drops 2 per spot. Most total points wins. Reward points are added to your balance when the week closes.</p>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head">
+        <div><h2>True Save %</h2><div class="range" id="save-range">Range loads with the data</div></div>
+      </div>
+      <div id="save-body"><div class="empty">Save rankings appear here once the first sync runs.</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head">
+        <div><h2>Renewal Rankings</h2><div class="range" id="ren-range">Signed renewals only</div></div>
+        <div class="seg" role="group" aria-label="Renewal range">
+          <button id="rn-cur" data-k="current" aria-pressed="true">Current Range</button>
+          <button id="rn-ytd" data-k="ytd" aria-pressed="false">YTD</button>
+        </div>
+      </div>
+      <div id="ren-body"><div class="empty">Renewal rankings appear here once the first sync runs.</div></div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section id="view-highlights" hidden>
+    <div class="sec">
+      <div class="sec-head"><div><h2>Weekly Highlights</h2><div class="range" id="hl-range">This week</div></div></div>
+      <div id="hl-body"><div class="empty">This week's highlights are on the way.</div></div>
+    </div>
+  </section>
+
+  <!-- TIERS -->
+  <section id="view-tiers" hidden>
+    <div class="sec">
+      <div class="sec-head"><div><h2>Point Balances</h2><div class="range">Reward points earned from weekly tiers, minus points cashed in.</div></div></div>
+      <div id="bal-body"><div class="empty">Point balances appear here once the first sync runs.</div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-head"><div><h2>Prizes</h2><div class="range">Cash in your points with your manager.</div></div></div>
+      <div id="prize-body"><div class="empty">The prize list appears here once prizes are added.</div></div>
+    </div>
+  </section>
+
+  <!-- AGENTS -->
+  <section id="view-agents" hidden>
+    <div id="agents-list" class="sec">
+      <div class="sec-head"><div><h2>Agents</h2><div class="range">Tap your name and enter your 4-digit PIN.</div></div></div>
+      <div class="agents" id="agents"><div class="empty">The team list appears here once the first sync runs.</div></div>
+    </div>
+    <div id="rep" hidden></div>
+  </section>
+</main>
+
+<div class="scrim" id="pin" hidden>
+  <div class="pad" role="dialog" aria-modal="true" aria-labelledby="pin-title">
+    <h3 id="pin-title">Agent</h3>
+    <p id="pin-hint">Enter your 4-digit PIN</p>
+    <div class="dots" id="dots"><i></i><i></i><i></i><i></i></div>
+    <div class="keys" id="keys"></div>
+    <div class="err" id="pin-err"></div>
+    <button class="mgr" id="pin-mgr">Use manager PIN</button>
+  </div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtPct = v => v == null ? "–" : (Math.round(v*10)/10) + "%";
+const fmtMoney = v => v == null ? "–" : "$" + Math.round(v).toLocaleString("en-US");
+const fmtRph = v => v == null ? "–" : "$" + v.toFixed(2);
+const fmtInt = v => v == null ? "–" : Math.round(v).toLocaleString("en-US");
+const first = n => esc(String(n).split(" ")[0]);
+const initials = n => n.split(/\s+/).map(w => w[0]).slice(0,2).join("").toUpperCase();
+const medal = r => r === 1 ? "m1" : r === 2 ? "m2" : r === 3 ? "m3" : "";
+const TIER_CLASS = {"Leader":"lead","Tier 1":"t1","Tier 2":"t2","Tier 3":"t3"};
+
+const state = { view:"board", saveK:"overall", renK:"current", saves:null, ren:null, tiers:null, attendance:null, highlights:null, points:null, banner:null, meta:null, access:null, agents:[], hasManager:false, payload:{}, keys:{}, mgrKey:null, current:null };
+
+/* ---------- views ---------- */
+const VIEWS = ["board","highlights","tiers","agents"];
+function show(view){
+  state.view = view;
+  for (const v of VIEWS){
+    $("#view-"+v).hidden = v !== view;
+    if (v === view) $("#nav-"+v).setAttribute("aria-current","page"); else $("#nav-"+v).removeAttribute("aria-current");
+  }
+  if (view === "agents" && !state.current) closeRep();
+  try { localStorage.setItem("cl-view", view); } catch(e){}
+}
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => show(b.dataset.view));
+function segment(groupSel, key, cb){
+  document.querySelectorAll(groupSel+" button").forEach(b => b.onclick = () => {
+    document.querySelectorAll(groupSel+" button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    state[key] = b.dataset.k; cb();
+  });
+}
+segment('[aria-label="Renewal range"]', "renK", renderRen);
+
+/* ---------- banner ---------- */
+function renderBanner(){
+  const b = state.banner || {};
+  $("#banner-label").textContent = b.label || "Pending Cancel Count";
+  $("#banner-val").textContent = (b.value ?? "") === "" ? "–" : b.value;
+}
+
+/* ---------- tier rankings ---------- */
+function gapLine(rows, i){
+  if (i === 0) return "Leading the team";
+  const a = rows[i-1], gap = (a.total ?? 0) - (rows[i].total ?? 0);
+  return gap > 0 ? `${fmtInt(gap)} ${gap === 1 ? "pt" : "pts"} behind ${first(a.name)}` : `Tied with ${first(a.name)} on points`;
+}
+function renderTiers(){
+  const d = state.tiers; if (!d) return;
+  $("#tier-range").textContent = d.range || "";
+  const rows = d.rows || [];
+  if (!rows.length){ $("#tier-body").innerHTML = `<div class="empty">No tier data yet.</div>`; return; }
+  $("#tier-body").innerHTML = `<div class="board tiers"><table>
+    <thead><tr><th>#</th><th class="l">Agent</th><th class="l hide-sm">Tier</th><th>Rev / Hr</th><th>Save %</th><th>Total</th><th class="hide-sm">Reward</th></tr></thead>
+    <tbody>${rows.map((r,i) => { const c = TIER_CLASS[r.tier] || "t3", brk = i > 0 && rows[i-1].tier !== r.tier ? " brk" : "";
+      return `<tr class="${c}${brk}">
+        <td class="rk">${fmtInt(r.place)}</td>
+        <td class="nm l">${esc(r.name)}<small>${gapLine(rows,i)}</small></td>
+        <td class="l hide-sm"><span class="pill">${esc(r.tier)}</span></td>
+        <td>${fmtRph(r.rph)}<span class="pts"><b>${fmtInt(r.revPts)}</b> pts</span></td>
+        <td>${fmtPct(r.savePct)}<span class="pts"><b>${fmtInt(r.savePts)}</b> pts</span></td>
+        <td class="big">${fmtInt(r.total)}</td>
+        <td class="hide-sm"><span class="reward">+${fmtInt(r.reward)}</span></td></tr>`; }).join("")}
+    </tbody></table></div>`;
+}
+
+/* ---------- saves ---------- */
+function renderSaves(){
+  const d = state.saves; if (!d) return;
+  $("#save-range").textContent = d.range || "";
+  const short = n => String(n).split(" ")[0];
+  const list = (title, rows, tot) => `<div class="slist"><h4>${title}${tot ? `<span>Team ${fmtPct(tot.pct)}</span>` : ""}</h4>${
+    (rows || []).map(r => `<div class="srow ${medal(r.rank)}"><span class="r">${fmtInt(r.rank)}</span>
+      <span class="n"><span class="full">${esc(r.name)}</span><span class="short">${esc(short(r.name))}</span></span>
+      <span class="v">${fmtPct(r.pct)}<small>${fmtInt(r.saves)} / ${fmtInt(r.cancels)}</small></span></div>`).join("") || `<div class="srow"><span></span><span class="n" style="color:var(--muted)">No data</span><span></span></div>`}</div>`;
+  $("#save-body").innerHTML = `<div class="trio">${list("Overall", d.overall, d.overallTotal)}${list("In Contract", d.inContract, d.inContractTotal)}${list("Out of Contract", d.outContract, d.outContractTotal)}</div>`;
+}
+
+/* ---------- renewals ---------- */
+function renderRen(){
+  const d = state.ren; if (!d) return;
+  const ytd = state.renK === "ytd";
+  $("#ren-range").textContent = ytd ? "Year to date · signed renewals only" : (d.range ? d.range + " · signed renewals only" : "Signed renewals only");
+  const rows = d[state.renK] || [], tot = d[state.renK+"Total"];
+  if (!rows.length){ $("#ren-body").innerHTML = `<div class="empty">No rows in this table yet.</div>`; return; }
+  $("#ren-body").innerHTML = `<div class="board"><table>
+    <thead><tr><th>#</th><th class="l">Agent</th><th>Signed Revenue</th><th>Renewals</th><th class="hide-sm">ACV</th><th class="hide-sm">Unsigned</th><th>Signed %</th></tr></thead>
+    <tbody>${rows.map(r => `<tr class="${medal(r.rank)}"><td class="rk">${fmtInt(r.rank)}</td><td class="nm l">${esc(r.name)}</td><td class="big">${fmtMoney(r.total)}</td><td>${fmtInt(r.count)}</td><td class="hide-sm">${fmtMoney(r.acv)}</td><td class="hide-sm">${fmtInt(r.unsigned)}</td><td>${fmtPct(r.signedPct)}</td></tr>`).join("")}
+    ${tot ? `<tr class="total"><td></td><td class="nm l">Team</td><td>${fmtMoney(tot.total)}</td><td>${fmtInt(tot.count)}</td><td class="hide-sm">${fmtMoney(tot.acv)}</td><td class="hide-sm">${fmtInt(tot.unsigned)}</td><td>${fmtPct(tot.signedPct)}</td></tr>` : ""}
+    </tbody></table></div>`;
+}
+
+/* ---------- tiers tab: balances + prizes ---------- */
+function renderPoints(){
+  const p = state.points; if (!p) return;
+  const bal = [...(p.balances || [])].sort((a,b) => (b.balance ?? 0) - (a.balance ?? 0));
+  if (!bal.length) $("#bal-body").innerHTML = `<div class="empty">No balances yet.</div>`;
+  else {
+    let place = 0, prev = null;
+    $("#bal-body").innerHTML = `<div class="board"><table>
+      <thead><tr><th>#</th><th class="l">Agent</th><th>Earned</th><th>Cashed In</th><th>Balance</th></tr></thead>
+      <tbody>${bal.map((r,i) => { if (r.balance !== prev){ place = i + 1; prev = r.balance; }
+        return `<tr class="${medal(place)}"><td class="rk">${place}</td><td class="nm l">${esc(r.name)}</td><td>${fmtInt(r.earned)}</td><td>${fmtInt(r.spent)}</td><td class="big">${fmtInt(r.balance)}</td></tr>`; }).join("")}
+      </tbody></table></div>`;
+  }
+  const prizes = [...(p.prizes || [])].sort((a,b) => (a.cost ?? 0) - (b.cost ?? 0));
+  if (!prizes.length) $("#prize-body").innerHTML = `<div class="empty">The prize list appears here once prizes are added.</div>`;
+  else $("#prize-body").innerHTML = `<div class="board plist"><table><thead><tr><th>Pts</th><th class="l">Prize</th><th>Reps who can afford</th></tr></thead><tbody>${
+    prizes.map(z => { const n = bal.filter(b => (b.balance ?? 0) >= (z.cost ?? Infinity)).length;
+      return `<tr><td class="big gold">${fmtInt(z.cost)}</td><td class="l nm">${esc(z.prize)}${z.details ? `<small>${esc(z.details)}</small>` : ""}</td><td>${n || "–"}</td></tr>`; }).join("")}</tbody></table></div>`;
+}
+
+/* ---------- highlights ---------- */
+function hlTokens(){
+  const t = state.tiers?.rows || [], sv = state.saves || {}, rn = state.ren || {};
+  const names = arr => arr.map(r => r.name).join(", ").replace(/, ([^,]*)$/, " and $1");
+  const topBy = (rows, k) => [...(rows || [])].sort((a,b) => (b[k] ?? -1) - (a[k] ?? -1))[0];
+  const rph = topBy(t, "rph"), o = (sv.overall || [])[0], i = (sv.inContract || [])[0], x = (sv.outContract || [])[0], r = (rn.current || [])[0];
+  return {
+    week: state.tiers?.range || sv.range || "",
+    leader: t[0]?.name, leader_points: t[0] ? fmtInt(t[0].total) : null,
+    tier1: names(t.filter(z => z.tier === "Tier 1" || z.tier === "Leader")), tier2: names(t.filter(z => z.tier === "Tier 2")),
+    top_rev_hr_rep: rph?.name, top_rev_hr: rph ? fmtRph(rph.rph) : null,
+    top_save_rep: o?.name, top_save_pct: o ? fmtPct(o.pct) : null,
+    top_ic_rep: i?.name, top_ic_pct: i ? fmtPct(i.pct) : null,
+    top_ooc_rep: x?.name, top_ooc_pct: x ? fmtPct(x.pct) : null,
+    top_renewal_rep: r?.name, top_renewal_revenue: r ? fmtMoney(r.total) : null,
+    team_save_pct: sv.overallTotal ? fmtPct(sv.overallTotal.pct) : null,
+    team_renewals: rn.currentTotal ? fmtInt(rn.currentTotal.count) : null,
+    team_revenue: rn.currentTotal ? fmtMoney(rn.currentTotal.total) : null,
+    pending_cancels: state.banner?.value || null,
+  };
+}
+function fillTokens(text){
+  const v = hlTokens();
+  return esc(text).replace(/\{([a-z0-9_]+)\}/gi, (m, k) => v[k.toLowerCase()] != null && v[k.toLowerCase()] !== "" ? `<b class="tok">${esc(v[k.toLowerCase()])}</b>` : m);
+}
+function renderHighlights(){
+  const h = state.highlights;
+  $("#hl-range").textContent = state.tiers?.range || "This week";
+  if (!h || (!h.headline && !(h.paragraphs || []).length)){ $("#hl-body").innerHTML = `<div class="empty">This week's highlights are on the way.</div>`; return; }
+  $("#hl-body").innerHTML = `<article class="hl">${h.headline ? `<h3>${fillTokens(h.headline)}</h3>` : ""}${(h.paragraphs || []).map(p => `<p>${fillTokens(p)}</p>`).join("")}</article>`;
+}
+
+/* ---------- agents ---------- */
+function renderAgents(){
+  const el = $("#agents");
+  if (!state.agents.length){ el.innerHTML = `<div class="empty">The team list appears here once the first sync runs.</div>`; return; }
+  el.innerHTML = state.agents.map(a => { const open = !!state.payload[a.id];
+    return `<button class="agent" id="ag-${esc(a.id)}" data-id="${esc(a.id)}">
+    <span class="ini">${esc(initials(a.name))}</span><span style="min-width:0"><span class="an">${esc(a.name)}</span><span class="as">${open ? "Open" : "PIN required"}</span></span>
+    <svg class="lock" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">${open ? '<path d="M9 18l6-6-6-6"/>' : '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/>'}</svg></button>`; }).join("");
+  el.querySelectorAll(".agent").forEach(b => b.onclick = () => {
+    const a = state.agents.find(x => x.id === b.dataset.id);
+    if (state.payload[a.id]) openRep(a); else askPin(a);
+  });
+}
+const ITER = 150000, enc = s => new TextEncoder().encode(s);
+const b64d = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function deriveKey(pin, key){
+  const base = await crypto.subtle.importKey("raw", enc(pin), "PBKDF2", false, ["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"PBKDF2", salt:enc(`cl-site|${key}`), iterations:ITER, hash:"SHA-256"},
+    base, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+}
+async function unseal(k, box){
+  const pt = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64d(box.iv)}, k, b64d(box.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+async function unsealAll(){
+  for (const a of state.agents){
+    try {
+      if (state.keys[a.id] && a.lock) state.payload[a.id] = await unseal(state.keys[a.id], a.lock);
+      else if (state.mgrKey && a.mlock) state.payload[a.id] = await unseal(state.mgrKey, a.mlock);
+      else delete state.payload[a.id];
+    } catch(e){ delete state.payload[a.id]; }
+  }
+}
+let pinTarget = null, pinMode = "agent", entry = "";
+const pad = $("#keys");
+pad.innerHTML = [1,2,3,4,5,6,7,8,9].map(n=>`<button data-n="${n}">${n}</button>`).join("") + `<button class="ghost" data-a="cancel">Cancel</button><button data-n="0">0</button><button class="ghost" data-a="del">Delete</button>`;
+pad.onclick = e => { const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.a === "cancel") return closePin();
+  if (b.dataset.a === "del") { entry = entry.slice(0,-1); return drawDots(); }
+  if (entry.length < 4) { entry += b.dataset.n; drawDots(); if (entry.length === 4) checkPin(); } };
+document.addEventListener("keydown", e => { if ($("#pin").hidden) return;
+  if (/^\d$/.test(e.key) && entry.length < 4){ entry += e.key; drawDots(); if (entry.length === 4) checkPin(); }
+  else if (e.key === "Backspace"){ entry = entry.slice(0,-1); drawDots(); }
+  else if (e.key === "Escape") closePin(); });
+function drawDots(){ [...$("#dots").children].forEach((d,i)=>d.classList.toggle("on", i < entry.length)); }
+function askPin(a){
+  pinTarget = a; pinMode = "agent"; entry = ""; drawDots();
+  $("#pin-title").textContent = a.name; $("#pin-hint").textContent = "Enter your 4-digit PIN"; $("#pin-err").textContent = "";
+  $("#pin-mgr").hidden = !state.hasManager; $("#pin").hidden = false;
+  if (!a.lock) $("#pin-err").textContent = "No PIN is set for this agent yet. Ask your manager.";
+}
+$("#pin-mgr").onclick = () => { pinMode = "manager"; entry = ""; drawDots(); $("#pin-hint").textContent = "Enter the manager PIN"; $("#pin-err").textContent = ""; };
+function closePin(){ $("#pin").hidden = true; entry = ""; }
+async function checkPin(){
+  const pin = entry, a = pinTarget, mgr = pinMode === "manager";
+  const box = mgr ? a.mlock : a.lock;
+  let ok = false;
+  $("#pin-hint").textContent = "Checking…";
+  try {
+    if (box){
+      const k = await deriveKey(pin, mgr ? "manager" : a.id);
+      const p = await unseal(k, box);
+      if (mgr){ state.mgrKey = k; await unsealAll(); } else { state.keys[a.id] = k; state.payload[a.id] = p; }
+      ok = true;
+    }
+  } catch(e) {}
+  $("#pin-hint").textContent = mgr ? "Enter the manager PIN" : "Enter your 4-digit PIN";
+  if (ok){
+    closePin(); renderAgents(); openRep(a);
+  } else {
+    $("#pin-err").textContent = box ? "That PIN didn't match. Try again." : "No PIN is set yet. Ask your manager.";
+    const d = $("#dots"); d.classList.remove("shake"); void d.offsetWidth; d.classList.add("shake");
+    entry = ""; setTimeout(drawDots, 300);
+  }
+}
+function findIn(list, name){ return (list||[]).find(r => r.name.toLowerCase() === name.toLowerCase()); }
+function openRep(a){
+  a = {...a, ...(state.payload[a.id] || {})};
+  state.current = a.id;
+  $("#agents-list").hidden = true; const el = $("#rep"); el.hidden = false;
+  const s = state.saves || {}, r = state.ren || {};
+  const ov = findIn(s.overall, a.name), ic = findIn(s.inContract, a.name), oc = findIn(s.outContract, a.name);
+  const rc = findIn(r.current, a.name), ry = findIn(r.ytd, a.name);
+  const bal = findIn(state.points?.balances, a.name);
+  const attTile = pts => {
+    if (pts == null) return tile("Attendance Points", "–", "Not tracked yet");
+    const lv = state.attendance?.levels || [];
+    const cur = [...lv].reverse().find(l => pts >= l.at), next = lv.find(l => pts < l.at);
+    const cls = !cur ? "hit" : cur === lv[0] ? "" : "miss";
+    const chip = `<span class="chip ${cls}">${esc(cur ? cur.name : "In good standing")}</span>`;
+    const sub = next ? `${fmtInt(next.at - pts)} ${next.at - pts === 1 ? "pt" : "pts"} until ${esc(next.name)}` : "Current total";
+    return tile("Attendance Points", fmtInt(pts), sub, null, chip);
+  };
+  const tile = (k, v, sub, rank, extra) => `<div class="tile"><div class="k">${k}${rank ? `<span class="chip">#${fmtInt(rank)}</span>` : ""}${extra || ""}</div><div class="v">${v}</div><div class="s">${sub}</div></div>`;
+  const tr = state.tiers?.rows || [], ti = tr.findIndex(x => x.name.toLowerCase() === a.name.toLowerCase()), t = tr[ti];
+  const tierBlock = t ? `<div class="tiles">
+      ${tile("Tier", esc(t.tier), `+${fmtInt(t.reward)} reward pts if the week ended now`, t.place)}
+      ${tile("Total Points", fmtInt(t.total), gapLine(tr, ti))}
+      ${tile("Rev / Hr Points", `${fmtInt(t.revPts)}<small> / 60</small>`, `${fmtRph(t.rph)} per hour · +3 for each rep you pass`)}
+      ${tile("Save % Points", `${fmtInt(t.savePts)}<small> / 40</small>`, `${fmtPct(t.savePct)} saved · +2 for each rep you pass`)}
+    </div>` : `<div class="soon"><b>Not in this week's tiers.</b> Tiers include the 11 reps on the team roster.</div>`;
+  const m = a.metrics;
+  let metricsHtml;
+  if (m && m.weeks && m.weeks.length){
+    const lower = n => /lower|aht|handle time/i.test(n||"");
+    const hit = (v, tg, n) => v == null || tg == null ? null : (lower(n) ? v <= tg : v >= tg);
+    const cols = m.names.map((n,i) => ({n, i})).filter(c => c.n);
+    const hasT = cols.some(c => m.targets[c.i] != null);
+    const wk = m.weeks[0];
+    const mark = (w, c) => { const h = hit(w.values[c.i], m.targets[c.i], c.n); return h === null ? "" : ` class="${h ? "hitv" : "missv"}"`; };
+    const isPct = i => /%/.test((m.targetDisplay[i] || "") + (wk.display[i] || ""));
+    const gap = (v, tg, i) => { const d = Math.abs(v - tg); return isPct(i) ? `${(Math.round(d*10)/10)} pts` : (Math.round(d*100)/100).toFixed(2); };
+    metricsHtml = `<div class="mins-week">Week of ${esc(wk.week)}</div><div class="mins">${cols.map(c => {
+        const v = wk.values[c.i], tg = m.targets[c.i], h = hit(v, tg, c.n);
+        const status = h === null ? (tg == null ? "No minimum set" : "No number yet")
+          : h ? `Meeting minimum${v !== tg ? ` · +${gap(v, tg, c.i)}` : ""}` : `Below minimum by ${gap(v, tg, c.i)}`;
+        return `<div class="min ${h === null ? "" : h ? "ok" : "bad"}">
+          <div class="min-k">${esc(c.n)}</div>
+          <div class="min-v">${esc(wk.display[c.i] || "–")}</div>
+          <div class="min-t">Minimum <b>${tg != null ? esc(m.targetDisplay[c.i]) : "–"}</b></div>
+          <div class="min-s">${h === true ? "✓ " : h === false ? "✕ " : ""}${status}</div></div>`; }).join("")}</div>
+      ${m.weeks.length > 1 ? `<h3 class="sub" style="font-size:17px;margin-top:20px">Past Weeks vs. Minimums</h3>
+      <div class="board hist-t"><table><thead><tr><th class="l">Week Of</th>${cols.map(c => `<th>${esc(c.n)}</th>`).join("")}${hasT ? "<th>Minimums Hit</th>" : ""}</tr></thead>
+      <tbody>${m.weeks.slice(1).map(w => `<tr><td class="l nm">${esc(w.week)}</td>${cols.map(c => `<td${mark(w,c)}>${esc(w.display[c.i] || "–")}</td>`).join("")}${hasT ? `<td>${cols.filter(c => hit(w.values[c.i], m.targets[c.i], c.n)).length} of ${cols.filter(c => m.targets[c.i] != null).length}</td>` : ""}</tr>`).join("")}</tbody></table></div>` : ""}`;
+  } else {
+    metricsHtml = `<div class="soon"><b>Weekly minimums are coming soon.</b> This week and past weeks will show here once your tab has numbers in it.</div>`;
+  }
+  const prizes = [...(state.points?.prizes || [])].filter(z => z.cost != null).sort((x,y) => x.cost - y.cost);
+  const balPts = bal ? (bal.balance || 0) : 0;
+  const canGet = prizes.filter(z => z.cost <= balPts), nextUp = prizes.find(z => z.cost > balPts);
+  const prizeHtml = !prizes.length ? "" : `<div class="board plist"><table><thead><tr><th>Pts</th><th class="l">Prizes you can cash in now</th></tr></thead><tbody>${
+      canGet.length ? canGet.map(z => `<tr><td class="big gold">${fmtInt(z.cost)}</td><td class="l nm">${esc(z.prize)}</td></tr>`).join("")
+                    : `<tr><td></td><td class="l nm" style="color:var(--muted);font-weight:500">Nothing yet. Keep stacking points.</td></tr>`}
+      ${nextUp ? `<tr class="next"><td class="big">${fmtInt(nextUp.cost)}</td><td class="l nm">${esc(nextUp.prize)}<small>Next up: ${fmtInt(nextUp.cost - balPts)} more ${nextUp.cost - balPts === 1 ? "pt" : "pts"}</small></td></tr>` : ""}
+    </tbody></table></div>`;
+  el.innerHTML = `<button class="back" id="rep-back">← All agents</button>
+    <div class="rep-head"><span class="ini">${esc(initials(a.name))}</span><div><h2>${esc(a.name)}</h2><div class="range">${esc(state.tiers?.range || s.range || "")}</div></div></div>
+    <h3 class="sub">Weekly Minimums</h3>
+    ${metricsHtml}
+    <h3 class="sub">Attendance</h3>
+    <div class="tiles one">${attTile(a.attendance)}</div>
+    <h3 class="sub">This Week's Tier</h3>
+    ${tierBlock}
+    <h3 class="sub">Points &amp; Prizes</h3>
+    <div class="tiles one">${tile("Point Balance", bal ? fmtInt(bal.balance) : "–", bal ? `${fmtInt(bal.earned)} earned · ${fmtInt(bal.spent)} cashed in` : "Not tracked yet")}</div>
+    ${prizeHtml}
+    <h3 class="sub">Save %</h3>
+    <div class="tiles three">
+      ${tile("True Save %", fmtPct(ov?.pct), ov ? `${fmtInt(ov.saves)} saves · ${fmtInt(ov.cancels)} cancels` : "Not on this board", ov?.rank)}
+      ${tile("In Contract", fmtPct(ic?.pct), ic ? `${fmtInt(ic.saves)} saves · ${fmtInt(ic.cancels)} cancels` : "Not on this board", ic?.rank)}
+      ${tile("Out of Contract", fmtPct(oc?.pct), oc ? `${fmtInt(oc.saves)} saves · ${fmtInt(oc.cancels)} cancels` : "Not on this board", oc?.rank)}
+    </div>
+    <h3 class="sub">Renewals</h3>
+    <div class="tiles three">
+      ${tile("Current Range", fmtMoney(rc?.total), rc ? `${fmtInt(rc.count)} renewals · ${fmtMoney(rc.acv)} ACV` : "Not on this board", rc?.rank)}
+      ${tile("Signed %", fmtPct(rc?.signedPct), rc ? `${fmtInt(rc.unsigned)} unsigned` : "–")}
+      ${tile("YTD Revenue", fmtMoney(ry?.total), ry ? `${fmtInt(ry.count)} renewals · ${fmtMoney(ry.acv)} ACV` : "Not on this board", ry?.rank)}
+    </div>`;
+  $("#rep-back").onclick = () => { state.current = null; closeRep(); };
+  window.scrollTo({top:0});
+}
+function closeRep(){ $("#rep").hidden = true; $("#agents-list").hidden = false; }
+function reopen(){ const a = state.agents.find(x => x.id === state.current); if (a && state.view === "agents") openRep(a); }
+
+/* ---------- status ---------- */
+function setStatus(ok, text){ $("#status").innerHTML = `<span class="dot ${ok?"":"off"}"></span><span>${esc(text)}</span>`; }
+function renderMeta(){
+  const t = state.meta?.syncedAt ? new Date(state.meta.syncedAt) : null;
+  setStatus(!!t, t ? "Updated " + t.toLocaleString("en-US",{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}) : "Waiting for the first sync");
+}
+
+/* ---------- data ---------- */
+try { const v = localStorage.getItem("cl-view"); if (VIEWS.includes(v)) show(v); } catch(e){}
+async function load(){
+  try {
+    const r = await fetch("data.json?t=" + Date.now(), {cache:"no-store"});
+    if (!r.ok) throw new Error(r.status);
+    const d = await r.json(), b = d.board || {};
+    Object.assign(state, {tiers:b.tiers, saves:b.saves, ren:b.renewals, points:b.points, banner:b.banner,
+      attendance:b.attendance, highlights:b.highlights, meta:b.meta, hasManager:!!d.hasManager,
+      agents:[...(d.agents || [])].sort((x,y) => x.order - y.order)});
+    await unsealAll();
+    renderBanner(); renderTiers(); renderSaves(); renderRen(); renderPoints(); renderHighlights(); renderMeta(); renderAgents();
+    if (state.current) reopen();
+  } catch(e) {
+    if (!state.meta) setStatus(false, "Couldn't load the numbers. Check your connection and refresh.");
+  }
+}
+load();
+setInterval(load, 5 * 60 * 1000);
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") load(); });
+</script>
+</body>
+</html>
