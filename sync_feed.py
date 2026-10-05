@@ -12,6 +12,7 @@ in_dir holds the raw get_values JSON results:
   points.json     Tiers!A1:H60
   attendance.json 'Attendance Feed'!G1:K4
   highlights.json Highlights!A1:B60
+  highlights1.json 'Highlights 1'!A1 (optional; when filled it replaces the Highlights tab, shown as written)
   pins.json       PINs!A1:B60
   tab_<Tab>.json  '<Tab>'!A1:Z200 for each rep tab (e.g. tab_Joe.json)
   history.json    History!A1:I400 (finished weeks, typed each Monday; optional)
@@ -189,6 +190,10 @@ def main(src, site_path):
     hv = load(os.path.join(src, "highlights.json"))
     headline = cell(hv[0], 1) if hv else ""
     paras = [cell(r, 0) for r in hv[3:] if cell(r, 0)]
+    # 'Highlights 1'!A1 (highlights1.json): when filled, shown exactly as written instead
+    h1 = load(os.path.join(src, "highlights1.json"))
+    h1 = (h1[0][0] if h1 and h1[0] else "").strip()
+    if h1: headline, paras = "", [h1]
     put("board", "highlights", {"headline": headline, "paragraphs": paras})
 
     # --- Attendance warning levels (G = level name, K = points that trigger it) ---
