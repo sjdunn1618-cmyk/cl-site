@@ -191,6 +191,37 @@ h2{font-family:var(--display);font-weight:700;font-size:34px;letter-spacing:.02e
 .hist .hrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;padding:0 14px 12px}
 .hist .hrow div{font-size:13px;color:var(--muted)} .hist .hrow b{display:block;color:var(--fg);font-size:16px}
 h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter-spacing:.03em;margin:30px 0 0}
+/* Attendance next to the name */
+.rep-name{display:flex;align-items:baseline;gap:4px 12px;flex-wrap:wrap}
+.att{--ac:var(--good);font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:.02em;color:var(--ac);white-space:nowrap}
+.att small{font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-left:4px}
+.att.warn{--ac:var(--warn)} .att.bad{--ac:var(--bad)} .att.none{--ac:var(--muted)}
+.att-sub{font-size:12.5px;color:var(--muted);margin-top:4px} .att-sub b{color:var(--fg);font-weight:600}
+/* Next-tier callout */
+.push{display:flex;align-items:center;gap:12px;margin-top:12px;padding:12px 16px;border-radius:12px;background:color-mix(in srgb,var(--tc,var(--accent)) 12%,var(--panel));border:1px solid color-mix(in srgb,var(--tc,var(--accent)) 40%,transparent)}
+.push b.n{font-family:var(--display);font-size:30px;line-height:1;color:var(--tc,var(--accent));font-variant-numeric:tabular-nums}
+.push span{font-size:14px} .push small{display:block;color:var(--muted);font-size:12.5px}
+.push.lead{--tc:var(--gold)} .push.t1{--tc:var(--t1)} .push.t2{--tc:var(--t2)} .push.t3{--tc:var(--accent)}
+/* History: trend cards + table */
+.trends{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:12px}
+.trend{background:var(--panel);border-radius:12px;padding:12px 14px 10px;min-width:0}
+.trend .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;display:flex;justify-content:space-between;gap:8px}
+.trend .k span{letter-spacing:0;text-transform:none;font-weight:600;color:var(--fg)}
+.trend .k em{font-style:normal;color:var(--muted);font-weight:500}
+.trend .plot{position:relative;height:56px;margin-top:10px}
+.trend svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.trend .dot2{position:absolute;width:8px;height:8px;border-radius:50%;transform:translate(-50%,-50%);background:var(--accent)}
+.trend .dot2.ok{background:var(--good)} .trend .dot2.no{background:var(--bad)}
+.trend .ln{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.trend .tg{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 4;vector-effect:non-scaling-stroke}
+.trend .ax{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px;font-variant-numeric:tabular-nums}
+.hist-t td .pill{font-size:9.5px}
+.hist-t tr.lead,.hist-t tr.t1,.hist-t tr.t2,.hist-t tr.t3{background:none}
+.hist-t .lead{--tc:var(--gold)} .hist-t .t1{--tc:var(--t1)} .hist-t .t2{--tc:var(--t2)} .hist-t .t3{--tc:var(--t3)}
+/* Keep me signed in */
+.keep{display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;color:var(--muted);margin-top:14px;cursor:pointer}
+.keep input{width:16px;height:16px;accent-color:var(--accent);margin:0}
+.forget{background:none;border:0;color:var(--muted);font-size:12.5px;cursor:pointer;padding:0;margin-left:14px;text-decoration:underline}
 
 @media (max-width:640px){
   .wrap,.top-in,.banner-in{padding-inline:16px}
@@ -221,6 +252,11 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
   .srow .v{font-size:12.5px}
   .srow .v small{display:none}
   .rep-head h2{font-size:28px}
+  .att{font-size:18px} .att small{font-size:10.5px}
+  .push b.n{font-size:24px} .push span{font-size:13px}
+  .trends{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .trend{padding:10px 10px 8px} .trend .k{font-size:9.5px;letter-spacing:.06em;flex-direction:column;gap:1px} .trend .plot{height:44px}
+  .rep-head .ini{display:none}
   .rep-head .ini{width:44px;height:44px;font-size:19px}
   h3.sub{font-size:19px;margin-top:22px}
   .tiles{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:10px}
@@ -332,6 +368,7 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
     <div class="dots" id="dots"><i></i><i></i><i></i><i></i></div>
     <div class="keys" id="keys"></div>
     <div class="err" id="pin-err"></div>
+    <label class="keep" id="keep-row"><input type="checkbox" id="keep"> Keep me signed in on this device</label>
     <button class="mgr" id="pin-mgr">Use manager PIN</button>
   </div>
 </div>
@@ -348,7 +385,7 @@ const initials = n => n.split(/\s+/).map(w => w[0]).slice(0,2).join("").toUpperC
 const medal = r => r === 1 ? "m1" : r === 2 ? "m2" : r === 3 ? "m3" : "";
 const TIER_CLASS = {"Leader":"lead","Tier 1":"t1","Tier 2":"t2","Tier 3":"t3"};
 
-const state = { view:"board", saveK:"overall", renK:"current", saves:null, ren:null, tiers:null, attendance:null, highlights:null, points:null, banner:null, meta:null, access:null, agents:[], hasManager:false, payload:{}, keys:{}, mgrKey:null, current:null };
+const state = { view:"board", saveK:"overall", renK:"current", saves:null, ren:null, tiers:null, attendance:null, highlights:null, points:null, banner:null, meta:null, access:null, agents:[], hasManager:false, payload:{}, keys:{}, mgrKey:null, current:null, logUrl:"", saved:{}, loggedSaved:{} };
 
 /* ---------- views ---------- */
 const VIEWS = ["board","highlights","tiers","agents"];
@@ -490,15 +527,36 @@ function renderAgents(){
     <svg class="lock" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">${open ? '<path d="M9 18l6-6-6-6"/>' : '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/>'}</svg></button>`; }).join("");
   el.querySelectorAll(".agent").forEach(b => b.onclick = () => {
     const a = state.agents.find(x => x.id === b.dataset.id);
-    if (state.payload[a.id]) openRep(a); else askPin(a);
+    if (state.payload[a.id]){
+      if (state.saved[a.id] && !state.loggedSaved[a.id]){ state.loggedSaved[a.id] = true; logUse(a.name, "Saved login"); }
+      openRep(a);
+    } else askPin(a);
   });
 }
 const ITER = 150000, enc = s => new TextEncoder().encode(s);
 const b64d = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
-async function deriveKey(pin, key){
-  const base = await crypto.subtle.importKey("raw", enc(pin), "PBKDF2", false, ["deriveKey"]);
-  return crypto.subtle.deriveKey({name:"PBKDF2", salt:enc(`cl-site|${key}`), iterations:ITER, hash:"SHA-256"},
-    base, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+async function deriveRaw(pin, key){
+  const base = await crypto.subtle.importKey("raw", enc(pin), "PBKDF2", false, ["deriveBits"]);
+  return new Uint8Array(await crypto.subtle.deriveBits({name:"PBKDF2", salt:enc(`cl-site|${key}`), iterations:ITER, hash:"SHA-256"}, base, 256));
+}
+const rawKey = raw => crypto.subtle.importKey("raw", raw, {name:"AES-GCM"}, false, ["decrypt"]);
+const b64e = u => btoa(String.fromCharCode(...u));
+/* "Keep me signed in": the derived key (never the PIN) is kept in this browser only */
+function readSaved(){ try { return JSON.parse(localStorage.getItem("cl-keep") || "{}") || {}; } catch(e){ return {}; } }
+function writeSaved(o){ try { localStorage.setItem("cl-keep", JSON.stringify(o)); } catch(e){} }
+async function restoreSaved(){
+  const o = readSaved();
+  for (const [id, b] of Object.entries(o)){
+    if (state.keys[id]) continue;
+    try { state.keys[id] = await rawKey(b64d(b)); state.saved[id] = true; } catch(e){}
+  }
+}
+function forget(id){ const o = readSaved(); delete o[id]; writeSaved(o); delete state.keys[id]; delete state.saved[id]; delete state.payload[id]; }
+/* Usage log: each PIN login is sent to the Apps Script web app (URL from the Banner tab) */
+function logUse(name, result, viewing){
+  if (!state.logUrl) return;
+  try { fetch(state.logUrl, {method:"POST", mode:"no-cors", keepalive:true, headers:{"Content-Type":"text/plain;charset=utf-8"},
+    body:JSON.stringify({name, result, viewing:viewing || "", device:/iPhone|iPad|Android|Mobi/i.test(navigator.userAgent) ? "Phone" : "Computer"})}); } catch(e){}
 }
 async function unseal(k, box){
   const pt = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64d(box.iv)}, k, b64d(box.ct));
@@ -507,7 +565,10 @@ async function unseal(k, box){
 async function unsealAll(){
   for (const a of state.agents){
     try {
-      if (state.keys[a.id] && a.lock) state.payload[a.id] = await unseal(state.keys[a.id], a.lock);
+      if (state.keys[a.id] && a.lock){
+        try { state.payload[a.id] = await unseal(state.keys[a.id], a.lock); }
+        catch(e){ if (state.saved[a.id]) forget(a.id); throw e; }   // PIN changed since it was saved
+      }
       else if (state.mgrKey && a.mlock) state.payload[a.id] = await unseal(state.mgrKey, a.mlock);
       else delete state.payload[a.id];
     } catch(e){ delete state.payload[a.id]; }
@@ -528,10 +589,10 @@ function drawDots(){ [...$("#dots").children].forEach((d,i)=>d.classList.toggle(
 function askPin(a){
   pinTarget = a; pinMode = "agent"; entry = ""; drawDots();
   $("#pin-title").textContent = a.name; $("#pin-hint").textContent = "Enter your 4-digit PIN"; $("#pin-err").textContent = "";
-  $("#pin-mgr").hidden = !state.hasManager; $("#pin").hidden = false;
+  $("#pin-mgr").hidden = !state.hasManager; $("#keep-row").hidden = false; $("#keep").checked = false; $("#pin").hidden = false;
   if (!a.lock) $("#pin-err").textContent = "No PIN is set for this agent yet. Ask your manager.";
 }
-$("#pin-mgr").onclick = () => { pinMode = "manager"; entry = ""; drawDots(); $("#pin-hint").textContent = "Enter the manager PIN"; $("#pin-err").textContent = ""; };
+$("#pin-mgr").onclick = () => { pinMode = "manager"; $("#keep-row").hidden = true; entry = ""; drawDots(); $("#pin-hint").textContent = "Enter the manager PIN"; $("#pin-err").textContent = ""; };
 function closePin(){ $("#pin").hidden = true; entry = ""; }
 async function checkPin(){
   const pin = entry, a = pinTarget, mgr = pinMode === "manager";
@@ -540,13 +601,18 @@ async function checkPin(){
   $("#pin-hint").textContent = "Checking…";
   try {
     if (box){
-      const k = await deriveKey(pin, mgr ? "manager" : a.id);
+      const raw = await deriveRaw(pin, mgr ? "manager" : a.id), k = await rawKey(raw);
       const p = await unseal(k, box);
-      if (mgr){ state.mgrKey = k; await unsealAll(); } else { state.keys[a.id] = k; state.payload[a.id] = p; }
+      if (mgr){ state.mgrKey = k; await unsealAll(); }
+      else {
+        state.keys[a.id] = k; state.payload[a.id] = p;
+        if ($("#keep").checked){ const o = readSaved(); o[a.id] = b64e(raw); writeSaved(o); state.saved[a.id] = true; state.loggedSaved[a.id] = true; }
+      }
       ok = true;
     }
   } catch(e) {}
   $("#pin-hint").textContent = mgr ? "Enter the manager PIN" : "Enter your 4-digit PIN";
+  if (box) logUse(mgr ? "Manager" : a.name, ok ? (mgr ? "Manager PIN" : "PIN") : "Wrong PIN", mgr ? a.name : "");
   if (ok){
     closePin(); renderAgents(); openRep(a);
   } else {
@@ -564,35 +630,59 @@ function openRep(a){
   const ov = findIn(s.overall, a.name), ic = findIn(s.inContract, a.name), oc = findIn(s.outContract, a.name);
   const rc = findIn(r.current, a.name), ry = findIn(r.ytd, a.name);
   const bal = findIn(state.points?.balances, a.name);
-  const attTile = pts => {
-    if (pts == null) return tile("Attendance Points", "–", "Not tracked yet");
-    const lv = state.attendance?.levels || [];
-    const cur = [...lv].reverse().find(l => pts >= l.at), next = lv.find(l => pts < l.at);
-    const cls = !cur ? "hit" : cur === lv[0] ? "" : "miss";
-    const chip = `<span class="chip ${cls}">${esc(cur ? cur.name : "In good standing")}</span>`;
-    const sub = next ? `${fmtInt(next.at - pts)} ${next.at - pts === 1 ? "pt" : "pts"} until ${esc(next.name)}` : "Current total";
-    return tile("Attendance Points", fmtInt(pts), sub, null, chip);
-  };
   const tile = (k, v, sub, rank, extra) => `<div class="tile"><div class="k">${k}${rank ? `<span class="chip">#${fmtInt(rank)}</span>` : ""}${extra || ""}</div><div class="v">${v}</div><div class="s">${sub}</div></div>`;
+
+  /* attendance: right next to the name, colored by warning level */
+  const pts = a.attendance, lv = state.attendance?.levels || [];
+  let attHtml = "", attSub = "";
+  if (pts != null){
+    const cur = [...lv].reverse().find(l => pts >= l.at), next = lv.find(l => pts < l.at);
+    const cls = !cur ? "" : cur === lv[0] ? "warn" : "bad";
+    attHtml = `<span class="att ${cls}">${fmtInt(pts)}<small>Attendance ${pts === 1 ? "pt" : "pts"}</small></span>`;
+    attSub = `<b>${esc(cur ? cur.name.trim() : "Good standing")}</b>${next ? ` · ${fmtInt(next.at - pts)} ${next.at - pts === 1 ? "pt" : "pts"} until ${esc(next.name.trim())}` : ""}`;
+  } else if (state.payload[a.id]) {
+    attHtml = `<span class="att none">–<small>Attendance pts</small></span>`;
+  }
+
+  /* this week's tier + what it takes to move up */
   const tr = state.tiers?.rows || [], ti = tr.findIndex(x => x.name.toLowerCase() === a.name.toLowerCase()), t = tr[ti];
-  const tierBlock = t ? `<div class="tiles">
+  const ORDER = ["Leader","Tier 1","Tier 2","Tier 3"];
+  let push = "";
+  if (t){
+    const myT = ORDER.indexOf(t.tier), cls = TIER_CLASS[t.tier] || "t3";
+    if (ti === 0){
+      const lead = tr[1] ? (t.total ?? 0) - (tr[1].total ?? 0) : null;
+      push = `<div class="push lead"><b class="n">${lead != null ? "+" + fmtInt(lead) : "1st"}</b><span>You're leading the team${tr[1] ? ` · ${fmtInt(lead)} ${lead === 1 ? "pt" : "pts"} ahead of ${first(tr[1].name)}` : ""}<small>Hold the spot to bank +${fmtInt(t.reward)} reward pts</small></span></div>`;
+    } else {
+      // the lowest-placed rep in a better tier is the one to pass
+      const above = [...tr.slice(0, ti)].reverse().find(x => ORDER.indexOf(x.tier) < myT);
+      if (above){
+        const need = Math.max(1, (above.total ?? 0) - (t.total ?? 0) + 1), nextCls = TIER_CLASS[above.tier] || "t3";
+        push = `<div class="push ${nextCls}"><b class="n">${fmtInt(need)}</b><span>${need === 1 ? "pt" : "pts"} to pass ${first(above.name)} and reach <b>${esc(above.tier)}</b><small>Rev/hr moves you 3 pts per rep you pass · Save % moves you 2</small></span></div>`;
+      }
+    }
+  }
+  const tierBlock = t ? `${push}<div class="tiles">
       ${tile("Tier", esc(t.tier), `+${fmtInt(t.reward)} reward pts if the week ended now`, t.place)}
       ${tile("Total Points", fmtInt(t.total), gapLine(tr, ti))}
       ${tile("Rev / Hr Points", `${fmtInt(t.revPts)}<small> / 60</small>`, `${fmtRph(t.rph)} per hour · +3 for each rep you pass`)}
       ${tile("Save % Points", `${fmtInt(t.savePts)}<small> / 40</small>`, `${fmtPct(t.savePct)} saved · +2 for each rep you pass`)}
     </div>` : `<div class="soon"><b>Not in this week's tiers.</b> Tiers include the 11 reps on the team roster.</div>`;
+
+  /* weekly minimums (live week) + history (finished weeks from the History tab) */
   const m = a.metrics;
-  let metricsHtml;
+  let metricsHtml, histHtml = "";
   if (m && m.weeks && m.weeks.length){
     const lower = n => /lower|aht|handle time/i.test(n||"");
     const hit = (v, tg, n) => v == null || tg == null ? null : (lower(n) ? v <= tg : v >= tg);
     const cols = m.names.map((n,i) => ({n, i})).filter(c => c.n);
     const hasT = cols.some(c => m.targets[c.i] != null);
-    const wk = m.weeks[0];
+    const wk = m.weeks.find(w => !w.final) || m.weeks[0];
+    const past = m.weeks.filter(w => w !== wk);
     const mark = (w, c) => { const h = hit(w.values[c.i], m.targets[c.i], c.n); return h === null ? "" : ` class="${h ? "hitv" : "missv"}"`; };
     const isPct = i => /%/.test((m.targetDisplay[i] || "") + (wk.display[i] || ""));
     const gap = (v, tg, i) => { const d = Math.abs(v - tg); return isPct(i) ? `${(Math.round(d*10)/10)} pts` : (Math.round(d*100)/100).toFixed(2); };
-    metricsHtml = `<div class="mins-week">Week of ${esc(wk.week)}</div><div class="mins">${cols.map(c => {
+    metricsHtml = `<div class="mins-week">Week of ${esc(wk.week)}${wk.final ? " · final" : ""}</div><div class="mins">${cols.map(c => {
         const v = wk.values[c.i], tg = m.targets[c.i], h = hit(v, tg, c.n);
         const status = h === null ? (tg == null ? "No minimum set" : "No number yet")
           : h ? `Meeting minimum${v !== tg ? ` · +${gap(v, tg, c.i)}` : ""}` : `Below minimum by ${gap(v, tg, c.i)}`;
@@ -600,13 +690,38 @@ function openRep(a){
           <div class="min-k">${esc(c.n)}</div>
           <div class="min-v">${esc(wk.display[c.i] || "–")}</div>
           <div class="min-t">Minimum <b>${tg != null ? esc(m.targetDisplay[c.i]) : "–"}</b></div>
-          <div class="min-s">${h === true ? "✓ " : h === false ? "✕ " : ""}${status}</div></div>`; }).join("")}</div>
-      ${m.weeks.length > 1 ? `<h3 class="sub" style="font-size:17px;margin-top:20px">Past Weeks vs. Minimums</h3>
-      <div class="board hist-t"><table><thead><tr><th class="l">Week Of</th>${cols.map(c => `<th>${esc(c.n)}</th>`).join("")}${hasT ? "<th>Minimums Hit</th>" : ""}</tr></thead>
-      <tbody>${m.weeks.slice(1).map(w => `<tr><td class="l nm">${esc(w.week)}</td>${cols.map(c => `<td${mark(w,c)}>${esc(w.display[c.i] || "–")}</td>`).join("")}${hasT ? `<td>${cols.filter(c => hit(w.values[c.i], m.targets[c.i], c.n)).length} of ${cols.filter(c => m.targets[c.i] != null).length}</td>` : ""}</tr>`).join("")}</tbody></table></div>` : ""}`;
+          <div class="min-s">${h === true ? "✓ " : h === false ? "✕ " : ""}${status}</div></div>`; }).join("")}</div>`;
+    if (past.length){
+      // trend lines: oldest → newest, including the live week, dashed line = minimum
+      const series = [...past].reverse().concat(wk.final ? [] : [wk]);
+      const tcols = cols.filter(c => series.filter(w => w.values[c.i] != null).length >= 2);
+      const spark = c => {
+        const pts2 = series.map((w, x) => ({x, v: w.values[c.i], w})).filter(p => p.v != null), tg = m.targets[c.i];
+        const vals = pts2.map(p => p.v).concat(tg != null ? [tg] : []);
+        let lo = Math.min(...vals), hi = Math.max(...vals); if (hi === lo){ hi += 1; lo -= 1; }
+        const pad = (hi - lo) * .15; lo -= pad; hi += pad;
+        const W = 100, H = 40, X = x => series.length < 2 ? W/2 : x / (series.length - 1) * W, Y = v => H - (v - lo) / (hi - lo) * H;
+        const dots = pts2.map(p => { const h = hit(p.v, tg, c.n); return `<i class="dot2 ${h === null ? "" : h ? "ok" : "no"}" style="left:${X(p.x).toFixed(1)}%;top:${(Y(p.v) / H * 100).toFixed(1)}%" title="${esc(p.w.week)}: ${esc(p.w.display[c.i])}"></i>`; }).join("");
+        const lastV = pts2[pts2.length-1], firstV = pts2[0];
+        return `<div class="trend"><div class="k">${esc(c.n)}<span>${esc(firstV.w.display[c.i])} → ${esc(lastV.w.display[c.i])}${tg != null ? ` <em>· min ${esc(m.targetDisplay[c.i])}</em>` : ""}</span></div>
+          <div class="plot" role="img" aria-label="${esc(c.n)} by week, dashed line is the minimum"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+            ${tg != null ? `<line class="tg" x1="0" x2="${W}" y1="${Y(tg).toFixed(1)}" y2="${Y(tg).toFixed(1)}"/>` : ""}
+            <polyline class="ln" points="${pts2.map(p => `${X(p.x).toFixed(1)},${Y(p.v).toFixed(1)}`).join(" ")}"/></svg>${dots}</div>
+          <div class="ax"><span>${esc(series[0].week)}</span><span>${esc(series[series.length-1].week)}</span></div></div>`;
+      };
+      const anyTier = past.some(w => w.tier);
+      const hcols = cols.filter(c => past.some(w => (w.display[c.i] || "") !== ""));
+      histHtml = `<h3 class="sub">Past Weeks</h3>
+        ${tcols.length ? `<div class="trends">${tcols.map(spark).join("")}</div>` : ""}
+        <div class="board hist-t" style="margin-top:8px"><table><thead><tr><th class="l">Week Of</th>${hcols.map(c => `<th>${esc(c.n)}</th>`).join("")}${hasT ? `<th class="hide-sm">Minimums Hit</th>` : ""}${anyTier ? "<th>Tier</th><th class=\"hide-sm\">Reward</th>" : ""}</tr></thead>
+        <tbody>${past.map(w => { const tc = TIER_CLASS[w.tier] || "t3";
+          return `<tr><td class="l nm">${esc(w.week)}</td>${hcols.map(c => `<td${mark(w,c)}>${esc(w.display[c.i] || "–")}</td>`).join("")}${hasT ? `<td class="hide-sm">${cols.filter(c => hit(w.values[c.i], m.targets[c.i], c.n)).length} of ${cols.filter(c => m.targets[c.i] != null).length}</td>` : ""}${anyTier ? `<td class="${tc}">${w.tier ? `<span class="pill">${esc(w.tier)}</span>` : "–"}</td><td class="hide-sm ${tc}">${w.reward != null ? `<span class="reward">+${fmtInt(w.reward)}</span>` : "–"}</td>` : ""}</tr>`; }).join("")}</tbody></table></div>`;
+    }
   } else {
-    metricsHtml = `<div class="soon"><b>Weekly minimums are coming soon.</b> This week and past weeks will show here once your tab has numbers in it.</div>`;
+    metricsHtml = `<div class="soon"><b>Weekly minimums are coming soon.</b> This week will show here once your tab has numbers in it.</div>`;
   }
+  if (!histHtml) histHtml = `<h3 class="sub">Past Weeks</h3><div class="soon"><b>Your history starts here.</b> Each finished week is added on Monday.</div>`;
+
   const prizes = [...(state.points?.prizes || [])].filter(z => z.cost != null).sort((x,y) => x.cost - y.cost);
   const balPts = bal ? (bal.balance || 0) : 0;
   const canGet = prizes.filter(z => z.cost <= balPts), nextUp = prizes.find(z => z.cost > balPts);
@@ -615,17 +730,19 @@ function openRep(a){
                     : `<tr><td></td><td class="l nm" style="color:var(--muted);font-weight:500">Nothing yet. Keep stacking points.</td></tr>`}
       ${nextUp ? `<tr class="next"><td class="big">${fmtInt(nextUp.cost)}</td><td class="l nm">${esc(nextUp.prize)}<small>Next up: ${fmtInt(nextUp.cost - balPts)} more ${nextUp.cost - balPts === 1 ? "pt" : "pts"}</small></td></tr>` : ""}
     </tbody></table></div>`;
-  el.innerHTML = `<button class="back" id="rep-back">← All agents</button>
-    <div class="rep-head"><span class="ini">${esc(initials(a.name))}</span><div><h2>${esc(a.name)}</h2><div class="range">${esc(state.tiers?.range || s.range || "")}</div></div></div>
+  el.innerHTML = `<button class="back" id="rep-back">← All agents</button>${state.saved[a.id] ? `<button class="forget" id="rep-forget">Sign out on this device</button>` : ""}
+    <div class="rep-head"><span class="ini">${esc(initials(a.name))}</span><div>
+      <div class="rep-name"><h2>${esc(a.name)}</h2>${attHtml}</div>
+      ${attSub ? `<div class="att-sub">${attSub}</div>` : ""}
+      <div class="range">${esc(state.tiers?.range || s.range || "")}</div></div></div>
     <h3 class="sub">Weekly Minimums</h3>
     ${metricsHtml}
-    <h3 class="sub">Attendance</h3>
-    <div class="tiles one">${attTile(a.attendance)}</div>
     <h3 class="sub">This Week's Tier</h3>
     ${tierBlock}
     <h3 class="sub">Points &amp; Prizes</h3>
     <div class="tiles one">${tile("Point Balance", bal ? fmtInt(bal.balance) : "–", bal ? `${fmtInt(bal.earned)} earned · ${fmtInt(bal.spent)} cashed in` : "Not tracked yet")}</div>
     ${prizeHtml}
+    ${histHtml}
     <h3 class="sub">Save %</h3>
     <div class="tiles three">
       ${tile("True Save %", fmtPct(ov?.pct), ov ? `${fmtInt(ov.saves)} saves · ${fmtInt(ov.cancels)} cancels` : "Not on this board", ov?.rank)}
@@ -639,6 +756,7 @@ function openRep(a){
       ${tile("YTD Revenue", fmtMoney(ry?.total), ry ? `${fmtInt(ry.count)} renewals · ${fmtMoney(ry.acv)} ACV` : "Not on this board", ry?.rank)}
     </div>`;
   $("#rep-back").onclick = () => { state.current = null; closeRep(); };
+  const f = $("#rep-forget"); if (f) f.onclick = () => { forget(a.id); state.current = null; renderAgents(); closeRep(); };
   window.scrollTo({top:0});
 }
 function closeRep(){ $("#rep").hidden = true; $("#agents-list").hidden = false; }
@@ -660,8 +778,8 @@ async function load(){
     const d = await r.json(), b = d.board || {};
     Object.assign(state, {tiers:b.tiers, saves:b.saves, ren:b.renewals, points:b.points, banner:b.banner,
       attendance:b.attendance, highlights:b.highlights, meta:b.meta, hasManager:!!d.hasManager,
-      agents:[...(d.agents || [])].sort((x,y) => x.order - y.order)});
-    await unsealAll();
+      agents:[...(d.agents || [])].sort((x,y) => x.order - y.order), logUrl:d.logUrl || ""});
+    await restoreSaved(); await unsealAll();
     renderBanner(); renderTiers(); renderSaves(); renderRen(); renderPoints(); renderHighlights(); renderMeta(); renderAgents();
     if (state.current) reopen();
   } catch(e) {
