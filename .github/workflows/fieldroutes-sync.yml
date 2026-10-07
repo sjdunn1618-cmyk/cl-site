@@ -1,6 +1,11 @@
 name: FieldRoutes sync
 on:
-  workflow_dispatch: {}              # lets you click "Run workflow" to test
+  workflow_dispatch:
+    inputs:
+      hours_ciphertext:
+        description: 'Encrypted Homebase snapshot (no raw hours)'
+        required: true
+        type: string
 permissions:
   contents: write
 concurrency:
@@ -14,6 +19,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - run: pip install cryptography
       - name: Mountain-time gate
         id: window
         run: |
@@ -29,6 +35,8 @@ jobs:
       - name: Pull from FieldRoutes (read-only)
         if: steps.window.outputs.active == 'true' 
         env:
+          HOURS_SNAPSHOT: ${{ inputs.hours_ciphertext }}
+          HOURS_PRIVATE_KEY: ${{ secrets.HOURS_PRIVATE_KEY }}
           FR_KEY_1: ${{ secrets.FR_KEY_1 }}
           FR_TOKEN_1: ${{ secrets.FR_TOKEN_1 }}
           FR_KEY_2: ${{ secrets.FR_KEY_2 }}
@@ -57,11 +65,21 @@ jobs:
           for key, value in before.items():
               if key == "board":
                   for section, original in value.items():
-                      if section not in ("saves", "renewals"):
+                      if section not in ("saves", "renewals", "tiers", "day", "metricsMeta"):
                           assert after["board"][section] == original, section
-                  assert set(after["board"]) - set(value) <= {"day"}
+                  assert set(after["board"]) - set(value) <= {"day", "metricsMeta"}
               elif key != "meta":
                   assert after[key] == value, key
           assert after["meta"]["source"] == "fieldroutes"
           print("Validation passed. No data was committed or published.")
+          PYCODE
+      - name: Validate minimized tier output
+        run: |
+          python - <<'PYCODE'
+          import json
+          d=json.load(open("data.json"))
+          for b in (d["board"]["tiers"], d["board"]["day"]["tiers"]):
+              assert b["status"] in ("ok","unavailable","tie-review")
+              assert all("hours" not in r for r in b["rows"])
+          print("Tier schema and private-hours exclusion passed; nothing published.")
           PYCODE
