@@ -1,0 +1,56 @@
+name: Closed-week minimums read
+on:
+  workflow_dispatch:
+    inputs:
+      period_start:
+        required: true
+        type: string
+      period_end:
+        required: true
+        type: string
+      validation_public_key:
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: fieldroutes-sync
+  cancel-in-progress: false
+jobs:
+  read:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install cryptography
+      - name: Closed-period read only
+        env:
+          PERIOD_START: ${{ inputs.period_start }}
+          PERIOD_END: ${{ inputs.period_end }}
+          VALIDATION_PUBLIC_KEY: ${{ inputs.validation_public_key }}
+          FR_KEY_1: ${{ secrets.FR_KEY_1 }}
+          FR_TOKEN_1: ${{ secrets.FR_TOKEN_1 }}
+          FR_KEY_2: ${{ secrets.FR_KEY_2 }}
+          FR_TOKEN_2: ${{ secrets.FR_TOKEN_2 }}
+          FR_KEY_3: ${{ secrets.FR_KEY_3 }}
+          FR_TOKEN_3: ${{ secrets.FR_TOKEN_3 }}
+          FR_KEY_4: ${{ secrets.FR_KEY_4 }}
+          FR_TOKEN_4: ${{ secrets.FR_TOKEN_4 }}
+          FR_KEY_5: ${{ secrets.FR_KEY_5 }}
+          FR_TOKEN_5: ${{ secrets.FR_TOKEN_5 }}
+          FR_KEY_6: ${{ secrets.FR_KEY_6 }}
+          FR_TOKEN_6: ${{ secrets.FR_TOKEN_6 }}
+          FR_KEY_8: ${{ secrets.FR_KEY_8 }}
+          FR_TOKEN_8: ${{ secrets.FR_TOKEN_8 }}
+          FR_KEY_9: ${{ secrets.FR_KEY_9 }}
+          FR_TOKEN_9: ${{ secrets.FR_TOKEN_9 }}
+          FR_KEY_10: ${{ secrets.FR_KEY_10 }}
+          FR_TOKEN_10: ${{ secrets.FR_TOKEN_10 }}
+        run: python prior_week_fr.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: encrypted-prior-week-minimums
+          path: prior-week.enc
+          retention-days: 1
