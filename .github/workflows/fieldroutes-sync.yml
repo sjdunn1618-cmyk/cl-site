@@ -133,14 +133,28 @@ jobs:
           name: encrypted-validation
           path: validation.enc
           retention-days: 1
-      - name: Publish approved aggregate data
+      - name: Publish approved aggregate data with one bounded rebuild
         if: inputs.publish == true
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
-          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" || { echo "Remote changed; refusing stale publish"; exit 1; }
-          git add data.json
-          if git diff --cached --quiet; then echo "No aggregate changes"; exit 0; fi
-          git commit -m "Refresh FieldRoutes aggregate metrics"
-          git push origin HEAD:main
+        env:
+          NEXT_UPDATE_AT: ${{ inputs.next_update_at }}
+          HOURS_SNAPSHOT: ${{ inputs.hours_ciphertext }}
+          HOURS_PRIVATE_KEY: ${{ secrets.HOURS_PRIVATE_KEY }}
+          FR_KEY_1: ${{ secrets.FR_KEY_1 }}
+          FR_TOKEN_1: ${{ secrets.FR_TOKEN_1 }}
+          FR_KEY_2: ${{ secrets.FR_KEY_2 }}
+          FR_TOKEN_2: ${{ secrets.FR_TOKEN_2 }}
+          FR_KEY_3: ${{ secrets.FR_KEY_3 }}
+          FR_TOKEN_3: ${{ secrets.FR_TOKEN_3 }}
+          FR_KEY_4: ${{ secrets.FR_KEY_4 }}
+          FR_TOKEN_4: ${{ secrets.FR_TOKEN_4 }}
+          FR_KEY_5: ${{ secrets.FR_KEY_5 }}
+          FR_TOKEN_5: ${{ secrets.FR_TOKEN_5 }}
+          FR_KEY_6: ${{ secrets.FR_KEY_6 }}
+          FR_TOKEN_6: ${{ secrets.FR_TOKEN_6 }}
+          FR_KEY_8: ${{ secrets.FR_KEY_8 }}
+          FR_TOKEN_8: ${{ secrets.FR_TOKEN_8 }}
+          FR_KEY_9: ${{ secrets.FR_KEY_9 }}
+          FR_TOKEN_9: ${{ secrets.FR_TOKEN_9 }}
+          FR_KEY_10: ${{ secrets.FR_KEY_10 }}
+          FR_TOKEN_10: ${{ secrets.FR_TOKEN_10 }}
+        run: python guarded_publish.py
