@@ -215,7 +215,7 @@ def main():
         save=agg_saves(notes,roster)
         values={r:sum(v[k] for k in ("ic","ooc","nc","oth")) for r,v in revenue.items()}
         return tiers(roster,values,hours[period]["hours"],{r:v["s"] for r,v in save.items()},
-                     {r:v["c"] for r,v in save.items()},tie_policy="revhr-only",zero_hours_policy="zero-bottom")
+                     {r:v["c"] for r,v in save.items()},tie_policy="revhr-only",zero_hours_policy="zero-bottom",day=period=="day")
     bd["tiers"] = dict(range=label(*cur), provisional=True, **score("week",rc,notes))
     bd["day"]["tiers"] = dict(range=label(today,today), provisional=True,
         **score("day",daily_renewals,[x for x in all_notes if x["d"]==today]))
