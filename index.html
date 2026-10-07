@@ -251,6 +251,7 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
   .srow .n .full{display:none} .srow .n .short{display:inline}
   .srow .v{font-size:12.5px}
   .srow .v small{display:none}
+  #view-day .srow .v small{display:block;font-size:9px}
   .rep-head h2{font-size:28px}
   .att{font-size:18px} .att small{font-size:10.5px}
   .push b.n{font-size:24px} .push span{font-size:13px}
@@ -291,6 +292,7 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
     </div>
     <nav aria-label="Sections">
       <button id="nav-board" data-view="board" aria-current="page">Leaderboard</button>
+      <button id="nav-day" data-view="day">Day</button>
       <button id="nav-highlights" data-view="highlights">Highlights</button>
       <button id="nav-tiers" data-view="tiers">Tiers</button>
       <button id="nav-agents" data-view="agents">Agents</button>
@@ -328,6 +330,24 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
         </div>
       </div>
       <div id="ren-body"><div class="empty">Renewal rankings appear here once the first sync runs.</div></div>
+    </div>
+  </section>
+
+  <!-- DAY -->
+  <section id="view-day" hidden>
+    <div class="sec">
+      <div class="sec-head"><div><h2>Day</h2><div class="range" id="day-label">Waiting for today's sync</div></div></div>
+      <p class="how" id="day-updated">Today's stats use Mountain time.</p>
+      <div class="sec-head"><div><h2>Today's tiers</h2><div class="range" id="day-tier-range"></div></div></div>
+      <p class="how">Provisional ranking only. Daily tiers do not award raffle points.</p>
+      <div style="margin-bottom:28px" id="day-tier-body"><div class="empty">Waiting for today's complete hours.</div></div>
+      <div class="sec-head"><div><h2>True Save %</h2><div class="range" id="day-save-range"></div></div></div>
+      <p class="how">Each row shows Save %, then saves / cancels.</p>
+      <div id="day-save-body"><div class="empty">Today's save rankings appear after the next FieldRoutes sync.</div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-head"><div><h2>Renewal Rankings</h2><div class="range" id="day-ren-range">Signed renewals only</div></div></div>
+      <div id="day-ren-body"><div class="empty">Today's renewal rankings appear after the next FieldRoutes sync.</div></div>
     </div>
   </section>
 
@@ -385,12 +405,13 @@ const initials = n => n.split(/\s+/).map(w => w[0]).slice(0,2).join("").toUpperC
 const medal = r => r === 1 ? "m1" : r === 2 ? "m2" : r === 3 ? "m3" : "";
 const TIER_CLASS = {"Leader":"lead","Tier 1":"t1","Tier 2":"t2","Tier 3":"t3"};
 
-const state = { view:"board", saveK:"overall", renK:"current", saves:null, ren:null, tiers:null, attendance:null, highlights:null, points:null, banner:null, meta:null, access:null, agents:[], hasManager:false, payload:{}, keys:{}, mgrKey:null, current:null, logUrl:"", saved:{}, loggedSaved:{} };
+const state = { view:"board", saveK:"overall", renK:"current", day:null, saves:null, ren:null, tiers:null, attendance:null, highlights:null, points:null, banner:null, meta:null, access:null, agents:[], hasManager:false, payload:{}, keys:{}, mgrKey:null, current:null, logUrl:"", saved:{}, loggedSaved:{} };
 
 /* ---------- views ---------- */
-const VIEWS = ["board","highlights","tiers","agents"];
+const VIEWS = ["board","day","highlights","tiers","agents"];
 function show(view){
   state.view = view;
+  renderMeta();
   for (const v of VIEWS){
     $("#view-"+v).hidden = v !== view;
     if (v === view) $("#nav-"+v).setAttribute("aria-current","page"); else $("#nav-"+v).removeAttribute("aria-current");
@@ -405,7 +426,7 @@ function segment(groupSel, key, cb){
     state[key] = b.dataset.k; cb();
   });
 }
-segment('[aria-label="Renewal range"]', "renK", renderRen);
+segment('[aria-label="Renewal range"]', "renK", () => renderRen());
 
 /* ---------- banner ---------- */
 function renderBanner(){
@@ -416,16 +437,23 @@ function renderBanner(){
 
 /* ---------- tier rankings ---------- */
 function gapLine(rows, i){
+  if (rows[i].notWorking) return "Not working today";
   if (i === 0) return "Leading the team";
   const a = rows[i-1], gap = (a.total ?? 0) - (rows[i].total ?? 0);
-  return gap > 0 ? `${fmtInt(gap)} ${gap === 1 ? "pt" : "pts"} behind ${first(a.name)}` : `Tied with ${first(a.name)} on points`;
+  return gap > 0 ? `${fmtInt(gap)} ${gap === 1 ? "pt" : "pts"} behind ${first(a.name)}` : `Tied on points with ${first(a.name)}; rev/hr breaks ties`;
 }
-function renderTiers(){
-  const d = state.tiers; if (!d) return;
-  $("#tier-range").textContent = d.range || "";
+function renderTiers(d = state.tiers, prefix = "tier"){
+  if (!d) return;
+  $("#"+prefix+"-range").textContent = d.range || "";
   const rows = d.rows || [];
-  if (!rows.length){ $("#tier-body").innerHTML = `<div class="empty">No tier data yet.</div>`; return; }
-  $("#tier-body").innerHTML = `<div class="board tiers"><table>
+  const hoursAt = state.metricsMeta?.hours?.fetchedAt;
+  const oldHours = hoursAt && Date.now() - new Date(hoursAt).getTime() > 90*60*1000;
+  if (oldHours){ $("#"+prefix+"-body").innerHTML = `<div class="empty">Homebase hours are stale. Waiting for a fresh snapshot.</div>`; return; }
+  if (d.status && d.status !== "ok"){
+    $("#"+prefix+"-body").innerHTML = `<div class="empty">${d.status === "tie-review" ? "Tier placement needs review: points and rev/hr are tied at a reward boundary." : "Waiting for complete, current Homebase hours. Tiers are unavailable."}</div>`; return;
+  }
+  if (!rows.length){ $("#"+prefix+"-body").innerHTML = `<div class="empty">No tier data yet.</div>`; return; }
+  $("#"+prefix+"-body").innerHTML = `<div class="board tiers"><table>
     <thead><tr><th>#</th><th class="l">Agent</th><th class="l hide-sm">Tier</th><th>Rev / Hr</th><th>Save %</th><th>Total</th><th class="hide-sm">Reward</th></tr></thead>
     <tbody>${rows.map((r,i) => { const c = TIER_CLASS[r.tier] || "t3", brk = i > 0 && rows[i-1].tier !== r.tier ? " brk" : "";
       return `<tr class="${c}${brk}">
@@ -440,29 +468,41 @@ function renderTiers(){
 }
 
 /* ---------- saves ---------- */
-function renderSaves(){
-  const d = state.saves; if (!d) return;
-  $("#save-range").textContent = d.range || "";
+function renderSaves(d = state.saves, prefix = "save"){
+  if (!d) return;
+  $("#"+prefix+"-range").textContent = d.range || "";
   const short = n => String(n).split(" ")[0];
   const list = (title, rows, tot) => `<div class="slist"><h4>${title}${tot ? `<span>Team ${fmtPct(tot.pct)}</span>` : ""}</h4>${
     (rows || []).map(r => `<div class="srow ${medal(r.rank)}"><span class="r">${fmtInt(r.rank)}</span>
       <span class="n"><span class="full">${esc(r.name)}</span><span class="short">${esc(short(r.name))}</span></span>
       <span class="v">${fmtPct(r.pct)}<small>${fmtInt(r.saves)} / ${fmtInt(r.cancels)}</small></span></div>`).join("") || `<div class="srow"><span></span><span class="n" style="color:var(--muted)">No data</span><span></span></div>`}</div>`;
-  $("#save-body").innerHTML = `<div class="trio">${list("Overall", d.overall, d.overallTotal)}${list("In Contract", d.inContract, d.inContractTotal)}${list("Out of Contract", d.outContract, d.outContractTotal)}</div>`;
+  $("#"+prefix+"-body").innerHTML = `<div class="trio">${list("Overall", d.overall, d.overallTotal)}${list("In Contract", d.inContract, d.inContractTotal)}${list("Out of Contract", d.outContract, d.outContractTotal)}</div>`;
 }
 
 /* ---------- renewals ---------- */
-function renderRen(){
-  const d = state.ren; if (!d) return;
-  const ytd = state.renK === "ytd";
-  $("#ren-range").textContent = ytd ? "Year to date · signed renewals only" : (d.range ? d.range + " · signed renewals only" : "Signed renewals only");
-  const rows = d[state.renK] || [], tot = d[state.renK+"Total"];
-  if (!rows.length){ $("#ren-body").innerHTML = `<div class="empty">No rows in this table yet.</div>`; return; }
-  $("#ren-body").innerHTML = `<div class="board"><table>
+function renderRen(d = state.ren, prefix = "ren", rangeKey = state.renK){
+  if (!d) return;
+  const ytd = rangeKey === "ytd";
+  $("#"+prefix+"-range").textContent = ytd ? "Year to date · signed renewals only" : (d.range ? d.range + " · signed renewals only" : "Signed renewals only");
+  const rows = d[rangeKey] || [], tot = d[rangeKey+"Total"];
+  if (!rows.length){ $("#"+prefix+"-body").innerHTML = `<div class="empty">No rows in this table yet.</div>`; return; }
+  $("#"+prefix+"-body").innerHTML = `<div class="board"><table>
     <thead><tr><th>#</th><th class="l">Agent</th><th>Signed Revenue</th><th>Renewals</th><th class="hide-sm">ACV</th><th class="hide-sm">Unsigned</th><th>Signed %</th></tr></thead>
     <tbody>${rows.map(r => `<tr class="${medal(r.rank)}"><td class="rk">${fmtInt(r.rank)}</td><td class="nm l">${esc(r.name)}</td><td class="big">${fmtMoney(r.total)}</td><td>${fmtInt(r.count)}</td><td class="hide-sm">${fmtMoney(r.acv)}</td><td class="hide-sm">${fmtInt(r.unsigned)}</td><td>${fmtPct(r.signedPct)}</td></tr>`).join("")}
     ${tot ? `<tr class="total"><td></td><td class="nm l">Team</td><td>${fmtMoney(tot.total)}</td><td>${fmtInt(tot.count)}</td><td class="hide-sm">${fmtMoney(tot.acv)}</td><td class="hide-sm">${fmtInt(tot.unsigned)}</td><td>${fmtPct(tot.signedPct)}</td></tr>` : ""}
     </tbody></table></div>`;
+}
+
+function renderDay(){
+  const d = state.day; if (!d) return;
+  const today = new Intl.DateTimeFormat("en-CA", {timeZone:"America/Denver", year:"numeric", month:"2-digit", day:"2-digit"}).format(new Date());
+  const stale = d.date !== today;
+  $("#day-label").textContent = d.range + " · Mountain time";
+  $("#day-updated").textContent = (stale ? "Previous snapshot. Waiting for today's sync. " : "") +
+    (d.syncedAt ? "Updated " + new Date(d.syncedAt).toLocaleString("en-US", {timeZone:"America/Denver", month:"short", day:"numeric", hour:"numeric", minute:"2-digit"}) + " Mountain" : "Waiting for sync");
+  renderTiers(d.tiers, "day-tier");
+  renderSaves(d.saves, "day-save");
+  renderRen(d.renewals, "day-ren", "current");
 }
 
 /* ---------- tiers tab: balances + prizes ---------- */
@@ -765,8 +805,9 @@ function reopen(){ const a = state.agents.find(x => x.id === state.current); if 
 /* ---------- status ---------- */
 function setStatus(ok, text){ $("#status").innerHTML = `<span class="dot ${ok?"":"off"}"></span><span>${esc(text)}</span>`; }
 function renderMeta(){
-  const t = state.meta?.syncedAt ? new Date(state.meta.syncedAt) : null;
-  setStatus(!!t, t ? "Updated " + t.toLocaleString("en-US",{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}) : "Waiting for the first sync");
+  const m = state.view === "day" ? state.day : state.view === "board" ? {syncedAt:state.metricsMeta?.fieldroutesAt} : state.meta;
+  const t = m?.syncedAt ? new Date(m.syncedAt) : null;
+  setStatus(!!t, t ? (state.view === "day" ? "Day updated " : state.view === "board" ? "Metrics updated " : "Sheet boards updated ") + t.toLocaleString("en-US",{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}) : "Waiting for the first sync");
 }
 
 /* ---------- data ---------- */
@@ -776,11 +817,11 @@ async function load(){
     const r = await fetch("data.json?t=" + Date.now(), {cache:"no-store"});
     if (!r.ok) throw new Error(r.status);
     const d = await r.json(), b = d.board || {};
-    Object.assign(state, {tiers:b.tiers, saves:b.saves, ren:b.renewals, points:b.points, banner:b.banner,
+    Object.assign(state, {metricsMeta:b.metricsMeta, day:b.day, tiers:b.tiers, saves:b.saves, ren:b.renewals, points:b.points, banner:b.banner,
       attendance:b.attendance, highlights:b.highlights, meta:b.meta, hasManager:!!d.hasManager,
       agents:[...(d.agents || [])].sort((x,y) => x.order - y.order), logUrl:d.logUrl || ""});
     await restoreSaved(); await unsealAll();
-    renderBanner(); renderTiers(); renderSaves(); renderRen(); renderPoints(); renderHighlights(); renderMeta(); renderAgents();
+    renderBanner(); renderTiers(); renderSaves(); renderRen(); renderDay(); renderPoints(); renderHighlights(); renderMeta(); renderAgents();
     if (state.current) reopen();
   } catch(e) {
     if (!state.meta) setStatus(false, "Couldn't load the numbers. Check your connection and refresh.");
