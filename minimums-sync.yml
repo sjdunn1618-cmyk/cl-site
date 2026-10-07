@@ -1,0 +1,38 @@
+name: Encrypted minimums sync
+on:
+  workflow_dispatch:
+    inputs:
+      minimums_ciphertext:
+        description: 'Locally sealed rep and manager minimums only; no PINs or keys'
+        required: true
+        type: string
+      publish:
+        description: 'Publish approved encrypted minimums'
+        required: true
+        default: false
+        type: boolean
+permissions:
+  contents: write
+concurrency:
+  group: fieldroutes-sync
+  cancel-in-progress: false
+jobs:
+  minimums:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate ciphertext only
+        env:
+          MINIMUMS_CIPHERTEXT: ${{ inputs.minimums_ciphertext }}
+        run: python validate_minimums.py
+      - name: Publish encrypted minimums only
+        if: inputs.publish == true
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" || { echo "Remote changed; refusing stale publish"; exit 1; }
+          git add minimums.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Refresh encrypted agent minimums"
+          git push origin HEAD:main
