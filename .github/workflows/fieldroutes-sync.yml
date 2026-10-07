@@ -6,6 +6,10 @@ on:
         description: 'Encrypted Homebase snapshot (no raw hours)'
         required: true
         type: string
+      validation_public_key:
+        description: 'One-run public encryption key for private validation output'
+        required: true
+        type: string
 permissions:
   contents: write
 concurrency:
@@ -83,3 +87,20 @@ jobs:
               assert all("hours" not in r for r in b["rows"])
           print("Tier schema and private-hours exclusion passed; nothing published.")
           PYCODE
+      - name: Encrypt private validation result
+        env:
+          VALIDATION_PUBLIC_KEY: ${{ inputs.validation_public_key }}
+        run: |
+          python - <<'PYCODE'
+          import json,os
+          from hours_crypto import encrypt
+          data=json.load(open("data.json"))
+          board=data["board"]
+          result={k:board[k] for k in ("saves","renewals","tiers","day","metricsMeta")}
+          open("validation.enc","w").write(encrypt(result,os.environ["VALIDATION_PUBLIC_KEY"]))
+          PYCODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: encrypted-validation
+          path: validation.enc
+          retention-days: 1
