@@ -10,6 +10,10 @@ on:
         description: 'One-run public encryption key for private validation output'
         required: false
         type: string
+      next_update_at:
+        description: 'Next metrics publication time (timezone-aware ISO timestamp)'
+        required: false
+        type: string
       publish:
         description: 'Publish approved aggregate data'
         required: true
@@ -65,6 +69,24 @@ jobs:
           FR_KEY_10: ${{ secrets.FR_KEY_10 }}
           FR_TOKEN_10: ${{ secrets.FR_TOKEN_10 }}
         run: python fr_pull.py
+      - name: Record next scheduled metrics update
+        env:
+          NEXT_UPDATE_AT: ${{ inputs.next_update_at }}
+        run: |
+          python - <<'PYCODE'
+          import datetime, json, os
+          data = json.load(open("data.json"))
+          meta = data["board"]["metricsMeta"]
+          value = os.environ.get("NEXT_UPDATE_AT", "").strip()
+          if value:
+              parsed = datetime.datetime.fromisoformat(value.replace("Z", "+00:00"))
+              assert parsed.tzinfo is not None and parsed.utcoffset() is not None, "next_update_at must include timezone"
+              meta["nextUpdateAt"] = parsed.isoformat()
+          else:
+              meta.pop("nextUpdateAt", None)
+          with open("data.json", "w") as output:
+              json.dump(data, output, separators=(",", ":"))
+          PYCODE
       - name: Verify changed sections only (validation; no publish)
         run: |
           python - <<'PYCODE'
