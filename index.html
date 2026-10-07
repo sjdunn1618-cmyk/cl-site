@@ -278,6 +278,7 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
   .chip{font-size:9.5px;padding:1px 6px;margin-left:4px}
 }
 @media (prefers-reduced-motion:reduce){.dots.shake{animation:none}}
+.team-volume{display:block;text-align:right;color:var(--muted);font-size:11px;line-height:1.5;letter-spacing:0;font-weight:500;margin-top:2px}
 </style>
 
 <div class="banner" id="banner"><div class="banner-in"><span id="banner-label">Pending Cancel Count</span><b id="banner-val">–</b></div></div>
@@ -472,7 +473,7 @@ function renderSaves(d = state.saves, prefix = "save"){
   if (!d) return;
   $("#"+prefix+"-range").textContent = d.range || "";
   const short = n => String(n).split(" ")[0];
-  const list = (title, rows, tot) => `<div class="slist"><h4>${title}${tot ? `<span>Team ${fmtPct(tot.pct)}</span>` : ""}</h4>${
+  const list = (title, rows, tot) => `<div class="slist"><h4>${title}${tot ? `<span>Team ${fmtPct(tot.pct)}<small class="team-volume">${fmtInt(tot.saves)} / ${fmtInt(tot.cancels)}</small></span>` : ""}</h4>${
     (rows || []).map(r => `<div class="srow ${medal(r.rank)}"><span class="r">${fmtInt(r.rank)}</span>
       <span class="n"><span class="full">${esc(r.name)}</span><span class="short">${esc(short(r.name))}</span></span>
       <span class="v">${fmtPct(r.pct)}<small>${fmtInt(r.saves)} / ${fmtInt(r.cancels)}</small></span></div>`).join("") || `<div class="srow"><span></span><span class="n" style="color:var(--muted)">No data</span><span></span></div>`}</div>`;
