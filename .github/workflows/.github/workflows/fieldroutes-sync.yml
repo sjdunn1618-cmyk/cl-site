@@ -1,0 +1,67 @@
+name: FieldRoutes sync
+on:
+  workflow_dispatch: {}              # lets you click "Run workflow" to test
+permissions:
+  contents: write
+concurrency:
+  group: fieldroutes-sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Mountain-time gate
+        id: window
+        run: |
+          python - <<'PYCODE'
+          import datetime, os
+          from zoneinfo import ZoneInfo
+          now = datetime.datetime.now(ZoneInfo("America/Denver"))
+          scheduled = os.environ["GITHUB_EVENT_NAME"] == "schedule"
+          active = not scheduled or (now.weekday() < 6 and 7 <= now.hour <= 17)
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              output.write(f"active={str(active).lower()}\n")
+          PYCODE
+      - name: Pull from FieldRoutes (read-only)
+        if: steps.window.outputs.active == 'true' 
+        env:
+          FR_KEY_1: ${{ secrets.FR_KEY_1 }}
+          FR_TOKEN_1: ${{ secrets.FR_TOKEN_1 }}
+          FR_KEY_2: ${{ secrets.FR_KEY_2 }}
+          FR_TOKEN_2: ${{ secrets.FR_TOKEN_2 }}
+          FR_KEY_3: ${{ secrets.FR_KEY_3 }}
+          FR_TOKEN_3: ${{ secrets.FR_TOKEN_3 }}
+          FR_KEY_4: ${{ secrets.FR_KEY_4 }}
+          FR_TOKEN_4: ${{ secrets.FR_TOKEN_4 }}
+          FR_KEY_5: ${{ secrets.FR_KEY_5 }}
+          FR_TOKEN_5: ${{ secrets.FR_TOKEN_5 }}
+          FR_KEY_6: ${{ secrets.FR_KEY_6 }}
+          FR_TOKEN_6: ${{ secrets.FR_TOKEN_6 }}
+          FR_KEY_8: ${{ secrets.FR_KEY_8 }}
+          FR_TOKEN_8: ${{ secrets.FR_TOKEN_8 }}
+          FR_KEY_9: ${{ secrets.FR_KEY_9 }}
+          FR_TOKEN_9: ${{ secrets.FR_TOKEN_9 }}
+          FR_KEY_10: ${{ secrets.FR_KEY_10 }}
+          FR_TOKEN_10: ${{ secrets.FR_TOKEN_10 }}
+        run: python fr_pull.py
+      - name: Verify changed sections only (validation; no publish)
+        run: |
+          python - <<'PYCODE'
+          import json, subprocess
+          before = json.loads(subprocess.check_output(["git", "show", "HEAD:data.json"]))
+          after = json.load(open("data.json"))
+          for key, value in before.items():
+              if key == "board":
+                  for section, original in value.items():
+                      if section not in ("saves", "renewals"):
+                          assert after["board"][section] == original, section
+                  assert set(after["board"]) - set(value) <= {"day"}
+              elif key != "meta":
+                  assert after[key] == value, key
+          assert after["meta"]["source"] == "fieldroutes"
+          print("Validation passed. No data was committed or published.")
+          PYCODE
