@@ -1,1 +1,1651 @@
-{"v":2,"hasManager":true,"logUrl":"https://script.google.com/macros/s/AKfycbz_GKBzQkT_Ukj-g9rrfpd45cuZxUwHKTcWw-Su8tIvpSPfwSEUTUtRH4d3E0ZMFt7OOQ/exec","board":{"saves":{"range":"October 6, 2026 - October 6, 2026","overall":[{"name":"Teagan McCune","rank":1,"pct":73.0,"saves":11.0,"cancels":4.0},{"name":"Colby Earl","rank":2,"pct":72.0,"saves":21.0,"cancels":8.0},{"name":"Jonah Layton","rank":3,"pct":71.0,"saves":10.0,"cancels":4.0},{"name":"Joseph Black","rank":4,"pct":69.0,"saves":9.0,"cancels":4.0},{"name":"Mitch McGuire","rank":5,"pct":65.0,"saves":17.0,"cancels":9.0},{"name":"Wyatt Brownell","rank":6,"pct":65.0,"saves":24.0,"cancels":13.0},{"name":"Marcus Neubert","rank":7,"pct":57.0,"saves":16.0,"cancels":12.0},{"name":"Gabe Layton","rank":8,"pct":56.0,"saves":22.0,"cancels":17.0},{"name":"Spencer Bishop","rank":9,"pct":0.0,"saves":0.0,"cancels":0.0},{"name":"Carter Bishop","rank":9,"pct":0.0,"saves":0.0,"cancels":0.0},{"name":"Luke Thayn","rank":9,"pct":0.0,"saves":0.0,"cancels":0.0}],"overallTotal":{"name":"Total","rank":null,"pct":64.7,"saves":130.0,"cancels":71.0},"inContract":[{"name":"Joseph Black","rank":1,"pct":100.0,"saves":5.0,"cancels":0.0},{"name":"Colby Earl","rank":2,"pct":92.0,"saves":12.0,"cancels":1.0},{"name":"Teagan McCune","rank":3,"pct":92.0,"saves":11.0,"cancels":1.0},{"name":"Wyatt Brownell","rank":4,"pct":83.0,"saves":20.0,"cancels":4.0},{"name":"Jonah Layton","rank":5,"pct":82.0,"saves":9.0,"cancels":2.0},{"name":"Gabe Layton","rank":6,"pct":75.0,"saves":15.0,"cancels":5.0},{"name":"Mitch McGuire","rank":7,"pct":71.0,"saves":15.0,"cancels":6.0},{"name":"Marcus Neubert","rank":8,"pct":67.0,"saves":12.0,"cancels":6.0},{"name":"Spencer Bishop","rank":9,"pct":0.0,"saves":0.0,"cancels":0.0},{"name":"Carter Bishop","rank":9,"pct":0.0,"saves":0.0,"cancels":0.0},{"name":"Luke Thayn","rank":9,"pct":0.0,"saves":0.0,"cancels":0.0}],"inContractTotal":{"name":"Total","rank":null,"pct":79.8,"saves":99.0,"cancels":25.0},"outContract":[{"name":"Colby Earl","rank":1,"pct":53.0,"saves":8.0,"cancels":7.0},{"name":"Joseph Black","rank":2,"pct":43.0,"saves":3.0,"cancels":4.0},{"name":"Marcus Neubert","rank":3,"pct":40.0,"saves":4.0,"cancels":6.0},{"name":"Mitch McGuire","rank":4,"pct":40.0,"saves":2.0,"cancels":3.0},{"name":"Gabe Layton","rank":5,"pct":39.0,"saves":7.0,"cancels":11.0},{"name":"Jonah Layton","rank":6,"pct":33.0,"saves":1.0,"cancels":2.0},{"name":"Wyatt Brownell","rank":7,"pct":31.0,"saves":4.0,"cancels":9.0},{"name":"Spencer Bishop","rank":8,"pct":0.0,"saves":0.0,"cancels":0.0},{"name":"Teagan McCune","rank":8,"pct":0.0,"saves":0.0,"cancels":3.0},{"name":"Carter Bishop","rank":8,"pct":0.0,"saves":0.0,"cancels":0.0},{"name":"Luke Thayn","rank":8,"pct":0.0,"saves":0.0,"cancels":0.0}],"outContractTotal":{"name":"Total","rank":null,"pct":39.2,"saves":29.0,"cancels":45.0}},"renewals":{"range":"September 27, 2026 - October 3, 2026","current":[{"name":"Gabe Layton","rank":1,"total":9419.49,"ic":1394.0,"ooc":8025.49,"nc":0.0,"count":14.0,"acv":673.0,"unsigned":2.0,"signedPct":87.5},{"name":"Colby Earl","rank":2,"total":8872.01,"ic":2003.0,"ooc":6869.01,"nc":0.0,"count":17.0,"acv":522.0,"unsigned":0.0,"signedPct":100.0},{"name":"Luke Thayn","rank":3,"total":8281.0,"ic":0.0,"ooc":8281.0,"nc":0.0,"count":14.0,"acv":592.0,"unsigned":3.0,"signedPct":82.35},{"name":"Marcus Neubert","rank":4,"total":6554.0,"ic":5498.0,"ooc":1056.0,"nc":0.0,"count":11.0,"acv":596.0,"unsigned":3.0,"signedPct":78.57},{"name":"Jonah Layton","rank":5,"total":6208.0,"ic":1776.0,"ooc":4432.0,"nc":0.0,"count":11.0,"acv":564.0,"unsigned":1.0,"signedPct":91.67},{"name":"Teagan McCune","rank":6,"total":5385.61,"ic":900.0,"ooc":1952.0,"nc":0.0,"count":10.0,"acv":539.0,"unsigned":0.0,"signedPct":100.0},{"name":"Joseph Black","rank":7,"total":5293.24,"ic":0.0,"ooc":5293.24,"nc":0.0,"count":13.0,"acv":407.0,"unsigned":1.0,"signedPct":92.86},{"name":"Mitch McGuire","rank":8,"total":4183.56,"ic":0.0,"ooc":4183.56,"nc":0.0,"count":6.0,"acv":697.0,"unsigned":0.0,"signedPct":100.0},{"name":"Wyatt Brownell","rank":9,"total":3666.0,"ic":948.0,"ooc":2718.0,"nc":0.0,"count":5.0,"acv":733.0,"unsigned":1.0,"signedPct":83.33},{"name":"Spencer Bishop","rank":10,"total":1947.9,"ic":594.0,"ooc":1353.9,"nc":0.0,"count":4.0,"acv":487.0,"unsigned":1.0,"signedPct":80.0},{"name":"Carter Bishop","rank":11,"total":1924.0,"ic":540.0,"ooc":1384.0,"nc":0.0,"count":4.0,"acv":481.0,"unsigned":0.0,"signedPct":100.0}],"currentTotal":{"name":"Total","rank":null,"total":61734.81,"ic":13653.0,"ooc":45548.2,"nc":0,"count":109.0,"unsigned":12.0,"acv":566.37,"signedPct":90.08},"ytd":[{"name":"Teagan McCune","rank":1,"total":334687.55,"ic":19685.5,"ooc":138883.16,"nc":1358.0,"count":536.0,"acv":624.0,"unsigned":85.0,"signedPct":86.31},{"name":"Spencer Bishop","rank":2,"total":242338.85,"ic":11854.0,"ooc":96589.37,"nc":0.0,"count":402.0,"acv":603.0,"unsigned":42.0,"signedPct":90.54},{"name":"Gabe Layton","rank":3,"total":206528.98,"ic":39334.44,"ooc":144130.44,"nc":2439.5,"count":336.0,"acv":615.0,"unsigned":55.0,"signedPct":85.93},{"name":"Joseph Black","rank":4,"total":204781.35,"ic":17510.0,"ooc":89448.74,"nc":1136.0,"count":380.0,"acv":539.0,"unsigned":41.0,"signedPct":90.26},{"name":"Mitch McGuire","rank":5,"total":143446.08,"ic":12731.0,"ooc":76061.71,"nc":1660.0,"count":213.0,"acv":673.0,"unsigned":23.0,"signedPct":90.25},{"name":"Colby Earl","rank":6,"total":140534.4,"ic":36801.94,"ooc":96304.46,"nc":7428.0,"count":218.0,"acv":645.0,"unsigned":20.0,"signedPct":91.6},{"name":"Jonah Layton","rank":7,"total":101991.12,"ic":16842.0,"ooc":43787.0,"nc":0.0,"count":172.0,"acv":593.0,"unsigned":17.0,"signedPct":91.01},{"name":"Wyatt Brownell","rank":8,"total":53166.0,"ic":16618.0,"ooc":36548.0,"nc":0.0,"count":77.0,"acv":690.0,"unsigned":14.0,"signedPct":84.62},{"name":"Marcus Neubert","rank":9,"total":48740.0,"ic":26441.0,"ooc":21999.0,"nc":0.0,"count":79.0,"acv":617.0,"unsigned":15.0,"signedPct":84.04},{"name":"Luke Thayn","rank":10,"total":40303.54,"ic":1294.0,"ooc":39009.54,"nc":0.0,"count":74.0,"acv":545.0,"unsigned":13.0,"signedPct":85.06},{"name":"Carter Bishop","rank":11,"total":32059.2,"ic":5340.0,"ooc":26719.2,"nc":0.0,"count":51.0,"acv":629.0,"unsigned":1.0,"signedPct":98.08}],"ytdTotal":{"name":"Total","rank":null,"total":1548577.07,"ic":204451.88,"ooc":809480.6199999999,"nc":14021.5,"count":2538.0,"unsigned":326.0,"acv":610.16,"signedPct":88.62}},"tiers":{"range":"October 6, 2026 - October 6, 2026","rows":[{"name":"Colby Earl","rph":1255.76,"savePct":72.41,"total":98.0,"tier":"Leader","reward":7.0,"place":1,"revPts":60.0,"savePts":38.0},{"name":"Joseph Black","rph":280.65,"savePct":69.23,"total":88.0,"tier":"Tier 1","reward":5.0,"place":2,"revPts":54.0,"savePts":34.0},{"name":"Gabe Layton","rph":718.22,"savePct":56.41,"total":83.0,"tier":"Tier 1","reward":5.0,"place":3,"revPts":57.0,"savePts":26.0},{"name":"Wyatt Brownell","rph":168.02,"savePct":64.86,"total":81.0,"tier":"Tier 2","reward":3.0,"place":4,"revPts":51.0,"savePts":30.0},{"name":"Teagan McCune","rph":0.0,"savePct":73.33,"total":79.0,"tier":"Tier 2","reward":3.0,"place":5,"revPts":39.0,"savePts":40.0},{"name":"Jonah Layton","rph":87.63,"savePct":71.43,"total":78.0,"tier":"Tier 2","reward":3.0,"place":6,"revPts":42.0,"savePts":36.0},{"name":"Mitch McGuire","rph":104.52,"savePct":65.38,"total":77.0,"tier":"Tier 3","reward":0.0,"place":7,"revPts":45.0,"savePts":32.0},{"name":"Marcus Neubert","rph":160.17,"savePct":57.14,"total":76.0,"tier":"Tier 3","reward":0.0,"place":8,"revPts":48.0,"savePts":28.0},{"name":"Carter Bishop","rph":0.0,"savePct":0.0,"total":63.0,"tier":"Tier 3","reward":0.0,"place":9,"revPts":39.0,"savePts":24.0},{"name":"Luke Thayn","rph":0.0,"savePct":0.0,"total":63.0,"tier":"Tier 3","reward":0.0,"place":10,"revPts":39.0,"savePts":24.0},{"name":"Spencer Bishop","rph":0.0,"savePct":0.0,"total":63.0,"tier":"Tier 3","reward":0.0,"place":11,"revPts":39.0,"savePts":24.0}]},"banner":{"label":"Pending Cancel Count","value":"805"},"highlights":{"headline":"","paragraphs":["Nice work last week team. We ended at a team save percentage of 61%. Shoutout to Carter for leading the team with 75% and being the only rep in the 70%'s. Luke and Colby both had a team high 17 renewals and Wyatt led the team with the highest ACV at $731. This week our focus is the pending cancel list. Everyone has an updated tab on the Outbounds sheet. Make sure we are working each account all the way through before the end of the 10 day counter. If we can hit the team target of 740 accounts on pending by the end of this month, everyone will receive a 5 point bonus to their balance for the tier prizes!"]},"attendance":{"levels":[{"name":"Verbal Warning","at":4.0},{"name":"Written Warning","at":7.0},{"name":"Final Warning","at":10.0},{"name":"Termination","at":14.0}]},"points":{"balances":[{"name":"Carter Bishop","earned":0,"spent":0,"balance":0},{"name":"Colby Earl","earned":7.0,"spent":0,"balance":7.0},{"name":"Gabe Layton","earned":5.0,"spent":0,"balance":5.0},{"name":"Jonah Layton","earned":5.0,"spent":0,"balance":5.0},{"name":"Joseph Black","earned":3.0,"spent":0,"balance":3.0},{"name":"Luke Thayn","earned":3.0,"spent":0,"balance":3.0},{"name":"Marcus Neubert","earned":0,"spent":0,"balance":0},{"name":"Mitch McGuire","earned":0,"spent":0,"balance":0},{"name":"Spencer Bishop","earned":0,"spent":0,"balance":0},{"name":"Teagan McCune","earned":3.0,"spent":0,"balance":3.0},{"name":"Wyatt Brownell","earned":0,"spent":0,"balance":0}],"prizes":[{"prize":"$5 Drink card (Swig, Fiiz or Sodalicious)","cost":5.0,"details":""},{"prize":"$10 Tremendous gift card","cost":7.0,"details":""},{"prize":"Brooks swag","cost":7.0,"details":""},{"prize":"Blue-light gaming glasses","cost":8.0,"details":""},{"prize":"Owala or Stanley water bottle","cost":10.0,"details":""},{"prize":"Lunch DoorDashed to the office","cost":10.0,"details":""},{"prize":"Case of white Monster","cost":15.0,"details":""},{"prize":"Wireless earbuds (Soundcore or JLab)","cost":18.0,"details":""},{"prize":"$75 Hoodie Your Choice","cost":20.0,"details":""},{"prize":"2 hour Top Golf bay for 6 people","cost":22.0,"details":""},{"prize":"Rodizio Grill dinner for two","cost":22.0,"details":""},{"prize":"Noise-canceling call headset","cost":25.0,"details":""},{"prize":"Mechanical keyboard","cost":25.0,"details":""},{"prize":"$150 Shoes","cost":33.0,"details":""},{"prize":"$200 Ticketmaster credit","cost":40.0,"details":""},{"prize":"Ninja Creami or air fryer","cost":40.0,"details":""},{"prize":"AirPods Pro","cost":45.0,"details":""},{"prize":"Meta Quest 3S","cost":60.0,"details":""},{"prize":"Nintendo Switch 2","cost":65.0,"details":""},{"prize":"Xbox Series X or Playstation 5","cost":65.0,"details":""}]},"meta":{"syncedAt":"2026-10-07T16:48:04+00:00"}},"agents":[{"id":"carter","tab":"Carter","name":"Carter Bishop","order":0,"lock":{"iv":"6vRCaadxjwUOEfLN","ct":"uLIP1giUjSYDD8l1MVi3U+L287Djz24wOzVBVoa3s+ExACt8v3QqXQ1j4GhpOYNgpIP9Z3wuZERQMTLDDIKe1SQM/Xm60kOVyKg26MxZNF/m9kHruv1lqZIVr8oitwWBOqTSfCops/hN9CBDr5aYeM21pgJBjoyLVgz2PLvJifapJL3014g8oI2ZEZl7Ixlcw600TiZtaLwb3n1G7l1Xz+qN0ZjHBbZddFZaDzO4pfonZdyb6ZL8eqi9begfsf/kKZ/vhgkVonp1z2ajeUxBjYSEgbW2qFfPQImjJ+IgFNtv7iF28jbW4o0+0PWkws5bbIv+y2a3cMutd1P8u9MPTchaKVIR7R6SRvUBdUHWQ5VCwxp3LQfFquuofSX2EmZ6xbbu/OBncUbPZawY7hwQpn6PJ+DJx5TJ0xU4o9TKOrLKYXP8vh21D/Q/J6WdG7OSmITZnFDaq08zu+OkrF7a0uvsf+vPYSVgQqpgk0GN9AkSoNDF3Pkr4QYN0WpbytO4PsZWBVQRUXBgSdHR0G9680uABpx3ETITUqi5Yjd1MbzEgXGaLMzrr4yRZevxBQBpgkx+fBK09oOXYapSrANd1eIn1a4hpfeWSJddTMwW0DOR8jLuE/QySNOQ2f2ZzA=="},"mlock":{"iv":"Ulxj7/SbMjyZXWWS","ct":"8sUO0cSoC3v2NeUR3zcRF4s0FtNerE5iDbxWc8axCsyt8JD6xr8V0thlbqlumZnqRFlw3YO7VrBW3xVqS5+VT+76kqtusAN48wSrKPvubMzrLPRbKVfG9yIICqTbSQIOAyD5uKDnfjmYYxm8l9PoPY4HnrbJ3AariJCLSpLml1n9pzKfOsfEyaLDIFprEfa92FsgiqCq6HeXDEeURSj195u2s/OkaZ72oCTkpZtM0P17Vb6UHw2u8YSokNaieolk4kspHXj4KRSC4mdCxfU7f4uW3J5i5obxU6v9JW8DdV6aItFwvNnc1EZuWG4/GFCSGavaf+2dkrxZqXgk9ZA9RS0iaMyNbsP/YyYF2GLbrRs8FCPkwws0w95NbhDqFsmc4RF5DenQ6MaiJ6jBieYESJp8Azwrxhe/qVLQjsvftdlQNNPwjYrCFI+zpRSK0IeB5it1OiOeelCdLMN6PHBL/ICcKYsUpccp10fkn0t3MIJ1GKgquOrbSDpmEebJkmkroZmuj5zoIZKBmgK0LUDdrs3EfqFFFy2V45ee7FYQywJhQjMgnOB05bZJA4wwJ/QZvkuMxF81RodHlMVztod2qM0+eu5WStOi/4qdHqEwKMUwFG4D1aEoXJLh+AGBwA=="}},{"id":"colby","tab":"Colby","name":"Colby Earl","order":1,"lock":{"iv":"uFXfdj7Ba7PCsGU6","ct":"2iFJO+jGAVYeExSrJ8GGHQvFAdh0Ms+w+uJZQ1MkT2NwV9Yt31x11WjrWu9mgH4WVfc0LDuWcPQEG+tPxo+9MtRjwHsXlie2dO/2cUGnzuOYAnAYmUkwp5ktHgde2YuZGIWUHPK3PexCeVi+WlxnwPJDSwQW9xNsh2hc8FMDP3m20zF5pOMkIPyRJ6oQktHY3QYV3ZxPUmvqyQZp6iyH1UVpdKrGmkaNCA1RnZcIvfrf9SQn8bq5WA9lNhWfF/1QZKVCFCDjYQY3Yig4AqXxS5Ji5g1mwlfLQwcBXbo6ieIj3hK4vFsTileSkLj6yZkIQlLeNy4TcEmksi1nGMXig4F6QgLgw42F3zCMSyUeRfPEwPcO6PFZyci2qlEedSdOVGfnkV2a/5GlsQzvJj3aj81kVpR+Ehrk1C69+szN0DmHJdcWmRu6WJ9sBJ+YK25jPkh/wh1ZNPQm8FLzA1S6psCxZLT0fXpl7esgk57/5ev8th/jlNb68fVfoWS+T3UE5fKrwHArbxUuOjyS0w+f7w6Cuz9l4qEnrOGmwbEUkm+ac4l3rh3UlnVFmRJV3B0IoyAXlVXgkt0iev7Qd3jTB737DYrwGuWCIWYI5wqu+YOCw5NTMl+Gs4FdIgpBrtmpVQ=="},"mlock":{"iv":"3EITsg6U2yMtOc8q","ct":"Hwnr6fJflbl/cJ+qW5XUTc2REZ3aIOFiz9QQVwwh8iMyu1ivqAbRzSD8msklR7UQ1PmjuDUE3U0ksXfRq+E3gk0MxFN3lrDPShg6JwXYsPWqfXnV6rrIsh//sWfKx/4elsqrGamxC14zPDKcrOGhIW3p/ZGEqwJV/z0qJa11MtkUHHis1G9JiwSr7B8rVuCu2uHoF5soCrkFKkbnNbVKT5lgPtiMy448mZ0TGo97AL+7AB+m0UoXbHe7HxRZ9Dv6Y4qI+H7JjjWxrtLn62m4gWuJIXn79zAC6uHCYPuBiQIlGgOoyvEasplRy2TOU1OioHCTGgCQBwMih8fEMK0ButJDhyGoJGXlUvEo2HLPxbJXAD2hrpfiXpmFpSjGI6O++MTUl6hpdIS6oxkObmGYBroQclDtbBr0eRYh3f78edOsMqb07DV6aM9IX6ovE3X8jnjjJFgvhZHoyl++LrSd/JIqdbBeAyKbZrnZs87U3ngBXEEEHKTHYjXpXHiv1chSV2eraQkLLhzLgIm8ofo1vHjiSMAc/NrDPFz7peuXSvauF+/XnKo3fQIGAsQbu+hDjzae0JZ+/Htvl64c++Ea258XTP/tBLZqe2e7+8MteQu+6aMwEy6aptD63CH28IbmUQ=="}},{"id":"gabe","tab":"Gabe","name":"Gabe Layton","order":2,"lock":{"iv":"bhKxqsIB0+RrxKOu","ct":"11szotC5NOQUlMCwyTSYCDBRoXv43ImEh+9CI8MHusNytZVMIkco7dc+rbp3dyNjcqk21Crm/9cVqQKDMA9N8Mbjm7K7S8y4IJOD5/+jo70iRjcv7+bdc4ax7o5cfzxqS4rMzME6HuhKlR5y7m4t/3Jhz3gevQzkF8RF5Xk+L+4s7GkfLkR+UOryAgDDoWjN7e0ftMc+7X/XQJdMYDY/z/h8Yaf8oz1mXGePH83Ssf0aPOi31WIYJPJQmYLIKgg+Ms4vVVDXkn/miHzWiqwUEnKk3Q4J6tVjG3NOj5vXzgqSl/OddLA3en6gNGxcdNVL+ogZlC8jUHiGjcnlXESY4VRuSHuI/PN3if5M1tZDuDnq2T8nV324cm9KL7WzsHBF+z5TeCX/kY0lP/j4SFoq6HAh6JpIRNzXgD5mnmjmSAchYyVwuPXNdFstBGLAhRQqnbCypTk6nFZqqjkP+3vmw5MnBO5xzf8X4LXp+kNug+WCNtzN918PRyd/Btu9rCxS6QRSAllFiC+kNXWGaS/+sPH911FT+lrAX560KHROqwzxC7ao2ABJmAln/c2+3Y3ZINsOXFYTAN3obKZpNu/zdWIMczTwIBuCjQB/lfcB9KsRaKYZATuu3w48m33chhWCxw=="},"mlock":{"iv":"+uJAyvghs6ZVA/Oj","ct":"LbCdp4nkSfHZh2tCk9jbPZFylIKRUMLR9af4EHvLN4lUxkGLTaHbSBOHWnNGVVlM1kmKe2epNJtmxpTxYvEqIOmmYLW+UGF7LgWMwW0OMBt1p3SVlxR0yB2MaLcgTWuo+wjLFDWXzrYNBp0fSuj9N1Pa770ACZDkJxQBgZc9cc8vaWq/k1TKPrxVmsea0TScO/nLgfcvEs6QsgxcIyq2n1frxMGOM78ZK15P761mYB83xZRHxq4nAZKUO0YD4OREV3plMSKpwPfi3C9DLTnA/wMMFyCrNNm7zkpsbCIyMlLTzz9BQIQioMDm0nySOBYEd7y7twJuMjtPzrjcky/mY5zI5hCtvu76gkvkZ9644dYh5e0JzKCMkWJTwhTzhwxf91tTLyvd4mvHDtcV/3gyLGP4HacKYYUaq3ljCs/z0PIMk81Y6g+jJKrTR4vvCSWmJJ28cVBHpmW3VTRbzNl0CLGOTkRbf8ERjKZL865y0hd/pp0Air82N6UsnUuFN0Cb0k42UBVlwyOnTdo7hwcP/cPkvcjww/HlF3q7g50kW07CwBvflnpWROXPxbk8KSxzk2nILV5Of/UHrUOM4trc48vC3DJZ2plvCU4NcKekI446hdcX4qgHT3Yx5DBgRMgwGg=="}},{"id":"jonah","tab":"Jonah","name":"Jonah Layton","order":3,"lock":{"iv":"P2td0EBFwODsFfY9","ct":"uVtRYyE2Dlr/NOAAPklxluI8KfTaNSlCAzyHeo3eED5UvtGrdTV4XDpuJsIIx3Jtt0EH7nwMghPBuMzm5eYMA9atH9GMkDAHFf4tYbdIfVeaLQ6OMTvXXboBTZAltIO13UXTEucKrYKFDvr7mjs5XyXJ1jVl/QXhkIWhtfFohxzVI1BbalAzDH3riy2AFQgNrme+YzvBuzZ3VH1sur4Qe94feBI9zENs8vbnauBL8RfH0h0i1wlimzS4iw3OwwWWwuPFYLS5mCee1Kw3+Q50C2RXyAUbzYZg3IgFJY0xPIRsT7mdNrZEnd8vBpO3p5S3dJPR4Pr2Hw5Yj+yNkObdwBOgw/JJtTV89txLXsi62bhLfplrma90QozFsx2ra/M4WxmCWLzzzo0ygPHBRbX/DRgCTBavIVDpzKdXjqnRE8ZWP9QoEaKGJ8hze+J2p/Vfm/AyuKF1sT1wbO3tgFbnBUd00Xmyi23gtDR91uZAx/UlpsXdBuYikR89JEsWinQPA/4BFqmvv2Lv1imuv+1mMKrylFMqbBP0hyOheUXjjn9t5AyQQLwKyCy6UThVxm2i1RiHonYHvudqoor5+3rFPu3dFaU8NtrCEJHetDeK+nxeaMp8KifSqhrLaO3f6mbZhg=="},"mlock":{"iv":"woPtzEZePuL58Q07","ct":"HS615pGh+mtl2sW45EkKhRtQldEBEkOghvOCiOtYM6Abw7YpEgbIjSHZwSXS4/axT9uwfpMh6qDM6/P7+wVZS1ulU+n90hvK8Ijs/EWJ3tY3rxxOgGqfv5g9NnJyeoehB7e0HRNNShFyIj3HL5nlNCBEhcEMAsW4bo+GJEskTFOPr5eQWnXtqUnUKFXeTB4UDdhLrqOQEQD9Fnw3ysKcfQLsljWd29tRyGuvTevnT35HgMXfQOPXS8T89OfnpSWE9MY3vHjYVUU/wazdxNByuIaPNCVPAukmKgF/y9+5bFEkz70Pj/wU5tS4KofzAY8YwZbLZC8z85cVbS1wB7KO5ADNXKy7z12cck2w0rwfEKCoZfAZaqiatlTDkYwJh4XHbjJIRLhgHz93NpV7FQTeYeUHBUJmLXJmu5dLAPZsAaMrT7QR8nvsWfM4RzPhVJoh6p9OcssjNeRYEmJ55JSjp2GbtaBU558FryFU+c+CxN5CO2DeiZFBMrNu9ChfstJpzqD02oFYPyndbcLB9gOs55VVe9lwJirRN6ihhNN5e5ZMMsynlvK5kFbldHcdyA067gBhqSwdJoYRQkMkWEyB044Si96JGwQpNaebYnDy55Oaaax+9H440rbJF0ptVW96eA=="}},{"id":"joe","tab":"Joe","name":"Joseph Black","order":4,"lock":{"iv":"8CP1PjBWwhNneqcZ","ct":"JxqjoF8JF30imhUHzU9EW7A188s1AeqGKtCOSVQ+iqRPQkiy4fq66Scxse34UrcgGos8ZFMfoDLbJliYnSYpyMWEODCoW5pZeptMGSRKDx/pzJPwmumyBnl6ABKKxq/+gOvYT5zUQ9z8jfVCrBigrZp8AhOFQ+i/u6Bvnl9EnUincmddQdajmakqxcAuzdHq74MpiPJtfObYuTxO9tTluwhNR130BbdOlFrJmXWHgyk5mHG4+WTC8b0jCSH1oJU/kGPygFRg+5Jcqhs260YCONTlPzDRBZdWy6sCHfaYU+pxiun4x5FzfIO+es97kcNwNg2POjZw5DVVlITv0eInoLB2iDuo0OUSg42lFZj5YDrr9QM9NqW20dq0aG/tF+IXbI+8mQPiBFJixb7wxTvfq1aGeLwZMfttCtCCH8aLSf6njJAVId+K2U+u+hgjvJPr/tuKqrj82KboeokeH9bZyOAHBlxJciB/gXFtAMChyxBOiPp/NenWvLSs6CUf975y+p5M7uvO2QeYHrnN/l3+MFbPLgNa6aev4ca7+FwclXdvh+ecbFOmMfPd2XBHObudM84QvgwzTjIsn3QXRwrButFJkgyoZkOAUJZOC/AKeg32L3KG3VqJztv5XQoJAfRoQw=="},"mlock":{"iv":"vDxEOmP8SgU8M6sj","ct":"zKYxt/TbQ2JJuzhwwAMNj7fvDVaHHsLdOLvf2tT5wCfYy3s0uA8hYDACAQ9VaxeIlf+cfuERk89uoan9xLK4XQryqLLukEst8szsTAk3IIDTqtPjIdC0OitFHJbdav1nj85S9rTqhR8IL31w1Kvc2CNjK4ddKaVa6Vn6Qqhboayrlilc1fhZ3FhYV5OUNoUuOfJeANU8ITqW0uES43wh7l6QkKF9A64q15oczW1yQCsWD5wF0+DETzU2yxDm1/VBoU2kDhuqZC9Z/9HB+n3ilQO8WSgKJs2b220LMCYn3kJBdrPivCNo+z7Mbvc+EHJX0CMmCGtR9HSV8xCrkHVW1YyvvXTrh36k5PrGFKGEYLs2o88ypv2mKXu1S+M0mGajFOMLiW8VDRfK6cbBEaoyR2zBBU44ImRzjDJMDpno01BIaj98rzBpuGMgJxR37+MvTAoZI3hEx+6Ep3zIwNjtrFbZ7tUiHmnjGqi5+QeKggkJvBewf0d+Bi3XgR/GgJV9Wh3h/pN6jFNYZeASS+FYIzS+e1O2/5aPRvYh4L1mG5SflWwT5sGjpcCB++NKYJs44P4LKwJZFgaYbYNi+iN3jFLQ6+rtNcFc0/HUXVu8ddrqF7ePXdfWQxgZVZjx6bEBaw=="}},{"id":"luke","tab":"Luke","name":"Luke Thayn","order":5,"lock":{"iv":"3W/4erxheisNvWir","ct":"/j+DMIH4+kUgbZ8SzkzwolJoeoAbXqztJFvXBNh82kcWpHQa85lnZ+sm8ABHwjdgUG4F5NwZj87DjJ9eXwid3wis5MtKAZNsH8nYyftXM4RyjMGUalymUVXJKdt8WJPbI1cUq4FvHBdVlfE2hkeNtwAvvaxl5L5tFlkiWdiZpRdfpo39lh9+7hNzF/qpyZ3JIY8M/xD0OBHKtotONQjQKcO0M+sFVZqjTg+Bq0qdC00Jyku4l0mJ9UuoFrl02hV11AvkPQ6CGTgYcvOO9i7Lvt8Om977UG7itZuoKQzy3w77NrTSdmGuH6CcpKXJbm/ShQSULko7WwVvQIqFeaMZqczIILpUAmbx/LrJEs9XE1eRr7XTLGFyXdpB3Btb+hvQxoIoYh4K8d/A3dxYUnjszpX4rG2WZEGhdABJ3alIqBTmVMtAzaeQ0vnhtAQyrUcvTJe68EVLklHCCnSqcWhyYzASycujgHI8w3WYELorek69u2YbxwyCpyhTaXU8DUKBELwuPXZE+5X4KL7Vls14syXlh8ppGe7aswRUr0NvVcJgnuM7pvF/DFs0rzvymHnlWfQgzsmurW5vG1KRCEPXHoPo5oTUPTwqIVUFGALzWW6xEq4bFXAFeKzf2CN3KA=="},"mlock":{"iv":"uA57HzvkC2UxUAcv","ct":"pLVXj2uByMzWmxEsz6xGF13czk3Y/FXaay6CpaOzz26Yrg6QVePiJjP+4yLxJ1jJzSs3rf67m+FEfO3A+mQcVxQAa1AyLeKyNHAmd4yhpDUFFgOOm/pN+NL64Ox3KZleB8Sue7ltMlov12NwZGFSUHw3/vBdvlqwHUNIJX19S42/kBHz9FNuclQbKMjY6gAkoWZoWQiu1+iQPlJ99U1cXNot2qUk+v07e9WuC7/MXmvsgjV++ESAgqeidO99gRMDXTwUf7n4aPN6UtZo2NBJrMUhF9TMVYRSMWQZn0zDDSGuyTZbYA9TvDCs4oNDTBEXTM/OuGeP0emHv3jwra4+3FrVCUSjCgxRb1ElNZLEjHkLA6dUudR+Py68MpMlGW/A0QlwvbQSPX0qGp52yNDwIVaGjoAhMiOliL+a3fZRGH/cmiF22FjIoGi/n/J3IXcKUdDgdFRoO3gFp8tuXlV0OEthOghuOGRfCzc6gMjHQuAemkLvG/WT6CVAHIlCaG47F7+r4yyFdN1e3ZQxSuDec7jFEDyDM8MRhw3UZMlxYIWFomdZj7u78xghYgcJWyjqDm8g//vRQ2BE4qSrZBOo5ks1cYJntm21gjJlYt9+UyUQDK6m6z49ygJvqx/Obg=="}},{"id":"marcus","tab":"Marcus","name":"Marcus Neubert","order":6,"lock":{"iv":"kK+3CXcR0LZFNRC+","ct":"6V0HjNuIj5vBZIoySMzcwSfrdwYQksj0Uy3cZEWeRn17lmXV+odqD7zxmeY7N56L/vnturiiwE+2IC0/28TDZS6JC0peGlkdyxowHfykKVt/FuiqFN8dhmo0+4vZ1p8Fit4n+o3g7fVT3F1YtRSnKBJRECe6l0FLyIgq4vYSROmtW1/Lj8MBz80eT4fMkMgv5E2YvmJ5mxEpus1rzcxovaW3IHiFKrDOU2q5JIob1wMxf5I/LHxu9LcyQjTWNiNHWe5jhwj0hqxwMkYhkKl+U4ShD1AAMB4aY8ZwhCrHMTFDud+je8RkDRwMH8sr/jPNlakrYl9oGAJv6CyOHcBxOWLxJBlDQwlL2ak3Y46jHk/bTC/Tzv2bgfYMmL6gAS0xBQcNDMtFrP97/xK879q4ChTxilRsv0J5f/2ihRQm5W4aTa3xA3I7yTSK72eifZWlnNCi+GAARs3da7aVHNaGuDRYMDx38ljuua/YbtrhGLMylI7jeY13As8RuTTu2OPJp9I4PBoRuaKjS5qkXDQW6aasqzI2n0LV9yEHjxqV8DWCzb8MN6Yc/yJXw/3GhEtdHnXiwupZPx5FiGLcHS49R1gHT1EOhPNJO6py1l6TTUX6qqE/KjwhcNHaISbie1JbIA=="},"mlock":{"iv":"tMxx6AB2XVg7p088","ct":"v5CRaE+gvy5kyC/n2q4CLCiKPbvi3k18t9MRNOq113ujIKBS5baRrrrOvNNfKCAcnsDE/GDIARHPkfFMQ6vtR8bkQ6cCelIdeRkkIC/8B9MiLP60EhDw5vhqQ3umXp+9+9jnbD6VUNglcTX8mr3w0CdJotpYoTntqSywiyPzjaNpi/+q2jHLY7wJuS9Jb6/lopodH9Mr3IiveYwdvieb9N/o842R+NfRj2fTESTr76BhWA4Ko7MUFD3lzQetA9lECQx6dIDXIzeQSZI089vbojOYaG00lKnkom6DBJqmAn9yx/B9TQ3eaW028DmwzTAC2G2OE2N+4pmWzNXZ0+NpsDZytdoPfRomePei6RBVi7y07WHlUsnTKxKltNAlEMClAHepDX5W8TWmQqDMQw+9CS02QgQPVd4lYsaMPd9PogK4p7i+qeW0YnpzXkjlsX9Fy8WtBMh9VJPbw8DaevmGScE3H+/qt0OmqrJxjfSwvFufbuEGHnrR9lCIWwuqiplW1L7CWD2En8fUGAa0kugHbq/dkL51W02rk3cM14ngm406O1CvJygH8daihqJfGQZhJGtPv21vd4zq2OM7THQQxpSiNrEZc/Q45Vz9X24shG0ZpgQSVbIZ5bJxkKM4szYfqw=="}},{"id":"mitch","tab":"Mitch","name":"Mitch McGuire","order":7,"lock":{"iv":"rFOGxgrXYkaqQXq7","ct":"5gBh0YQLZYS698Okl2+NU9ciPJuYR8ms1cHeQSWnT62mVv2Y4YBbM9iVNMxxVITwWL0G3eIUyY23oNzzOfBj5OvOjWCBjy+3514Guin3uZfvnQzGrMGBqq/e/cNU4qotrvxDzUNygbncAW5iv3d18EbUKudJ+qnaUglxpydF3S8vUhD9uwIVF/nMRBHuKyejSkfIznqcOJEngy3wvFWKDJZ6GI3e6kVtZQlI/0Le5aPgWAxZjCrbLfdwVwlKweuP/HD6nSQUEyW1M1F2EQeh1XyiGXM0G5I/3mnPUGGAnXPbbsnNIBTh713T5tq8+uV3x8KBKXZd6i3NeGf77u2g0br4FnfXzNbf6cvpFZKvyQnnnaMfxzNzxo4b/ktKES+MG9Xbi9r/8mb2WYBZkpcyLOiJAWc9UJ5Td32uF+/zwhkWYiwUfFBHzHfNr3Ft+csa8xUGITEjpWYh+oRquBvc2oL8e+5KEhzawwssewOSqNaFgD6f9BIWTSnT6AooYTi3IML/YxVcwnj9Vh/cSfaC4Absqg8R1xFGQP5L3PShuQqo46vjf944CZYP8AJE/hi9kUgBYOj7/SMThjLjT27tc9yEsnPin2wF/pu/hjTopZmeTW4VQFR8t9nknKZB8iaIkg=="},"mlock":{"iv":"gPazwsFkRG3OCwY7","ct":"6GZx2FzuTqF+ik7GXVIiVqkBOVca9Po6OxtkVYRXMV5rXb/QZyYHlva42oJhOBRiogHCoPLeIy2gi0bW5X+lDpckeg12BBXkbmV9mHN0cLpwljQHnd48Sphd3PSds5a/TM+zxNK9ES3Wcio/UwVFePpOZ3Oup3UDxNQ+NFCv7CvmkE6wLjwRhG8YChj+XzHdXkzf6n9lVeQQzZwYNciqgJkrywvZtNboiXgaP9xvoTfj8R+2gsw4gYluar1Rs/g1mq8sAToH+5FwhyOart6LCiTiVe9zMwqENNP1VU9HFCDL4nX1CjeZvIlXU5GQ+9vnqOU83lshaF4xuFWMZyzNNohwbnxwKheYzAIMdUIq93lVdUrVstySkmleFGK37VAUWE3XTyeCbUIZIZnJA6g12S9LDKQ9mWBjkcn1IJteB9QodkQufg6TPzl8Yw2P53oR7F8MXPWxySwcF51ND6TFSmfiYVrdDJ7n4NuBnJx4IksqMs3llGJ+0Qw575Vafx+k2wbvrIruGFy0rARYZtXZIkpwNptbTFwF9nEPg4uli7sDgdFs0AEG6ARfk8K9VqGArnLaAr7jh9kJLJgkQ9OGEYcCdZqtdpWk+I7W+olsHcJwNRjtC+obSP5E4uxiXxOTAA=="}},{"id":"spencer","tab":"Spencer","name":"Spencer Bishop","order":8,"lock":{"iv":"9Sh/kKtjKhtYhyhb","ct":"TMeQCvTU8I9PcFmY7z+G30liHLYcouzyPgXs7liP6ZZttk24N4rmyCalOE35Rwbl+nEhoFAHrdCHz5v1H3eyHHddWumz07n24fFjagJ+X4BlSRKIVfQlP4Ed2XZ1OnA9OFZzPqqXQ8Ow9Ng09+dq0ytS0t9buHj84aN5CB6xB4Gi0xJ88+sm/iEyguCoUMGDHGq239Pw0uIu76cRPEqsitsXKUc9RWDynpZylE4cjlVgK/GEHtQqDzE36/owYM9tM8nxICxhklmeXFoZ/GChqIKEVVmKQaAGEwayNftzRaWdx1yIFhK6ahRgE809Ugl4u7UIfI6yGhmYHwELDkMLcZ9cwBNJen3ZM73QOrqxkyGvEehCYVBJg1SrH1BXEA8xZHkju89Zf+4jiclFYoDpGB+k6GtYN45ugd4SmCP0uxQWMhBoWM0qQ45Baztm5k+uaL/zmtkg/qZuaMyl9z9dNQAXAFY9OqvYbFQ5JObFMjKP4GO3Ekn43AUqUDYjkDKxAwY2pYu3ie+hmIbF2X+bGLS+WL3YKD/AJJ7lbkSwK8WFKPkq+rkO939fPWSfFTIVHjxDs6iANALz5OMP7CS9HHiaXtKqQLLIUuqqReNelEF3mlYAMlyMWlgGVxlkrg=="},"mlock":{"iv":"ZQ3f9N8EfiPA6lHG","ct":"/YpNpA0wVSf3bzPhPVCQKbZCs9A3J669aP6z+l4fTUj/QaspYkB8PAY9fgg/bsnJL/EwbQhATPxwnX55ftjrfpej0gAnrNO0xNh4y6UgPHqeuI2RtF8NPupom/xYD3h6qriI6Bxvb2NpCN/5ARDtUgpoK4L7eJUnQfnn1HcsYkZaycQU7lnSG1jdCi5bATcdTReQ2nuLlscoI54bFMSJLi0Cqk7d6EW6r5QfL8NkWOy6bB7zANLD6P0XDR+8PHrMr8JKX+SsKcFI6mxKUUmETkzEdO2qcbGfpOjWaJZFZUoToP1CBcarrPD+A9IAV6Po3ISpXbZbx5GMyfbldufAF/4a3lc6thpfFfAzi+0htJev3e88tcgnvRlIYQUvVju5hkngUCgXIqM87n5G8AI+plyr2WuzlJv3KSIDPxkP9ivkuBJ6sqx9P6qBNLqPnH7DygCoRpyWGfxV65ZJnrf9idCfw/uzWfB2m2Nf6+m6o6Nure2PAGXGXzEtWtUpSN7q8ZejlxG9HTNS09dAofSNTsZZxZpK85sE+rqjbqrp19KJA0YaUlcbPVJZdTmZoj53jq+nZ/wj4+fuLwY8kwIIlsrIc9n3pZAA8JOmS88aNIpiAxxOZw2O+9A3wsfa3w=="}},{"id":"teagan","tab":"Teagan","name":"Teagan McCune","order":9,"lock":{"iv":"QyafjXXukLT+Flpv","ct":"be3fvLIaHbI7k/m6X61RPaH4EZR1Gsu44cuDYhSZr5Y6gOEOdRSN8hvboyFmrL0os5n/HrqMJUyBffs1jNw4N79zwppiDgFVCFeSy7K6PTE2WXbfBlZh8AuVOqEQz0SDCuiA/XSudBv/8lpy3gmJ5/J3kIx/Bz5GlcivcIZmomuTgSAEA5X7DY8kTyxM1khwYhJGittWdjHyKW/hU3dFwMvHdjt/oouFd2pZejFBpxzPZv/sbhqmy5H849bqT/SHHTRNLSNGGvWcWwXEBp6E2svJIIA8Lpp7zZHYcfE7CDXkvPi6HOYTHkCR+h/BK6PzVgx16rL68uRj1FxUAZGa97J9sS7KVrE9JBjMqMYszfbZEfWpNfoP9Z/D0dpLejkBHivFxZx/fdljN+Ny3xE2cOKAv8EFp2dVOm1MRIU3GwNyT8sTR2yXw0yMLCiuFngwiwdTUa9GtP0CM2a759Emni6gMDFTZaHyEGfhdLyDZYM4Jr7JukcqLjftjHOV8dM1e723aIdsNirVtMunoU2kOgxsF36fP0QjgEt3GoGQs4y4xACHwBWsy5NTqt+G5GAhYG/+Lrhm8OIstJUeKIkFtJ9YHSp8J5zSsDZny/2NHuZ2l+utV2G/vRi4Wk5zco1X"},"mlock":{"iv":"Z7yNV4yunclCGFrf","ct":"GBWVIqp9PBrDxcRA9JwDda753XkK+GLu5ZUAIVb04lzGfafa6OgH73TRLc3tLHicJ4RQLMxR5vAtzIfgJ/WKsdvLC6fK+PlceJ99n81XhQdJtLsdM7jkhB30CGFb+Ka70N0Aqjr/GqtB/fqKgIqcw3UfYOsc1ohOyoNSf4m8nPKGVeSQOAiZ+OcXwO4wGPhkmPKb6vltQxkbSU4vuMrthEZaMB0xqjzAPu9zqz3N1uJFH7eX6H7ofjhQFRvlgxum+ww8LT1MVj2PngqD4knmYdX6SlMrOwXR/tX4664r4kCTAY3U2/T/RV4rZ4omiaAj2iZLMtqEPSX0MuIGQokvSIoDA6ECGNco6VQqlkn+VBDoPUimDLF6Aauilkcv8qk7fMxYCKJDztdIZGtPaxbwFHb4V8L7BPCFm96nsoFjvf10b7lppzU/WXiJ8INjmtNNAPnd9QYefAi7vjsByGQgKRYWs8z1z2gtBjOf0sYeQCuMmoo0qXoe6nzOqQuvOn+zCDGdUEMv4R6RxrNnqrYAsLo0qnwXzYDxzdvHHKlqm7OpMGE55kriWea4fTzxDNJrBCPjBN3J5jgA2cs2t2xnjtvEsPXdjZQJE6irzuDmMWteVYW3jrln139AovYYy5QD"}},{"id":"wyatt","tab":"Wyatt","name":"Wyatt Brownell","order":10,"lock":{"iv":"4g4UHNTlisNlZByp","ct":"oBczuNB4b+63gVDqYY4G3DGEAHc8OoZo7XySOynnh8JjN2MnA7IvypZLWBcaGX5Khkac45NG8oOHDrX3dXLQ6LkKtD24n/NdX9GGGKHn5NzAeYpx/5kcNB0x+YZlFjejjrQyrKjlGN1MvF4t0GGH7DD3RMwCpQSGORsf/5kRjmZybK9E8FfQyXmLOcV7sf9BFbc+TlPBaZXR5huRhh+1c1FEVjwaAtQc/JVd4Mpyf8ODjYxRAdPsOk2OR1EqVIjX/Zxrq3aE9S78DMy0t64M4bHy8PVh/tfKf659SjyuYtxg+MbYeyNL+SDdqx6Yndqn5Ao81FoNi2/4+o9CtAltXUxKZy15OjQ4ATKnmJMc19RlUppRVbm1YbbOfFTEbNWsfGfYji5RC1AoNhg+NnCMEAKR7kjQjZNeKXBum6uhFErZrnkDNyDoBYYuhrLzrSRCKPxadD1bLNDxCRuaTSLxSelWHA+qpWI1xPgjwswdS9ZorrRBedQ1x41/nTPKMtxS+lG27/jARUWcN4OEUzIJIVTg4OeQksH8i6AsUaD+IzrxWlmoJfgViNN6uBirtm/7ijJGdIGlSPUNL6q4PAnIgw/4En95pHJofLbbO8VPKLuJNdd71+QG00Szd3sjJGVbAQ=="},"mlock":{"iv":"VDHPpJdKqPY5wwuo","ct":"0KPEkWPecN4TMNKrOfHyI3HNQuuUvqJYyMTiy6k1RNt+82s6pLGW0VdyBPO0BROr1gAQUFvE3fCaH2VHHsvxyrAiNEC5nMPY9TTHemBzAJi+U9G39qsHVbvEMfiNTBeN7UBtKMQgbFFoeNNRifvUjGYlYbDSVAa/AR5ow1ZteHVj/6Glb5pZW50z3zR6C8GatjZqaQXA9+i5IY+wAiucIS9z6Q2qBdGkfH1E6+x1WWrUbgok5LIIg4zcfZjFaplUmK9pD4TlC2xgB0eyL0nZfX2T09L6GE5NamD3lCfyi0v/ZXTjmAUkpnw33jSJev6Pal4D06g4xFcARDH80eZ1SsLv0SR8HjUGbt3NBYTTbDnPlFvuBAgD+RVoGKOy+uJ7pBHUcEz85PzEKRLIuTtdIdLc4M53eRbsWjv3eJLhQkn96sxNW0S4TUcCb4/TIYIRA50izfl5T+avsyM0WCwakmY5y0SqvUI2stVYEdMRHdNBHWIBDUuGhhF1aYyIDhTXzWcANeFGCc3ljBHgQfjvXsSqEgX+ft5tkfuTIEVL3LFaA3tfb1ArAoAim9Y9sklM/GSE0Xjau0JjM/5ZAFr53dL6E7AJxKl+4Cc+j/vGnJTecRtotnE29tNqrqZpUy/rLg=="}}]}
+{
+ "v": 2,
+ "hasManager": true,
+ "logUrl": "https://script.google.com/macros/s/AKfycbz_GKBzQkT_Ukj-g9rrfpd45cuZxUwHKTcWw-Su8tIvpSPfwSEUTUtRH4d3E0ZMFt7OOQ/exec",
+ "board": {
+  "saves": {
+   "range": "October 5, 2026 - October 9, 2026",
+   "overall": [
+    {
+     "name": "Jonah Layton",
+     "pct": 73,
+     "saves": 19.0,
+     "cancels": 7.0,
+     "rank": 1
+    },
+    {
+     "name": "Colby Earl",
+     "pct": 72,
+     "saves": 28.0,
+     "cancels": 11.0,
+     "rank": 2
+    },
+    {
+     "name": "Teagan McCune",
+     "pct": 72,
+     "saves": 21.0,
+     "cancels": 8.0,
+     "rank": 3
+    },
+    {
+     "name": "Carter Bishop",
+     "pct": 67,
+     "saves": 18.0,
+     "cancels": 9.0,
+     "rank": 4
+    },
+    {
+     "name": "Mitch McGuire",
+     "pct": 66,
+     "saves": 31.0,
+     "cancels": 16.0,
+     "rank": 5
+    },
+    {
+     "name": "Spencer Bishop",
+     "pct": 63,
+     "saves": 26.0,
+     "cancels": 15.0,
+     "rank": 6
+    },
+    {
+     "name": "Gabe Layton",
+     "pct": 62,
+     "saves": 38.0,
+     "cancels": 23.0,
+     "rank": 7
+    },
+    {
+     "name": "Wyatt Brownell",
+     "pct": 57,
+     "saves": 51.0,
+     "cancels": 39.0,
+     "rank": 8
+    },
+    {
+     "name": "Marcus Neubert",
+     "pct": 57,
+     "saves": 39.0,
+     "cancels": 29.0,
+     "rank": 9
+    },
+    {
+     "name": "Joseph Black",
+     "pct": 57,
+     "saves": 12.0,
+     "cancels": 9.0,
+     "rank": 10
+    },
+    {
+     "name": "Luke Thayn",
+     "pct": 56,
+     "saves": 10.0,
+     "cancels": 8.0,
+     "rank": 11
+    }
+   ],
+   "overallTotal": {
+    "name": "Total",
+    "rank": null,
+    "pct": 62.7,
+    "saves": 293.0,
+    "cancels": 174.0
+   },
+   "inContract": [
+    {
+     "name": "Colby Earl",
+     "pct": 100,
+     "saves": 18.0,
+     "cancels": 0.0,
+     "rank": 1
+    },
+    {
+     "name": "Joseph Black",
+     "pct": 100,
+     "saves": 9.0,
+     "cancels": 0.0,
+     "rank": 2
+    },
+    {
+     "name": "Teagan McCune",
+     "pct": 95,
+     "saves": 18.0,
+     "cancels": 1.0,
+     "rank": 3
+    },
+    {
+     "name": "Spencer Bishop",
+     "pct": 91,
+     "saves": 20.0,
+     "cancels": 2.0,
+     "rank": 4
+    },
+    {
+     "name": "Gabe Layton",
+     "pct": 87,
+     "saves": 26.0,
+     "cancels": 4.0,
+     "rank": 5
+    },
+    {
+     "name": "Carter Bishop",
+     "pct": 87,
+     "saves": 13.0,
+     "cancels": 2.0,
+     "rank": 6
+    },
+    {
+     "name": "Wyatt Brownell",
+     "pct": 86,
+     "saves": 36.0,
+     "cancels": 6.0,
+     "rank": 7
+    },
+    {
+     "name": "Jonah Layton",
+     "pct": 83,
+     "saves": 15.0,
+     "cancels": 3.0,
+     "rank": 8
+    },
+    {
+     "name": "Mitch McGuire",
+     "pct": 81,
+     "saves": 26.0,
+     "cancels": 6.0,
+     "rank": 9
+    },
+    {
+     "name": "Marcus Neubert",
+     "pct": 77,
+     "saves": 27.0,
+     "cancels": 8.0,
+     "rank": 10
+    },
+    {
+     "name": "Luke Thayn",
+     "pct": 50,
+     "saves": 4.0,
+     "cancels": 4.0,
+     "rank": 11
+    }
+   ],
+   "inContractTotal": {
+    "name": "Total",
+    "rank": null,
+    "pct": 85.5,
+    "saves": 212.0,
+    "cancels": 36.0
+   },
+   "outContract": [
+    {
+     "name": "Luke Thayn",
+     "pct": 75,
+     "saves": 6.0,
+     "cancels": 2.0,
+     "rank": 1
+    },
+    {
+     "name": "Carter Bishop",
+     "pct": 56,
+     "saves": 5.0,
+     "cancels": 4.0,
+     "rank": 2
+    },
+    {
+     "name": "Gabe Layton",
+     "pct": 55,
+     "saves": 12.0,
+     "cancels": 10.0,
+     "rank": 3
+    },
+    {
+     "name": "Colby Earl",
+     "pct": 50,
+     "saves": 10.0,
+     "cancels": 10.0,
+     "rank": 4
+    },
+    {
+     "name": "Jonah Layton",
+     "pct": 50,
+     "saves": 4.0,
+     "cancels": 4.0,
+     "rank": 5
+    },
+    {
+     "name": "Mitch McGuire",
+     "pct": 45,
+     "saves": 5.0,
+     "cancels": 6.0,
+     "rank": 6
+    },
+    {
+     "name": "Spencer Bishop",
+     "pct": 43,
+     "saves": 6.0,
+     "cancels": 8.0,
+     "rank": 7
+    },
+    {
+     "name": "Teagan McCune",
+     "pct": 43,
+     "saves": 3.0,
+     "cancels": 4.0,
+     "rank": 8
+    },
+    {
+     "name": "Marcus Neubert",
+     "pct": 40,
+     "saves": 12.0,
+     "cancels": 18.0,
+     "rank": 9
+    },
+    {
+     "name": "Wyatt Brownell",
+     "pct": 38,
+     "saves": 15.0,
+     "cancels": 24.0,
+     "rank": 10
+    },
+    {
+     "name": "Joseph Black",
+     "pct": 27,
+     "saves": 3.0,
+     "cancels": 8.0,
+     "rank": 11
+    }
+   ],
+   "outContractTotal": {
+    "name": "Total",
+    "rank": null,
+    "pct": 45.2,
+    "saves": 81.0,
+    "cancels": 98.0
+   }
+  },
+  "renewals": {
+   "range": "October 5, 2026 - October 9, 2026",
+   "current": [
+    {
+     "name": "Gabe Layton",
+     "total": 9880.52,
+     "ic": 1461.0,
+     "ooc": 8419.52,
+     "nc": 0.0,
+     "count": 12.0,
+     "acv": 823,
+     "unsigned": 0.0,
+     "signedPct": 100.0,
+     "rank": 1
+    },
+    {
+     "name": "Marcus Neubert",
+     "total": 9314.0,
+     "ic": 6800.0,
+     "ooc": 2514.0,
+     "nc": 0.0,
+     "count": 14.0,
+     "acv": 665,
+     "unsigned": 0.0,
+     "signedPct": 100.0,
+     "rank": 2
+    },
+    {
+     "name": "Wyatt Brownell",
+     "total": 5334.0,
+     "ic": 0.0,
+     "ooc": 5334.0,
+     "nc": 0.0,
+     "count": 9.0,
+     "acv": 593,
+     "unsigned": 0.0,
+     "signedPct": 100.0,
+     "rank": 3
+    },
+    {
+     "name": "Colby Earl",
+     "total": 5041.2,
+     "ic": 600.0,
+     "ooc": 4441.2,
+     "nc": 0.0,
+     "count": 7.0,
+     "acv": 720,
+     "unsigned": 0.0,
+     "signedPct": 100.0,
+     "rank": 4
+    },
+    {
+     "name": "Carter Bishop",
+     "total": 4915.2,
+     "ic": 420.0,
+     "ooc": 4495.2,
+     "nc": 0.0,
+     "count": 6.0,
+     "acv": 819,
+     "unsigned": 0.0,
+     "signedPct": 100.0,
+     "rank": 5
+    },
+    {
+     "name": "Spencer Bishop",
+     "total": 4458.0,
+     "ic": 594.0,
+     "ooc": 3156.0,
+     "nc": 0.0,
+     "count": 6.0,
+     "acv": 743,
+     "unsigned": 0.0,
+     "signedPct": 100.0,
+     "rank": 6
+    },
+    {
+     "name": "Jonah Layton",
+     "total": 3106.0,
+     "ic": 1188.0,
+     "ooc": 1918.0,
+     "nc": 0.0,
+     "count": 4.0,
+     "acv": 776,
+     "unsigned": 0.0,
+     "signedPct": 100.0,
+     "rank": 7
+    },
+    {
+     "name": "Luke Thayn",
+     "total": 2841.6,
+     "ic": 0.0,
+     "ooc": 2841.6,
+     "nc": 0.0,
+     "count": 3.0,
+     "acv": 947,
+     "unsigned": 0.0,
+     "signedPct": 100.0,
+     "rank": 8
+    },
+    {
+     "name": "Mitch McGuire",
+     "total": 2573.2,
+     "ic": 826.0,
+     "ooc": 1747.2,
+     "nc": 0.0,
+     "count": 5.0,
+     "acv": 515,
+     "unsigned": 1.0,
+     "signedPct": 83.33,
+     "rank": 9
+    },
+    {
+     "name": "Joseph Black",
+     "total": 1192.0,
+     "ic": 0.0,
+     "ooc": 1192.0,
+     "nc": 0.0,
+     "count": 2.0,
+     "acv": 596,
+     "unsigned": 1.0,
+     "signedPct": 66.67,
+     "rank": 10
+    },
+    {
+     "name": "Teagan McCune",
+     "total": 888.0,
+     "ic": 0.0,
+     "ooc": 888.0,
+     "nc": 0.0,
+     "count": 2.0,
+     "acv": 444,
+     "unsigned": 0.0,
+     "signedPct": 100.0,
+     "rank": 11
+    }
+   ],
+   "currentTotal": {
+    "name": "Total",
+    "rank": null,
+    "total": 49543.72,
+    "ic": 11889.0,
+    "ooc": 36946.72,
+    "nc": 0.0,
+    "count": 70.0,
+    "acv": 708,
+    "unsigned": 2.0,
+    "signedPct": 97.22
+   },
+   "ytd": [
+    {
+     "name": "Teagan McCune",
+     "total": 388442.57,
+     "ic": 23287.5,
+     "ooc": 163216.18,
+     "nc": 0.0,
+     "count": 612.0,
+     "acv": 635,
+     "unsigned": 20.0,
+     "signedPct": 96.84,
+     "rank": 1
+    },
+    {
+     "name": "Spencer Bishop",
+     "total": 269309.15,
+     "ic": 13849.0,
+     "ooc": 111229.1,
+     "nc": 0.0,
+     "count": 446.0,
+     "acv": 604,
+     "unsigned": 4.0,
+     "signedPct": 99.11,
+     "rank": 2
+    },
+    {
+     "name": "Colby Earl",
+     "total": 251002.82,
+     "ic": 39030.94,
+     "ooc": 108435.8,
+     "nc": 0.0,
+     "count": 403.0,
+     "acv": 623,
+     "unsigned": 2.0,
+     "signedPct": 99.51,
+     "rank": 3
+    },
+    {
+     "name": "Gabe Layton",
+     "total": 232822.98,
+     "ic": 41902.36,
+     "ooc": 167508.02,
+     "nc": 0.0,
+     "count": 382.0,
+     "acv": 609,
+     "unsigned": 8.0,
+     "signedPct": 97.95,
+     "rank": 4
+    },
+    {
+     "name": "Joseph Black",
+     "total": 222900.31,
+     "ic": 16723.0,
+     "ooc": 97480.74,
+     "nc": 0.0,
+     "count": 415.0,
+     "acv": 537,
+     "unsigned": 11.0,
+     "signedPct": 97.42,
+     "rank": 5
+    },
+    {
+     "name": "Mitch McGuire",
+     "total": 156137.3,
+     "ic": 13961.0,
+     "ooc": 82455.71,
+     "nc": 0.0,
+     "count": 236.0,
+     "acv": 662,
+     "unsigned": 3.0,
+     "signedPct": 98.74,
+     "rank": 6
+    },
+    {
+     "name": "Jonah Layton",
+     "total": 110310.72,
+     "ic": 17435.0,
+     "ooc": 45329.6,
+     "nc": 0.0,
+     "count": 187.0,
+     "acv": 590,
+     "unsigned": 3.0,
+     "signedPct": 98.42,
+     "rank": 7
+    },
+    {
+     "name": "Wyatt Brownell",
+     "total": 66771.5,
+     "ic": 20759.5,
+     "ooc": 46012.0,
+     "nc": 0.0,
+     "count": 99.0,
+     "acv": 674,
+     "unsigned": 1.0,
+     "signedPct": 99.0,
+     "rank": 8
+    },
+    {
+     "name": "Marcus Neubert",
+     "total": 62790.0,
+     "ic": 36680.0,
+     "ooc": 25810.0,
+     "nc": 0.0,
+     "count": 101.0,
+     "acv": 622,
+     "unsigned": 2.0,
+     "signedPct": 98.06,
+     "rank": 9
+    },
+    {
+     "name": "Luke Thayn",
+     "total": 47308.58,
+     "ic": 1294.0,
+     "ooc": 46014.58,
+     "nc": 0.0,
+     "count": 87.0,
+     "acv": 544,
+     "unsigned": 3.0,
+     "signedPct": 96.67,
+     "rank": 10
+    },
+    {
+     "name": "Carter Bishop",
+     "total": 38055.2,
+     "ic": 6156.0,
+     "ooc": 31899.2,
+     "nc": 0.0,
+     "count": 58.0,
+     "acv": 656,
+     "unsigned": 2.0,
+     "signedPct": 96.67,
+     "rank": 11
+    }
+   ],
+   "ytdTotal": {
+    "name": "Total",
+    "rank": null,
+    "total": 1845851.13,
+    "ic": 231078.3,
+    "ooc": 925390.93,
+    "nc": 0.0,
+    "count": 3026.0,
+    "acv": 610,
+    "unsigned": 59.0,
+    "signedPct": 98.09
+   }
+  },
+  "tiers": {
+   "range": "October 5, 2026 - October 9, 2026",
+   "provisional": true,
+   "status": "ok",
+   "rows": [
+    {
+     "name": "Carter Bishop",
+     "place": 1,
+     "rph": 731.4285714285714,
+     "savePct": 66.66666666666667,
+     "revPts": 57,
+     "savePts": 34,
+     "total": 91,
+     "tier": "Tier 1",
+     "reward": 7,
+     "zeroHours": false,
+     "notWorking": false
+    },
+    {
+     "name": "Gabe Layton",
+     "place": 2,
+     "rph": 814.5523495465787,
+     "savePct": 62.295081967213115,
+     "revPts": 60,
+     "savePts": 28,
+     "total": 88,
+     "tier": "Tier 1",
+     "reward": 5,
+     "zeroHours": false,
+     "notWorking": false
+    },
+    {
+     "name": "Colby Earl",
+     "place": 3,
+     "rph": 540.3215434083602,
+     "savePct": 71.7948717948718,
+     "revPts": 51,
+     "savePts": 36,
+     "total": 87,
+     "tier": "Tier 1",
+     "reward": 5,
+     "zeroHours": false,
+     "notWorking": false
+    },
+    {
+     "name": "Jonah Layton",
+     "place": 4,
+     "rph": 333.9784946236559,
+     "savePct": 73.07692307692308,
+     "revPts": 42,
+     "savePts": 40,
+     "total": 82,
+     "tier": "Tier 2",
+     "reward": 3,
+     "zeroHours": false,
+     "notWorking": false
+    },
+    {
+     "name": "Spencer Bishop",
+     "place": 5,
+     "rph": 391.73989455184534,
+     "savePct": 63.41463414634146,
+     "revPts": 45,
+     "savePts": 30,
+     "total": 75,
+     "tier": "Tier 2",
+     "reward": 3,
+     "zeroHours": false,
+     "notWorking": false
+    },
+    {
+     "name": "Luke Thayn",
+     "place": 6,
+     "rph": 568.3199999999999,
+     "savePct": 55.55555555555556,
+     "revPts": 54,
+     "savePts": 20,
+     "total": 74,
+     "tier": "Tier 2",
+     "reward": 3,
+     "zeroHours": false,
+     "notWorking": false
+    },
+    {
+     "name": "Marcus Neubert",
+     "place": 7,
+     "rph": 491.50395778364117,
+     "savePct": 57.35294117647059,
+     "revPts": 48,
+     "savePts": 26,
+     "total": 74,
+     "tier": "Tier 3",
+     "reward": 0,
+     "zeroHours": false,
+     "notWorking": false
+    },
+    {
+     "name": "Mitch McGuire",
+     "place": 8,
+     "rph": 194.20377358490563,
+     "savePct": 65.95744680851064,
+     "revPts": 36,
+     "savePts": 32,
+     "total": 68,
+     "tier": "Tier 3",
+     "reward": 0,
+     "zeroHours": false,
+     "notWorking": false
+    },
+    {
+     "name": "Teagan McCune",
+     "place": 9,
+     "rph": 133.33333333333334,
+     "savePct": 72.41379310344827,
+     "revPts": 30,
+     "savePts": 38,
+     "total": 68,
+     "tier": "Tier 3",
+     "reward": 0,
+     "zeroHours": false,
+     "notWorking": false
+    },
+    {
+     "name": "Wyatt Brownell",
+     "place": 10,
+     "rph": 284.48,
+     "savePct": 56.666666666666664,
+     "revPts": 39,
+     "savePts": 22,
+     "total": 61,
+     "tier": "Tier 3",
+     "reward": 0,
+     "zeroHours": false,
+     "notWorking": false
+    },
+    {
+     "name": "Joseph Black",
+     "place": 11,
+     "rph": 142.41338112305854,
+     "savePct": 57.142857142857146,
+     "revPts": 33,
+     "savePts": 24,
+     "total": 57,
+     "tier": "Tier 3",
+     "reward": 0,
+     "zeroHours": false,
+     "notWorking": false
+    }
+   ]
+  },
+  "banner": {
+   "label": "Pending Cancel Count",
+   "value": "805"
+  },
+  "highlights": {
+   "headline": "",
+   "paragraphs": [
+    "Nice work last week team. We ended at a team save percentage of 61%. Shoutout to Carter for leading the team with 75% and being the only rep in the 70%'s. Luke and Colby both had a team high 17 renewals and Wyatt led the team with the highest ACV at $731. This week our focus is the pending cancel list. Everyone has an updated tab on the Outbounds sheet. Make sure we are working each account all the way through before the end of the 10 day counter. If we can hit the team target of 740 accounts on pending by the end of this month, everyone will receive a 5 point bonus to their balance for the tier prizes!"
+   ]
+  },
+  "attendance": {
+   "levels": [
+    {
+     "name": "Verbal Warning",
+     "at": 4.0
+    },
+    {
+     "name": "Written Warning",
+     "at": 7.0
+    },
+    {
+     "name": "Final Warning",
+     "at": 10.0
+    },
+    {
+     "name": "Termination",
+     "at": 14.0
+    }
+   ]
+  },
+  "points": {
+   "balances": [
+    {
+     "name": "Carter Bishop",
+     "earned": 0,
+     "spent": 0,
+     "balance": 0
+    },
+    {
+     "name": "Colby Earl",
+     "earned": 7.0,
+     "spent": 0,
+     "balance": 7.0
+    },
+    {
+     "name": "Gabe Layton",
+     "earned": 5.0,
+     "spent": 0,
+     "balance": 5.0
+    },
+    {
+     "name": "Jonah Layton",
+     "earned": 5.0,
+     "spent": 0,
+     "balance": 5.0
+    },
+    {
+     "name": "Joseph Black",
+     "earned": 3.0,
+     "spent": 0,
+     "balance": 3.0
+    },
+    {
+     "name": "Luke Thayn",
+     "earned": 3.0,
+     "spent": 0,
+     "balance": 3.0
+    },
+    {
+     "name": "Marcus Neubert",
+     "earned": 0,
+     "spent": 0,
+     "balance": 0
+    },
+    {
+     "name": "Mitch McGuire",
+     "earned": 0,
+     "spent": 0,
+     "balance": 0
+    },
+    {
+     "name": "Spencer Bishop",
+     "earned": 0,
+     "spent": 0,
+     "balance": 0
+    },
+    {
+     "name": "Teagan McCune",
+     "earned": 3.0,
+     "spent": 0,
+     "balance": 3.0
+    },
+    {
+     "name": "Wyatt Brownell",
+     "earned": 0,
+     "spent": 0,
+     "balance": 0
+    }
+   ],
+   "prizes": [
+    {
+     "prize": "$5 Drink card (Swig, Fiiz or Sodalicious)",
+     "cost": 5.0,
+     "details": ""
+    },
+    {
+     "prize": "$10 Tremendous gift card",
+     "cost": 7.0,
+     "details": ""
+    },
+    {
+     "prize": "Brooks swag",
+     "cost": 7.0,
+     "details": ""
+    },
+    {
+     "prize": "Blue-light gaming glasses",
+     "cost": 8.0,
+     "details": ""
+    },
+    {
+     "prize": "Owala or Stanley water bottle",
+     "cost": 10.0,
+     "details": ""
+    },
+    {
+     "prize": "Lunch DoorDashed to the office",
+     "cost": 10.0,
+     "details": ""
+    },
+    {
+     "prize": "Case of white Monster",
+     "cost": 15.0,
+     "details": ""
+    },
+    {
+     "prize": "Wireless earbuds (Soundcore or JLab)",
+     "cost": 18.0,
+     "details": ""
+    },
+    {
+     "prize": "$75 Hoodie Your Choice",
+     "cost": 20.0,
+     "details": ""
+    },
+    {
+     "prize": "2 hour Top Golf bay for 6 people",
+     "cost": 22.0,
+     "details": ""
+    },
+    {
+     "prize": "Rodizio Grill dinner for two",
+     "cost": 22.0,
+     "details": ""
+    },
+    {
+     "prize": "Noise-canceling call headset",
+     "cost": 25.0,
+     "details": ""
+    },
+    {
+     "prize": "Mechanical keyboard",
+     "cost": 25.0,
+     "details": ""
+    },
+    {
+     "prize": "$150 Shoes",
+     "cost": 33.0,
+     "details": ""
+    },
+    {
+     "prize": "$200 Ticketmaster credit",
+     "cost": 40.0,
+     "details": ""
+    },
+    {
+     "prize": "Ninja Creami or air fryer",
+     "cost": 40.0,
+     "details": ""
+    },
+    {
+     "prize": "AirPods Pro",
+     "cost": 45.0,
+     "details": ""
+    },
+    {
+     "prize": "Meta Quest 3S",
+     "cost": 60.0,
+     "details": ""
+    },
+    {
+     "prize": "Nintendo Switch 2",
+     "cost": 65.0,
+     "details": ""
+    },
+    {
+     "prize": "Xbox Series X or Playstation 5",
+     "cost": 65.0,
+     "details": ""
+    }
+   ]
+  },
+  "meta": {
+   "syncedAt": "2026-10-07T16:48:04+00:00"
+  },
+  "day": {
+   "date": "2026-10-07",
+   "range": "October 7, 2026 - October 7, 2026",
+   "saves": {
+    "range": "October 7, 2026 - October 7, 2026",
+    "overall": [
+     {
+      "name": "Mitch McGuire",
+      "pct": 86,
+      "saves": 6.0,
+      "cancels": 1.0,
+      "rank": 1
+     },
+     {
+      "name": "Carter Bishop",
+      "pct": 83,
+      "saves": 5.0,
+      "cancels": 1.0,
+      "rank": 2
+     },
+     {
+      "name": "Marcus Neubert",
+      "pct": 78,
+      "saves": 7.0,
+      "cancels": 2.0,
+      "rank": 3
+     },
+     {
+      "name": "Colby Earl",
+      "pct": 73,
+      "saves": 8.0,
+      "cancels": 3.0,
+      "rank": 4
+     },
+     {
+      "name": "Spencer Bishop",
+      "pct": 67,
+      "saves": 6.0,
+      "cancels": 3.0,
+      "rank": 5
+     },
+     {
+      "name": "Wyatt Brownell",
+      "pct": 58,
+      "saves": 7.0,
+      "cancels": 5.0,
+      "rank": 6
+     },
+     {
+      "name": "Joseph Black",
+      "pct": 50,
+      "saves": 4.0,
+      "cancels": 4.0,
+      "rank": 7
+     },
+     {
+      "name": "Gabe Layton",
+      "pct": 0,
+      "saves": 0.0,
+      "cancels": 0.0,
+      "rank": 8
+     },
+     {
+      "name": "Jonah Layton",
+      "pct": 0,
+      "saves": 0.0,
+      "cancels": 0.0,
+      "rank": 8
+     },
+     {
+      "name": "Luke Thayn",
+      "pct": 0,
+      "saves": 0.0,
+      "cancels": 0.0,
+      "rank": 8
+     },
+     {
+      "name": "Teagan McCune",
+      "pct": 0,
+      "saves": 0.0,
+      "cancels": 0.0,
+      "rank": 8
+     }
+    ],
+    "overallTotal": {
+     "name": "Total",
+     "rank": null,
+     "pct": 69.3,
+     "saves": 43.0,
+     "cancels": 19.0
+    },
+    "inContract": [
+     {
+      "name": "Colby Earl",
+      "pct": 100,
+      "saves": 6.0,
+      "cancels": 0.0,
+      "rank": 1
+     },
+     {
+      "name": "Marcus Neubert",
+      "pct": 100,
+      "saves": 5.0,
+      "cancels": 0.0,
+      "rank": 2
+     },
+     {
+      "name": "Spencer Bishop",
+      "pct": 100,
+      "saves": 5.0,
+      "cancels": 0.0,
+      "rank": 2
+     },
+     {
+      "name": "Joseph Black",
+      "pct": 100,
+      "saves": 4.0,
+      "cancels": 0.0,
+      "rank": 4
+     },
+     {
+      "name": "Mitch McGuire",
+      "pct": 100,
+      "saves": 4.0,
+      "cancels": 0.0,
+      "rank": 4
+     },
+     {
+      "name": "Carter Bishop",
+      "pct": 100,
+      "saves": 2.0,
+      "cancels": 0.0,
+      "rank": 6
+     },
+     {
+      "name": "Wyatt Brownell",
+      "pct": 80,
+      "saves": 4.0,
+      "cancels": 1.0,
+      "rank": 7
+     },
+     {
+      "name": "Gabe Layton",
+      "pct": 0,
+      "saves": 0.0,
+      "cancels": 0.0,
+      "rank": 8
+     },
+     {
+      "name": "Jonah Layton",
+      "pct": 0,
+      "saves": 0.0,
+      "cancels": 0.0,
+      "rank": 8
+     },
+     {
+      "name": "Luke Thayn",
+      "pct": 0,
+      "saves": 0.0,
+      "cancels": 0.0,
+      "rank": 8
+     },
+     {
+      "name": "Teagan McCune",
+      "pct": 0,
+      "saves": 0.0,
+      "cancels": 0.0,
+      "rank": 8
+     }
+    ],
+    "inContractTotal": {
+     "name": "Total",
+     "rank": null,
+     "pct": 96.8,
+     "saves": 30.0,
+     "cancels": 1.0
+    },
+    "outContract": [
+     {
+      "name": "Carter Bishop",
+      "pct": 100,
+      "saves": 3.0,
+      "cancels": 0.0,
+      "rank": 1
+     },
+     {
+      "name": "Mitch McGuire",
+      "pct": 67,
+      "saves": 2.0,
+      "cancels": 1.0,
+      "rank": 2
+     },
+     {
+      "name": "Wyatt Brownell",
+      "pct": 60,
+      "saves": 3.0,
+      "cancels": 2.0,
+      "rank": 3
+     },
+     {
+      "name": "Marcus Neubert",
+      "pct": 50,
+      "saves": 2.0,
+      "cancels": 2.0,
+      "rank": 4
+     },
+     {
+      "name": "Spencer Bishop",
+      "pct": 50,
+      "saves": 1.0,
+      "cancels": 1.0,
+      "rank": 5
+     },
+     {
+      "name": "Colby Earl",
+      "pct": 40,
+      "saves": 2.0,
+      "cancels": 3.0,
+      "rank": 6
+     },
+     {
+      "name": "Gabe Layton",
+      "pct": 0,
+      "saves": 0.0,
+      "cancels": 0.0,
+      "rank": 7
+     },
+     {
+      "name": "Jonah Layton",
+      "pct": 0,
+      "saves": 0.0,
+      "cancels": 0.0,
+      "rank": 7
+     },
+     {
+      "name": "Joseph Black",
+      "pct": 0,
+      "saves": 0.0,
+      "cancels": 3.0,
+      "rank": 7
+     },
+     {
+      "name": "Luke Thayn",
+      "pct": 0,
+      "saves": 0.0,
+      "cancels": 0.0,
+      "rank": 7
+     },
+     {
+      "name": "Teagan McCune",
+      "pct": 0,
+      "saves": 0.0,
+      "cancels": 0.0,
+      "rank": 7
+     }
+    ],
+    "outContractTotal": {
+     "name": "Total",
+     "rank": null,
+     "pct": 52.0,
+     "saves": 13.0,
+     "cancels": 12.0
+    }
+   },
+   "renewals": {
+    "range": "October 7, 2026 - October 7, 2026",
+    "current": [
+     {
+      "name": "Carter Bishop",
+      "total": 4160.0,
+      "ic": 420.0,
+      "ooc": 3740.0,
+      "nc": 0.0,
+      "count": 4.0,
+      "acv": 1040,
+      "unsigned": 0.0,
+      "signedPct": 100.0,
+      "rank": 1
+     },
+     {
+      "name": "Colby Earl",
+      "total": 1160.89,
+      "ic": 0.0,
+      "ooc": 1160.89,
+      "nc": 0.0,
+      "count": 1.0,
+      "acv": 1161,
+      "unsigned": 0.0,
+      "signedPct": 100.0,
+      "rank": 2
+     },
+     {
+      "name": "Marcus Neubert",
+      "total": 695.0,
+      "ic": 0.0,
+      "ooc": 695.0,
+      "nc": 0.0,
+      "count": 2.0,
+      "acv": 348,
+      "unsigned": 0.0,
+      "signedPct": 100.0,
+      "rank": 3
+     },
+     {
+      "name": "Mitch McGuire",
+      "total": 540.0,
+      "ic": 0.0,
+      "ooc": 540.0,
+      "nc": 0.0,
+      "count": 1.0,
+      "acv": 540,
+      "unsigned": 0.0,
+      "signedPct": 100.0,
+      "rank": 4
+     },
+     {
+      "name": "Wyatt Brownell",
+      "total": 540.0,
+      "ic": 0.0,
+      "ooc": 540.0,
+      "nc": 0.0,
+      "count": 1.0,
+      "acv": 540,
+      "unsigned": 0.0,
+      "signedPct": 100.0,
+      "rank": 4
+     },
+     {
+      "name": "Gabe Layton",
+      "total": 0.0,
+      "ic": 0.0,
+      "ooc": 0.0,
+      "nc": 0.0,
+      "count": 0.0,
+      "acv": 0.0,
+      "unsigned": 0.0,
+      "signedPct": 0.0,
+      "rank": 6
+     },
+     {
+      "name": "Jonah Layton",
+      "total": 0.0,
+      "ic": 0.0,
+      "ooc": 0.0,
+      "nc": 0.0,
+      "count": 0.0,
+      "acv": 0.0,
+      "unsigned": 0.0,
+      "signedPct": 0.0,
+      "rank": 6
+     },
+     {
+      "name": "Joseph Black",
+      "total": 0.0,
+      "ic": 0.0,
+      "ooc": 0.0,
+      "nc": 0.0,
+      "count": 0.0,
+      "acv": 0.0,
+      "unsigned": 0.0,
+      "signedPct": 0.0,
+      "rank": 6
+     },
+     {
+      "name": "Luke Thayn",
+      "total": 0.0,
+      "ic": 0.0,
+      "ooc": 0.0,
+      "nc": 0.0,
+      "count": 0.0,
+      "acv": 0.0,
+      "unsigned": 0.0,
+      "signedPct": 0.0,
+      "rank": 6
+     },
+     {
+      "name": "Spencer Bishop",
+      "total": 0.0,
+      "ic": 0.0,
+      "ooc": 0.0,
+      "nc": 0.0,
+      "count": 0.0,
+      "acv": 0.0,
+      "unsigned": 0.0,
+      "signedPct": 0.0,
+      "rank": 6
+     },
+     {
+      "name": "Teagan McCune",
+      "total": 0.0,
+      "ic": 0.0,
+      "ooc": 0.0,
+      "nc": 0.0,
+      "count": 0.0,
+      "acv": 0.0,
+      "unsigned": 0.0,
+      "signedPct": 0.0,
+      "rank": 6
+     }
+    ],
+    "currentTotal": {
+     "name": "Total",
+     "rank": null,
+     "total": 7095.89,
+     "ic": 420.0,
+     "ooc": 6675.89,
+     "nc": 0.0,
+     "count": 9.0,
+     "acv": 788,
+     "unsigned": 0.0,
+     "signedPct": 100.0
+    }
+   },
+   "syncedAt": "2026-10-07T18:10:24.616450+00:00",
+   "tiers": {
+    "range": "October 7, 2026 - October 7, 2026",
+    "provisional": true,
+    "status": "ok",
+    "rows": [
+     {
+      "name": "Carter Bishop",
+      "place": 1,
+      "rph": 2491.0179640718566,
+      "savePct": 83.33333333333333,
+      "revPts": 60,
+      "savePts": 38,
+      "total": 98,
+      "tier": "Tier 1",
+      "reward": 0,
+      "zeroHours": false,
+      "notWorking": false
+     },
+     {
+      "name": "Colby Earl",
+      "place": 2,
+      "rph": 417.58633093525185,
+      "savePct": 72.72727272727273,
+      "revPts": 57,
+      "savePts": 34,
+      "total": 91,
+      "tier": "Tier 1",
+      "reward": 0,
+      "zeroHours": false,
+      "notWorking": false
+     },
+     {
+      "name": "Marcus Neubert",
+      "place": 3,
+      "rph": 255.51470588235293,
+      "savePct": 77.77777777777777,
+      "revPts": 54,
+      "savePts": 36,
+      "total": 90,
+      "tier": "Tier 1",
+      "reward": 0,
+      "zeroHours": false,
+      "notWorking": false
+     },
+     {
+      "name": "Mitch McGuire",
+      "place": 4,
+      "rph": 194.94584837545125,
+      "savePct": 85.71428571428571,
+      "revPts": 48,
+      "savePts": 40,
+      "total": 88,
+      "tier": "Tier 2",
+      "reward": 0,
+      "zeroHours": false,
+      "notWorking": false
+     },
+     {
+      "name": "Wyatt Brownell",
+      "place": 5,
+      "rph": 198.52941176470586,
+      "savePct": 58.333333333333336,
+      "revPts": 51,
+      "savePts": 30,
+      "total": 81,
+      "tier": "Tier 2",
+      "reward": 0,
+      "zeroHours": false,
+      "notWorking": false
+     },
+     {
+      "name": "Spencer Bishop",
+      "place": 6,
+      "rph": 0.0,
+      "savePct": 66.66666666666667,
+      "revPts": 45,
+      "savePts": 32,
+      "total": 77,
+      "tier": "Tier 2",
+      "reward": 0,
+      "zeroHours": false,
+      "notWorking": false
+     },
+     {
+      "name": "Joseph Black",
+      "place": 7,
+      "rph": 0.0,
+      "savePct": 50.0,
+      "revPts": 45,
+      "savePts": 28,
+      "total": 73,
+      "tier": "Tier 3",
+      "reward": 0,
+      "zeroHours": false,
+      "notWorking": false
+     },
+     {
+      "name": "Gabe Layton",
+      "place": 8,
+      "rph": null,
+      "savePct": 0,
+      "revPts": 0,
+      "savePts": 0,
+      "total": 0,
+      "tier": "Tier 3",
+      "reward": 0,
+      "zeroHours": true,
+      "notWorking": true
+     },
+     {
+      "name": "Jonah Layton",
+      "place": 9,
+      "rph": null,
+      "savePct": 0,
+      "revPts": 0,
+      "savePts": 0,
+      "total": 0,
+      "tier": "Tier 3",
+      "reward": 0,
+      "zeroHours": true,
+      "notWorking": true
+     },
+     {
+      "name": "Luke Thayn",
+      "place": 10,
+      "rph": null,
+      "savePct": 0,
+      "revPts": 0,
+      "savePts": 0,
+      "total": 0,
+      "tier": "Tier 3",
+      "reward": 0,
+      "zeroHours": true,
+      "notWorking": true
+     },
+     {
+      "name": "Teagan McCune",
+      "place": 11,
+      "rph": null,
+      "savePct": 0,
+      "revPts": 0,
+      "savePts": 0,
+      "total": 0,
+      "tier": "Tier 3",
+      "reward": 0,
+      "zeroHours": true,
+      "notWorking": true
+     }
+    ]
+   }
+  },
+  "metricsMeta": {
+   "fieldroutesAt": "2026-10-07T18:10:24.616450+00:00",
+   "hours": {
+    "source": "homebase",
+    "fetchedAt": "2026-10-07T17:46:59.827094+00:00",
+    "status": "ok"
+   }
+  }
+ },
+ "agents": [
+  {
+   "id": "carter",
+   "tab": "Carter",
+   "name": "Carter Bishop",
+   "order": 0,
+   "lock": {
+    "iv": "6vRCaadxjwUOEfLN",
+    "ct": "uLIP1giUjSYDD8l1MVi3U+L287Djz24wOzVBVoa3s+ExACt8v3QqXQ1j4GhpOYNgpIP9Z3wuZERQMTLDDIKe1SQM/Xm60kOVyKg26MxZNF/m9kHruv1lqZIVr8oitwWBOqTSfCops/hN9CBDr5aYeM21pgJBjoyLVgz2PLvJifapJL3014g8oI2ZEZl7Ixlcw600TiZtaLwb3n1G7l1Xz+qN0ZjHBbZddFZaDzO4pfonZdyb6ZL8eqi9begfsf/kKZ/vhgkVonp1z2ajeUxBjYSEgbW2qFfPQImjJ+IgFNtv7iF28jbW4o0+0PWkws5bbIv+y2a3cMutd1P8u9MPTchaKVIR7R6SRvUBdUHWQ5VCwxp3LQfFquuofSX2EmZ6xbbu/OBncUbPZawY7hwQpn6PJ+DJx5TJ0xU4o9TKOrLKYXP8vh21D/Q/J6WdG7OSmITZnFDaq08zu+OkrF7a0uvsf+vPYSVgQqpgk0GN9AkSoNDF3Pkr4QYN0WpbytO4PsZWBVQRUXBgSdHR0G9680uABpx3ETITUqi5Yjd1MbzEgXGaLMzrr4yRZevxBQBpgkx+fBK09oOXYapSrANd1eIn1a4hpfeWSJddTMwW0DOR8jLuE/QySNOQ2f2ZzA=="
+   },
+   "mlock": {
+    "iv": "Ulxj7/SbMjyZXWWS",
+    "ct": "8sUO0cSoC3v2NeUR3zcRF4s0FtNerE5iDbxWc8axCsyt8JD6xr8V0thlbqlumZnqRFlw3YO7VrBW3xVqS5+VT+76kqtusAN48wSrKPvubMzrLPRbKVfG9yIICqTbSQIOAyD5uKDnfjmYYxm8l9PoPY4HnrbJ3AariJCLSpLml1n9pzKfOsfEyaLDIFprEfa92FsgiqCq6HeXDEeURSj195u2s/OkaZ72oCTkpZtM0P17Vb6UHw2u8YSokNaieolk4kspHXj4KRSC4mdCxfU7f4uW3J5i5obxU6v9JW8DdV6aItFwvNnc1EZuWG4/GFCSGavaf+2dkrxZqXgk9ZA9RS0iaMyNbsP/YyYF2GLbrRs8FCPkwws0w95NbhDqFsmc4RF5DenQ6MaiJ6jBieYESJp8Azwrxhe/qVLQjsvftdlQNNPwjYrCFI+zpRSK0IeB5it1OiOeelCdLMN6PHBL/ICcKYsUpccp10fkn0t3MIJ1GKgquOrbSDpmEebJkmkroZmuj5zoIZKBmgK0LUDdrs3EfqFFFy2V45ee7FYQywJhQjMgnOB05bZJA4wwJ/QZvkuMxF81RodHlMVztod2qM0+eu5WStOi/4qdHqEwKMUwFG4D1aEoXJLh+AGBwA=="
+   }
+  },
+  {
+   "id": "colby",
+   "tab": "Colby",
+   "name": "Colby Earl",
+   "order": 1,
+   "lock": {
+    "iv": "uFXfdj7Ba7PCsGU6",
+    "ct": "2iFJO+jGAVYeExSrJ8GGHQvFAdh0Ms+w+uJZQ1MkT2NwV9Yt31x11WjrWu9mgH4WVfc0LDuWcPQEG+tPxo+9MtRjwHsXlie2dO/2cUGnzuOYAnAYmUkwp5ktHgde2YuZGIWUHPK3PexCeVi+WlxnwPJDSwQW9xNsh2hc8FMDP3m20zF5pOMkIPyRJ6oQktHY3QYV3ZxPUmvqyQZp6iyH1UVpdKrGmkaNCA1RnZcIvfrf9SQn8bq5WA9lNhWfF/1QZKVCFCDjYQY3Yig4AqXxS5Ji5g1mwlfLQwcBXbo6ieIj3hK4vFsTileSkLj6yZkIQlLeNy4TcEmksi1nGMXig4F6QgLgw42F3zCMSyUeRfPEwPcO6PFZyci2qlEedSdOVGfnkV2a/5GlsQzvJj3aj81kVpR+Ehrk1C69+szN0DmHJdcWmRu6WJ9sBJ+YK25jPkh/wh1ZNPQm8FLzA1S6psCxZLT0fXpl7esgk57/5ev8th/jlNb68fVfoWS+T3UE5fKrwHArbxUuOjyS0w+f7w6Cuz9l4qEnrOGmwbEUkm+ac4l3rh3UlnVFmRJV3B0IoyAXlVXgkt0iev7Qd3jTB737DYrwGuWCIWYI5wqu+YOCw5NTMl+Gs4FdIgpBrtmpVQ=="
+   },
+   "mlock": {
+    "iv": "3EITsg6U2yMtOc8q",
+    "ct": "Hwnr6fJflbl/cJ+qW5XUTc2REZ3aIOFiz9QQVwwh8iMyu1ivqAbRzSD8msklR7UQ1PmjuDUE3U0ksXfRq+E3gk0MxFN3lrDPShg6JwXYsPWqfXnV6rrIsh//sWfKx/4elsqrGamxC14zPDKcrOGhIW3p/ZGEqwJV/z0qJa11MtkUHHis1G9JiwSr7B8rVuCu2uHoF5soCrkFKkbnNbVKT5lgPtiMy448mZ0TGo97AL+7AB+m0UoXbHe7HxRZ9Dv6Y4qI+H7JjjWxrtLn62m4gWuJIXn79zAC6uHCYPuBiQIlGgOoyvEasplRy2TOU1OioHCTGgCQBwMih8fEMK0ButJDhyGoJGXlUvEo2HLPxbJXAD2hrpfiXpmFpSjGI6O++MTUl6hpdIS6oxkObmGYBroQclDtbBr0eRYh3f78edOsMqb07DV6aM9IX6ovE3X8jnjjJFgvhZHoyl++LrSd/JIqdbBeAyKbZrnZs87U3ngBXEEEHKTHYjXpXHiv1chSV2eraQkLLhzLgIm8ofo1vHjiSMAc/NrDPFz7peuXSvauF+/XnKo3fQIGAsQbu+hDjzae0JZ+/Htvl64c++Ea258XTP/tBLZqe2e7+8MteQu+6aMwEy6aptD63CH28IbmUQ=="
+   }
+  },
+  {
+   "id": "gabe",
+   "tab": "Gabe",
+   "name": "Gabe Layton",
+   "order": 2,
+   "lock": {
+    "iv": "bhKxqsIB0+RrxKOu",
+    "ct": "11szotC5NOQUlMCwyTSYCDBRoXv43ImEh+9CI8MHusNytZVMIkco7dc+rbp3dyNjcqk21Crm/9cVqQKDMA9N8Mbjm7K7S8y4IJOD5/+jo70iRjcv7+bdc4ax7o5cfzxqS4rMzME6HuhKlR5y7m4t/3Jhz3gevQzkF8RF5Xk+L+4s7GkfLkR+UOryAgDDoWjN7e0ftMc+7X/XQJdMYDY/z/h8Yaf8oz1mXGePH83Ssf0aPOi31WIYJPJQmYLIKgg+Ms4vVVDXkn/miHzWiqwUEnKk3Q4J6tVjG3NOj5vXzgqSl/OddLA3en6gNGxcdNVL+ogZlC8jUHiGjcnlXESY4VRuSHuI/PN3if5M1tZDuDnq2T8nV324cm9KL7WzsHBF+z5TeCX/kY0lP/j4SFoq6HAh6JpIRNzXgD5mnmjmSAchYyVwuPXNdFstBGLAhRQqnbCypTk6nFZqqjkP+3vmw5MnBO5xzf8X4LXp+kNug+WCNtzN918PRyd/Btu9rCxS6QRSAllFiC+kNXWGaS/+sPH911FT+lrAX560KHROqwzxC7ao2ABJmAln/c2+3Y3ZINsOXFYTAN3obKZpNu/zdWIMczTwIBuCjQB/lfcB9KsRaKYZATuu3w48m33chhWCxw=="
+   },
+   "mlock": {
+    "iv": "+uJAyvghs6ZVA/Oj",
+    "ct": "LbCdp4nkSfHZh2tCk9jbPZFylIKRUMLR9af4EHvLN4lUxkGLTaHbSBOHWnNGVVlM1kmKe2epNJtmxpTxYvEqIOmmYLW+UGF7LgWMwW0OMBt1p3SVlxR0yB2MaLcgTWuo+wjLFDWXzrYNBp0fSuj9N1Pa770ACZDkJxQBgZc9cc8vaWq/k1TKPrxVmsea0TScO/nLgfcvEs6QsgxcIyq2n1frxMGOM78ZK15P761mYB83xZRHxq4nAZKUO0YD4OREV3plMSKpwPfi3C9DLTnA/wMMFyCrNNm7zkpsbCIyMlLTzz9BQIQioMDm0nySOBYEd7y7twJuMjtPzrjcky/mY5zI5hCtvu76gkvkZ9644dYh5e0JzKCMkWJTwhTzhwxf91tTLyvd4mvHDtcV/3gyLGP4HacKYYUaq3ljCs/z0PIMk81Y6g+jJKrTR4vvCSWmJJ28cVBHpmW3VTRbzNl0CLGOTkRbf8ERjKZL865y0hd/pp0Air82N6UsnUuFN0Cb0k42UBVlwyOnTdo7hwcP/cPkvcjww/HlF3q7g50kW07CwBvflnpWROXPxbk8KSxzk2nILV5Of/UHrUOM4trc48vC3DJZ2plvCU4NcKekI446hdcX4qgHT3Yx5DBgRMgwGg=="
+   }
+  },
+  {
+   "id": "jonah",
+   "tab": "Jonah",
+   "name": "Jonah Layton",
+   "order": 3,
+   "lock": {
+    "iv": "P2td0EBFwODsFfY9",
+    "ct": "uVtRYyE2Dlr/NOAAPklxluI8KfTaNSlCAzyHeo3eED5UvtGrdTV4XDpuJsIIx3Jtt0EH7nwMghPBuMzm5eYMA9atH9GMkDAHFf4tYbdIfVeaLQ6OMTvXXboBTZAltIO13UXTEucKrYKFDvr7mjs5XyXJ1jVl/QXhkIWhtfFohxzVI1BbalAzDH3riy2AFQgNrme+YzvBuzZ3VH1sur4Qe94feBI9zENs8vbnauBL8RfH0h0i1wlimzS4iw3OwwWWwuPFYLS5mCee1Kw3+Q50C2RXyAUbzYZg3IgFJY0xPIRsT7mdNrZEnd8vBpO3p5S3dJPR4Pr2Hw5Yj+yNkObdwBOgw/JJtTV89txLXsi62bhLfplrma90QozFsx2ra/M4WxmCWLzzzo0ygPHBRbX/DRgCTBavIVDpzKdXjqnRE8ZWP9QoEaKGJ8hze+J2p/Vfm/AyuKF1sT1wbO3tgFbnBUd00Xmyi23gtDR91uZAx/UlpsXdBuYikR89JEsWinQPA/4BFqmvv2Lv1imuv+1mMKrylFMqbBP0hyOheUXjjn9t5AyQQLwKyCy6UThVxm2i1RiHonYHvudqoor5+3rFPu3dFaU8NtrCEJHetDeK+nxeaMp8KifSqhrLaO3f6mbZhg=="
+   },
+   "mlock": {
+    "iv": "woPtzEZePuL58Q07",
+    "ct": "HS615pGh+mtl2sW45EkKhRtQldEBEkOghvOCiOtYM6Abw7YpEgbIjSHZwSXS4/axT9uwfpMh6qDM6/P7+wVZS1ulU+n90hvK8Ijs/EWJ3tY3rxxOgGqfv5g9NnJyeoehB7e0HRNNShFyIj3HL5nlNCBEhcEMAsW4bo+GJEskTFOPr5eQWnXtqUnUKFXeTB4UDdhLrqOQEQD9Fnw3ysKcfQLsljWd29tRyGuvTevnT35HgMXfQOPXS8T89OfnpSWE9MY3vHjYVUU/wazdxNByuIaPNCVPAukmKgF/y9+5bFEkz70Pj/wU5tS4KofzAY8YwZbLZC8z85cVbS1wB7KO5ADNXKy7z12cck2w0rwfEKCoZfAZaqiatlTDkYwJh4XHbjJIRLhgHz93NpV7FQTeYeUHBUJmLXJmu5dLAPZsAaMrT7QR8nvsWfM4RzPhVJoh6p9OcssjNeRYEmJ55JSjp2GbtaBU558FryFU+c+CxN5CO2DeiZFBMrNu9ChfstJpzqD02oFYPyndbcLB9gOs55VVe9lwJirRN6ihhNN5e5ZMMsynlvK5kFbldHcdyA067gBhqSwdJoYRQkMkWEyB044Si96JGwQpNaebYnDy55Oaaax+9H440rbJF0ptVW96eA=="
+   }
+  },
+  {
+   "id": "joe",
+   "tab": "Joe",
+   "name": "Joseph Black",
+   "order": 4,
+   "lock": {
+    "iv": "8CP1PjBWwhNneqcZ",
+    "ct": "JxqjoF8JF30imhUHzU9EW7A188s1AeqGKtCOSVQ+iqRPQkiy4fq66Scxse34UrcgGos8ZFMfoDLbJliYnSYpyMWEODCoW5pZeptMGSRKDx/pzJPwmumyBnl6ABKKxq/+gOvYT5zUQ9z8jfVCrBigrZp8AhOFQ+i/u6Bvnl9EnUincmddQdajmakqxcAuzdHq74MpiPJtfObYuTxO9tTluwhNR130BbdOlFrJmXWHgyk5mHG4+WTC8b0jCSH1oJU/kGPygFRg+5Jcqhs260YCONTlPzDRBZdWy6sCHfaYU+pxiun4x5FzfIO+es97kcNwNg2POjZw5DVVlITv0eInoLB2iDuo0OUSg42lFZj5YDrr9QM9NqW20dq0aG/tF+IXbI+8mQPiBFJixb7wxTvfq1aGeLwZMfttCtCCH8aLSf6njJAVId+K2U+u+hgjvJPr/tuKqrj82KboeokeH9bZyOAHBlxJciB/gXFtAMChyxBOiPp/NenWvLSs6CUf975y+p5M7uvO2QeYHrnN/l3+MFbPLgNa6aev4ca7+FwclXdvh+ecbFOmMfPd2XBHObudM84QvgwzTjIsn3QXRwrButFJkgyoZkOAUJZOC/AKeg32L3KG3VqJztv5XQoJAfRoQw=="
+   },
+   "mlock": {
+    "iv": "vDxEOmP8SgU8M6sj",
+    "ct": "zKYxt/TbQ2JJuzhwwAMNj7fvDVaHHsLdOLvf2tT5wCfYy3s0uA8hYDACAQ9VaxeIlf+cfuERk89uoan9xLK4XQryqLLukEst8szsTAk3IIDTqtPjIdC0OitFHJbdav1nj85S9rTqhR8IL31w1Kvc2CNjK4ddKaVa6Vn6Qqhboayrlilc1fhZ3FhYV5OUNoUuOfJeANU8ITqW0uES43wh7l6QkKF9A64q15oczW1yQCsWD5wF0+DETzU2yxDm1/VBoU2kDhuqZC9Z/9HB+n3ilQO8WSgKJs2b220LMCYn3kJBdrPivCNo+z7Mbvc+EHJX0CMmCGtR9HSV8xCrkHVW1YyvvXTrh36k5PrGFKGEYLs2o88ypv2mKXu1S+M0mGajFOMLiW8VDRfK6cbBEaoyR2zBBU44ImRzjDJMDpno01BIaj98rzBpuGMgJxR37+MvTAoZI3hEx+6Ep3zIwNjtrFbZ7tUiHmnjGqi5+QeKggkJvBewf0d+Bi3XgR/GgJV9Wh3h/pN6jFNYZeASS+FYIzS+e1O2/5aPRvYh4L1mG5SflWwT5sGjpcCB++NKYJs44P4LKwJZFgaYbYNi+iN3jFLQ6+rtNcFc0/HUXVu8ddrqF7ePXdfWQxgZVZjx6bEBaw=="
+   }
+  },
+  {
+   "id": "luke",
+   "tab": "Luke",
+   "name": "Luke Thayn",
+   "order": 5,
+   "lock": {
+    "iv": "3W/4erxheisNvWir",
+    "ct": "/j+DMIH4+kUgbZ8SzkzwolJoeoAbXqztJFvXBNh82kcWpHQa85lnZ+sm8ABHwjdgUG4F5NwZj87DjJ9eXwid3wis5MtKAZNsH8nYyftXM4RyjMGUalymUVXJKdt8WJPbI1cUq4FvHBdVlfE2hkeNtwAvvaxl5L5tFlkiWdiZpRdfpo39lh9+7hNzF/qpyZ3JIY8M/xD0OBHKtotONQjQKcO0M+sFVZqjTg+Bq0qdC00Jyku4l0mJ9UuoFrl02hV11AvkPQ6CGTgYcvOO9i7Lvt8Om977UG7itZuoKQzy3w77NrTSdmGuH6CcpKXJbm/ShQSULko7WwVvQIqFeaMZqczIILpUAmbx/LrJEs9XE1eRr7XTLGFyXdpB3Btb+hvQxoIoYh4K8d/A3dxYUnjszpX4rG2WZEGhdABJ3alIqBTmVMtAzaeQ0vnhtAQyrUcvTJe68EVLklHCCnSqcWhyYzASycujgHI8w3WYELorek69u2YbxwyCpyhTaXU8DUKBELwuPXZE+5X4KL7Vls14syXlh8ppGe7aswRUr0NvVcJgnuM7pvF/DFs0rzvymHnlWfQgzsmurW5vG1KRCEPXHoPo5oTUPTwqIVUFGALzWW6xEq4bFXAFeKzf2CN3KA=="
+   },
+   "mlock": {
+    "iv": "uA57HzvkC2UxUAcv",
+    "ct": "pLVXj2uByMzWmxEsz6xGF13czk3Y/FXaay6CpaOzz26Yrg6QVePiJjP+4yLxJ1jJzSs3rf67m+FEfO3A+mQcVxQAa1AyLeKyNHAmd4yhpDUFFgOOm/pN+NL64Ox3KZleB8Sue7ltMlov12NwZGFSUHw3/vBdvlqwHUNIJX19S42/kBHz9FNuclQbKMjY6gAkoWZoWQiu1+iQPlJ99U1cXNot2qUk+v07e9WuC7/MXmvsgjV++ESAgqeidO99gRMDXTwUf7n4aPN6UtZo2NBJrMUhF9TMVYRSMWQZn0zDDSGuyTZbYA9TvDCs4oNDTBEXTM/OuGeP0emHv3jwra4+3FrVCUSjCgxRb1ElNZLEjHkLA6dUudR+Py68MpMlGW/A0QlwvbQSPX0qGp52yNDwIVaGjoAhMiOliL+a3fZRGH/cmiF22FjIoGi/n/J3IXcKUdDgdFRoO3gFp8tuXlV0OEthOghuOGRfCzc6gMjHQuAemkLvG/WT6CVAHIlCaG47F7+r4yyFdN1e3ZQxSuDec7jFEDyDM8MRhw3UZMlxYIWFomdZj7u78xghYgcJWyjqDm8g//vRQ2BE4qSrZBOo5ks1cYJntm21gjJlYt9+UyUQDK6m6z49ygJvqx/Obg=="
+   }
+  },
+  {
+   "id": "marcus",
+   "tab": "Marcus",
+   "name": "Marcus Neubert",
+   "order": 6,
+   "lock": {
+    "iv": "kK+3CXcR0LZFNRC+",
+    "ct": "6V0HjNuIj5vBZIoySMzcwSfrdwYQksj0Uy3cZEWeRn17lmXV+odqD7zxmeY7N56L/vnturiiwE+2IC0/28TDZS6JC0peGlkdyxowHfykKVt/FuiqFN8dhmo0+4vZ1p8Fit4n+o3g7fVT3F1YtRSnKBJRECe6l0FLyIgq4vYSROmtW1/Lj8MBz80eT4fMkMgv5E2YvmJ5mxEpus1rzcxovaW3IHiFKrDOU2q5JIob1wMxf5I/LHxu9LcyQjTWNiNHWe5jhwj0hqxwMkYhkKl+U4ShD1AAMB4aY8ZwhCrHMTFDud+je8RkDRwMH8sr/jPNlakrYl9oGAJv6CyOHcBxOWLxJBlDQwlL2ak3Y46jHk/bTC/Tzv2bgfYMmL6gAS0xBQcNDMtFrP97/xK879q4ChTxilRsv0J5f/2ihRQm5W4aTa3xA3I7yTSK72eifZWlnNCi+GAARs3da7aVHNaGuDRYMDx38ljuua/YbtrhGLMylI7jeY13As8RuTTu2OPJp9I4PBoRuaKjS5qkXDQW6aasqzI2n0LV9yEHjxqV8DWCzb8MN6Yc/yJXw/3GhEtdHnXiwupZPx5FiGLcHS49R1gHT1EOhPNJO6py1l6TTUX6qqE/KjwhcNHaISbie1JbIA=="
+   },
+   "mlock": {
+    "iv": "tMxx6AB2XVg7p088",
+    "ct": "v5CRaE+gvy5kyC/n2q4CLCiKPbvi3k18t9MRNOq113ujIKBS5baRrrrOvNNfKCAcnsDE/GDIARHPkfFMQ6vtR8bkQ6cCelIdeRkkIC/8B9MiLP60EhDw5vhqQ3umXp+9+9jnbD6VUNglcTX8mr3w0CdJotpYoTntqSywiyPzjaNpi/+q2jHLY7wJuS9Jb6/lopodH9Mr3IiveYwdvieb9N/o842R+NfRj2fTESTr76BhWA4Ko7MUFD3lzQetA9lECQx6dIDXIzeQSZI089vbojOYaG00lKnkom6DBJqmAn9yx/B9TQ3eaW028DmwzTAC2G2OE2N+4pmWzNXZ0+NpsDZytdoPfRomePei6RBVi7y07WHlUsnTKxKltNAlEMClAHepDX5W8TWmQqDMQw+9CS02QgQPVd4lYsaMPd9PogK4p7i+qeW0YnpzXkjlsX9Fy8WtBMh9VJPbw8DaevmGScE3H+/qt0OmqrJxjfSwvFufbuEGHnrR9lCIWwuqiplW1L7CWD2En8fUGAa0kugHbq/dkL51W02rk3cM14ngm406O1CvJygH8daihqJfGQZhJGtPv21vd4zq2OM7THQQxpSiNrEZc/Q45Vz9X24shG0ZpgQSVbIZ5bJxkKM4szYfqw=="
+   }
+  },
+  {
+   "id": "mitch",
+   "tab": "Mitch",
+   "name": "Mitch McGuire",
+   "order": 7,
+   "lock": {
+    "iv": "rFOGxgrXYkaqQXq7",
+    "ct": "5gBh0YQLZYS698Okl2+NU9ciPJuYR8ms1cHeQSWnT62mVv2Y4YBbM9iVNMxxVITwWL0G3eIUyY23oNzzOfBj5OvOjWCBjy+3514Guin3uZfvnQzGrMGBqq/e/cNU4qotrvxDzUNygbncAW5iv3d18EbUKudJ+qnaUglxpydF3S8vUhD9uwIVF/nMRBHuKyejSkfIznqcOJEngy3wvFWKDJZ6GI3e6kVtZQlI/0Le5aPgWAxZjCrbLfdwVwlKweuP/HD6nSQUEyW1M1F2EQeh1XyiGXM0G5I/3mnPUGGAnXPbbsnNIBTh713T5tq8+uV3x8KBKXZd6i3NeGf77u2g0br4FnfXzNbf6cvpFZKvyQnnnaMfxzNzxo4b/ktKES+MG9Xbi9r/8mb2WYBZkpcyLOiJAWc9UJ5Td32uF+/zwhkWYiwUfFBHzHfNr3Ft+csa8xUGITEjpWYh+oRquBvc2oL8e+5KEhzawwssewOSqNaFgD6f9BIWTSnT6AooYTi3IML/YxVcwnj9Vh/cSfaC4Absqg8R1xFGQP5L3PShuQqo46vjf944CZYP8AJE/hi9kUgBYOj7/SMThjLjT27tc9yEsnPin2wF/pu/hjTopZmeTW4VQFR8t9nknKZB8iaIkg=="
+   },
+   "mlock": {
+    "iv": "gPazwsFkRG3OCwY7",
+    "ct": "6GZx2FzuTqF+ik7GXVIiVqkBOVca9Po6OxtkVYRXMV5rXb/QZyYHlva42oJhOBRiogHCoPLeIy2gi0bW5X+lDpckeg12BBXkbmV9mHN0cLpwljQHnd48Sphd3PSds5a/TM+zxNK9ES3Wcio/UwVFePpOZ3Oup3UDxNQ+NFCv7CvmkE6wLjwRhG8YChj+XzHdXkzf6n9lVeQQzZwYNciqgJkrywvZtNboiXgaP9xvoTfj8R+2gsw4gYluar1Rs/g1mq8sAToH+5FwhyOart6LCiTiVe9zMwqENNP1VU9HFCDL4nX1CjeZvIlXU5GQ+9vnqOU83lshaF4xuFWMZyzNNohwbnxwKheYzAIMdUIq93lVdUrVstySkmleFGK37VAUWE3XTyeCbUIZIZnJA6g12S9LDKQ9mWBjkcn1IJteB9QodkQufg6TPzl8Yw2P53oR7F8MXPWxySwcF51ND6TFSmfiYVrdDJ7n4NuBnJx4IksqMs3llGJ+0Qw575Vafx+k2wbvrIruGFy0rARYZtXZIkpwNptbTFwF9nEPg4uli7sDgdFs0AEG6ARfk8K9VqGArnLaAr7jh9kJLJgkQ9OGEYcCdZqtdpWk+I7W+olsHcJwNRjtC+obSP5E4uxiXxOTAA=="
+   }
+  },
+  {
+   "id": "spencer",
+   "tab": "Spencer",
+   "name": "Spencer Bishop",
+   "order": 8,
+   "lock": {
+    "iv": "9Sh/kKtjKhtYhyhb",
+    "ct": "TMeQCvTU8I9PcFmY7z+G30liHLYcouzyPgXs7liP6ZZttk24N4rmyCalOE35Rwbl+nEhoFAHrdCHz5v1H3eyHHddWumz07n24fFjagJ+X4BlSRKIVfQlP4Ed2XZ1OnA9OFZzPqqXQ8Ow9Ng09+dq0ytS0t9buHj84aN5CB6xB4Gi0xJ88+sm/iEyguCoUMGDHGq239Pw0uIu76cRPEqsitsXKUc9RWDynpZylE4cjlVgK/GEHtQqDzE36/owYM9tM8nxICxhklmeXFoZ/GChqIKEVVmKQaAGEwayNftzRaWdx1yIFhK6ahRgE809Ugl4u7UIfI6yGhmYHwELDkMLcZ9cwBNJen3ZM73QOrqxkyGvEehCYVBJg1SrH1BXEA8xZHkju89Zf+4jiclFYoDpGB+k6GtYN45ugd4SmCP0uxQWMhBoWM0qQ45Baztm5k+uaL/zmtkg/qZuaMyl9z9dNQAXAFY9OqvYbFQ5JObFMjKP4GO3Ekn43AUqUDYjkDKxAwY2pYu3ie+hmIbF2X+bGLS+WL3YKD/AJJ7lbkSwK8WFKPkq+rkO939fPWSfFTIVHjxDs6iANALz5OMP7CS9HHiaXtKqQLLIUuqqReNelEF3mlYAMlyMWlgGVxlkrg=="
+   },
+   "mlock": {
+    "iv": "ZQ3f9N8EfiPA6lHG",
+    "ct": "/YpNpA0wVSf3bzPhPVCQKbZCs9A3J669aP6z+l4fTUj/QaspYkB8PAY9fgg/bsnJL/EwbQhATPxwnX55ftjrfpej0gAnrNO0xNh4y6UgPHqeuI2RtF8NPupom/xYD3h6qriI6Bxvb2NpCN/5ARDtUgpoK4L7eJUnQfnn1HcsYkZaycQU7lnSG1jdCi5bATcdTReQ2nuLlscoI54bFMSJLi0Cqk7d6EW6r5QfL8NkWOy6bB7zANLD6P0XDR+8PHrMr8JKX+SsKcFI6mxKUUmETkzEdO2qcbGfpOjWaJZFZUoToP1CBcarrPD+A9IAV6Po3ISpXbZbx5GMyfbldufAF/4a3lc6thpfFfAzi+0htJev3e88tcgnvRlIYQUvVju5hkngUCgXIqM87n5G8AI+plyr2WuzlJv3KSIDPxkP9ivkuBJ6sqx9P6qBNLqPnH7DygCoRpyWGfxV65ZJnrf9idCfw/uzWfB2m2Nf6+m6o6Nure2PAGXGXzEtWtUpSN7q8ZejlxG9HTNS09dAofSNTsZZxZpK85sE+rqjbqrp19KJA0YaUlcbPVJZdTmZoj53jq+nZ/wj4+fuLwY8kwIIlsrIc9n3pZAA8JOmS88aNIpiAxxOZw2O+9A3wsfa3w=="
+   }
+  },
+  {
+   "id": "teagan",
+   "tab": "Teagan",
+   "name": "Teagan McCune",
+   "order": 9,
+   "lock": {
+    "iv": "QyafjXXukLT+Flpv",
+    "ct": "be3fvLIaHbI7k/m6X61RPaH4EZR1Gsu44cuDYhSZr5Y6gOEOdRSN8hvboyFmrL0os5n/HrqMJUyBffs1jNw4N79zwppiDgFVCFeSy7K6PTE2WXbfBlZh8AuVOqEQz0SDCuiA/XSudBv/8lpy3gmJ5/J3kIx/Bz5GlcivcIZmomuTgSAEA5X7DY8kTyxM1khwYhJGittWdjHyKW/hU3dFwMvHdjt/oouFd2pZejFBpxzPZv/sbhqmy5H849bqT/SHHTRNLSNGGvWcWwXEBp6E2svJIIA8Lpp7zZHYcfE7CDXkvPi6HOYTHkCR+h/BK6PzVgx16rL68uRj1FxUAZGa97J9sS7KVrE9JBjMqMYszfbZEfWpNfoP9Z/D0dpLejkBHivFxZx/fdljN+Ny3xE2cOKAv8EFp2dVOm1MRIU3GwNyT8sTR2yXw0yMLCiuFngwiwdTUa9GtP0CM2a759Emni6gMDFTZaHyEGfhdLyDZYM4Jr7JukcqLjftjHOV8dM1e723aIdsNirVtMunoU2kOgxsF36fP0QjgEt3GoGQs4y4xACHwBWsy5NTqt+G5GAhYG/+Lrhm8OIstJUeKIkFtJ9YHSp8J5zSsDZny/2NHuZ2l+utV2G/vRi4Wk5zco1X"
+   },
+   "mlock": {
+    "iv": "Z7yNV4yunclCGFrf",
+    "ct": "GBWVIqp9PBrDxcRA9JwDda753XkK+GLu5ZUAIVb04lzGfafa6OgH73TRLc3tLHicJ4RQLMxR5vAtzIfgJ/WKsdvLC6fK+PlceJ99n81XhQdJtLsdM7jkhB30CGFb+Ka70N0Aqjr/GqtB/fqKgIqcw3UfYOsc1ohOyoNSf4m8nPKGVeSQOAiZ+OcXwO4wGPhkmPKb6vltQxkbSU4vuMrthEZaMB0xqjzAPu9zqz3N1uJFH7eX6H7ofjhQFRvlgxum+ww8LT1MVj2PngqD4knmYdX6SlMrOwXR/tX4664r4kCTAY3U2/T/RV4rZ4omiaAj2iZLMtqEPSX0MuIGQokvSIoDA6ECGNco6VQqlkn+VBDoPUimDLF6Aauilkcv8qk7fMxYCKJDztdIZGtPaxbwFHb4V8L7BPCFm96nsoFjvf10b7lppzU/WXiJ8INjmtNNAPnd9QYefAi7vjsByGQgKRYWs8z1z2gtBjOf0sYeQCuMmoo0qXoe6nzOqQuvOn+zCDGdUEMv4R6RxrNnqrYAsLo0qnwXzYDxzdvHHKlqm7OpMGE55kriWea4fTzxDNJrBCPjBN3J5jgA2cs2t2xnjtvEsPXdjZQJE6irzuDmMWteVYW3jrln139AovYYy5QD"
+   }
+  },
+  {
+   "id": "wyatt",
+   "tab": "Wyatt",
+   "name": "Wyatt Brownell",
+   "order": 10,
+   "lock": {
+    "iv": "4g4UHNTlisNlZByp",
+    "ct": "oBczuNB4b+63gVDqYY4G3DGEAHc8OoZo7XySOynnh8JjN2MnA7IvypZLWBcaGX5Khkac45NG8oOHDrX3dXLQ6LkKtD24n/NdX9GGGKHn5NzAeYpx/5kcNB0x+YZlFjejjrQyrKjlGN1MvF4t0GGH7DD3RMwCpQSGORsf/5kRjmZybK9E8FfQyXmLOcV7sf9BFbc+TlPBaZXR5huRhh+1c1FEVjwaAtQc/JVd4Mpyf8ODjYxRAdPsOk2OR1EqVIjX/Zxrq3aE9S78DMy0t64M4bHy8PVh/tfKf659SjyuYtxg+MbYeyNL+SDdqx6Yndqn5Ao81FoNi2/4+o9CtAltXUxKZy15OjQ4ATKnmJMc19RlUppRVbm1YbbOfFTEbNWsfGfYji5RC1AoNhg+NnCMEAKR7kjQjZNeKXBum6uhFErZrnkDNyDoBYYuhrLzrSRCKPxadD1bLNDxCRuaTSLxSelWHA+qpWI1xPgjwswdS9ZorrRBedQ1x41/nTPKMtxS+lG27/jARUWcN4OEUzIJIVTg4OeQksH8i6AsUaD+IzrxWlmoJfgViNN6uBirtm/7ijJGdIGlSPUNL6q4PAnIgw/4En95pHJofLbbO8VPKLuJNdd71+QG00Szd3sjJGVbAQ=="
+   },
+   "mlock": {
+    "iv": "VDHPpJdKqPY5wwuo",
+    "ct": "0KPEkWPecN4TMNKrOfHyI3HNQuuUvqJYyMTiy6k1RNt+82s6pLGW0VdyBPO0BROr1gAQUFvE3fCaH2VHHsvxyrAiNEC5nMPY9TTHemBzAJi+U9G39qsHVbvEMfiNTBeN7UBtKMQgbFFoeNNRifvUjGYlYbDSVAa/AR5ow1ZteHVj/6Glb5pZW50z3zR6C8GatjZqaQXA9+i5IY+wAiucIS9z6Q2qBdGkfH1E6+x1WWrUbgok5LIIg4zcfZjFaplUmK9pD4TlC2xgB0eyL0nZfX2T09L6GE5NamD3lCfyi0v/ZXTjmAUkpnw33jSJev6Pal4D06g4xFcARDH80eZ1SsLv0SR8HjUGbt3NBYTTbDnPlFvuBAgD+RVoGKOy+uJ7pBHUcEz85PzEKRLIuTtdIdLc4M53eRbsWjv3eJLhQkn96sxNW0S4TUcCb4/TIYIRA50izfl5T+avsyM0WCwakmY5y0SqvUI2stVYEdMRHdNBHWIBDUuGhhF1aYyIDhTXzWcANeFGCc3ljBHgQfjvXsSqEgX+ft5tkfuTIEVL3LFaA3tfb1ArAoAim9Y9sklM/GSE0Xjau0JjM/5ZAFr53dL6E7AJxKl+4Cc+j/vGnJTecRtotnE29tNqrqZpUy/rLg=="
+   }
+  }
+ ],
+ "meta": {
+  "syncedAt": "2026-10-07T18:10:24.616450+00:00",
+  "source": "fieldroutes"
+ }
+}
