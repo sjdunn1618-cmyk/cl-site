@@ -808,7 +808,9 @@ function setStatus(ok, text){ $("#status").innerHTML = `<span class="dot ${ok?""
 function renderMeta(){
   const m = state.view === "day" ? state.day : state.view === "board" ? {syncedAt:state.metricsMeta?.fieldroutesAt} : state.meta;
   const t = m?.syncedAt ? new Date(m.syncedAt) : null;
-  setStatus(!!t, t ? (state.view === "day" ? "Day updated " : state.view === "board" ? "Metrics updated " : "Sheet boards updated ") + t.toLocaleString("en-US",{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}) : "Waiting for the first sync");
+  const nt = state.metricsMeta?.nextUpdateAt ? new Date(state.metricsMeta.nextUpdateAt) : null;
+  const next = nt && Number.isFinite(nt.getTime()) ? (state.view === "board" || state.view === "day" ? " · Next update " : " · Next metrics update ") + (nt > new Date() ? "at " + nt.toLocaleString("en-US",{weekday:"short",hour:"numeric",minute:"2-digit",timeZone:"America/Denver"}) + " Mountain" : "pending") : "";
+  setStatus(!!t, t ? (state.view === "day" ? "Day updated " : state.view === "board" ? "Metrics updated " : "Sheet boards updated ") + t.toLocaleString("en-US",{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit",timeZone:"America/Denver"}) + " Mountain" + next : "Waiting for the first sync");
 }
 
 /* ---------- data ---------- */
