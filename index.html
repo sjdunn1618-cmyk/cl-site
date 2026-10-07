@@ -603,6 +603,23 @@ async function unseal(k, box){
   const pt = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64d(box.iv)}, k, b64d(box.ct));
   return JSON.parse(new TextDecoder().decode(pt));
 }
+function mergeMinimums(base, overlay){
+  if (!base || !overlay || !Array.isArray(overlay.weeks)) return base;
+  const names = base.names || [], at = n => names.findIndex(x => x.toLowerCase() === n.toLowerCase());
+  const normalized = label => { const d = new Date(label + (/^\d{4}-\d{2}-\d{2}$/.test(label) ? "T12:00:00" : "")); if (!Number.isFinite(d.getTime())) return label; d.setDate(d.getDate() - (d.getDay()+6)%7); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); };
+  const overlayDates = new Set(overlay.weeks.map(w => w.week));
+  const old = (base.weeks || []).filter(w => !overlayDates.has(normalized(w.week)));
+  const fresh = overlay.weeks.map(w => ({...w, values:names.map(n => {const i=overlay.names.indexOf(n);return i<0?null:w.values[i];}), display:names.map(n=>{const i=overlay.names.indexOf(n);return i<0?"":w.display[i];})}));
+  return {...base, weeks:[...fresh,...old].sort((a,b)=>normalized(b.week).localeCompare(normalized(a.week)))};
+}
+async function applyMinimums(a){
+  const p=state.payload[a.id], box=state.minimums?.agents?.[a.id];
+  if (!p || !box) return;
+  const key=state.keys[a.id] || state.mgrKey, sealed=state.keys[a.id] ? box.lock : box.mlock;
+  if (!key || !sealed) return;
+  try { const o=await unseal(key,sealed); p.metrics=mergeMinimums(p.metrics,o); p.minimumsAsOf=state.minimums.updatedAt; }
+  catch(e){ p.minimumsUnavailable=true; }
+}
 async function unsealAll(){
   for (const a of state.agents){
     try {
@@ -612,6 +629,7 @@ async function unsealAll(){
       }
       else if (state.mgrKey && a.mlock) state.payload[a.id] = await unseal(state.mgrKey, a.mlock);
       else delete state.payload[a.id];
+      await applyMinimums(a);
     } catch(e){ delete state.payload[a.id]; }
   }
 }
@@ -646,7 +664,7 @@ async function checkPin(){
       const p = await unseal(k, box);
       if (mgr){ state.mgrKey = k; await unsealAll(); }
       else {
-        state.keys[a.id] = k; state.payload[a.id] = p;
+        state.keys[a.id] = k; state.payload[a.id] = p; await applyMinimums(a);
         if ($("#keep").checked){ const o = readSaved(); o[a.id] = b64e(raw); writeSaved(o); state.saved[a.id] = true; state.loggedSaved[a.id] = true; }
       }
       ok = true;
@@ -712,18 +730,19 @@ function openRep(a){
 
   /* weekly minimums (live week) + history (finished weeks from the History tab) */
   const m = a.metrics;
+  const minimumsNote = a.minimumsAsOf ? "Minimums updated " + new Date(a.minimumsAsOf).toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit",timeZone:"America/Denver"}) + " Mountain" : a.minimumsUnavailable ? "Live minimums unavailable; showing sheet values" : "";
   let metricsHtml, histHtml = "";
   if (m && m.weeks && m.weeks.length){
     const lower = n => /lower|aht|handle time/i.test(n||"");
     const hit = (v, tg, n) => v == null || tg == null ? null : (lower(n) ? v <= tg : v >= tg);
     const cols = m.names.map((n,i) => ({n, i})).filter(c => c.n);
     const hasT = cols.some(c => m.targets[c.i] != null);
-    const wk = m.weeks.find(w => !w.final) || m.weeks[0];
+    const wk = m.weeks[0];
     const past = m.weeks.filter(w => w !== wk);
     const mark = (w, c) => { const h = hit(w.values[c.i], m.targets[c.i], c.n); return h === null ? "" : ` class="${h ? "hitv" : "missv"}"`; };
     const isPct = i => /%/.test((m.targetDisplay[i] || "") + (wk.display[i] || ""));
     const gap = (v, tg, i) => { const d = Math.abs(v - tg); return isPct(i) ? `${(Math.round(d*10)/10)} pts` : (Math.round(d*100)/100).toFixed(2); };
-    metricsHtml = `<div class="mins-week">Week of ${esc(wk.week)}${wk.final ? " · final" : ""}</div><div class="mins">${cols.map(c => {
+    metricsHtml = `${minimumsNote ? `<div class="sub">${esc(minimumsNote)}</div>` : ""}<div class="mins-week">Week of ${esc(wk.week)}${wk.final ? " · final" : " · provisional"}</div><div class="mins">${cols.map(c => {
         const v = wk.values[c.i], tg = m.targets[c.i], h = hit(v, tg, c.n);
         const status = h === null ? (tg == null ? "No minimum set" : "No number yet")
           : h ? `Meeting minimum${v !== tg ? ` · +${gap(v, tg, c.i)}` : ""}` : `Below minimum by ${gap(v, tg, c.i)}`;
@@ -756,7 +775,7 @@ function openRep(a){
         ${tcols.length ? `<div class="trends">${tcols.map(spark).join("")}</div>` : ""}
         <div class="board hist-t" style="margin-top:8px"><table><thead><tr><th class="l">Week Of</th>${hcols.map(c => `<th>${esc(c.n)}</th>`).join("")}${hasT ? `<th class="hide-sm">Minimums Hit</th>` : ""}${anyTier ? "<th>Tier</th><th class=\"hide-sm\">Reward</th>" : ""}</tr></thead>
         <tbody>${past.map(w => { const tc = TIER_CLASS[w.tier] || "t3";
-          return `<tr><td class="l nm">${esc(w.week)}</td>${hcols.map(c => `<td${mark(w,c)}>${esc(w.display[c.i] || "–")}</td>`).join("")}${hasT ? `<td class="hide-sm">${cols.filter(c => hit(w.values[c.i], m.targets[c.i], c.n)).length} of ${cols.filter(c => m.targets[c.i] != null).length}</td>` : ""}${anyTier ? `<td class="${tc}">${w.tier ? `<span class="pill">${esc(w.tier)}</span>` : "–"}</td><td class="hide-sm ${tc}">${w.reward != null ? `<span class="reward">+${fmtInt(w.reward)}</span>` : "–"}</td>` : ""}</tr>`; }).join("")}</tbody></table></div>`;
+          return `<tr><td class="l nm">${esc(w.week)}${!w.final ? `<small>Provisional</small>` : ""}</td>${hcols.map(c => `<td${mark(w,c)}>${esc(w.display[c.i] || "–")}</td>`).join("")}${hasT ? `<td class="hide-sm">${cols.filter(c => hit(w.values[c.i], m.targets[c.i], c.n)).length} of ${cols.filter(c => m.targets[c.i] != null).length}</td>` : ""}${anyTier ? `<td class="${tc}">${w.tier ? `<span class="pill">${esc(w.tier)}</span>` : "–"}</td><td class="hide-sm ${tc}">${w.reward != null ? `<span class="reward">+${fmtInt(w.reward)}</span>` : "–"}</td>` : ""}</tr>`; }).join("")}</tbody></table></div>`;
     }
   } else {
     metricsHtml = `<div class="soon"><b>Weekly minimums are coming soon.</b> This week will show here once your tab has numbers in it.</div>`;
@@ -816,6 +835,7 @@ function renderMeta(){
 /* ---------- data ---------- */
 try { const v = localStorage.getItem("cl-view"); if (VIEWS.includes(v)) show(v); } catch(e){}
 async function load(){
+  try { const r=await fetch("minimums.json?t="+Date.now(),{cache:"no-store"}); const o=r.ok ? await r.json() : null; state.minimums=o?.v===1 ? o : null; } catch(e){state.minimums=null;}
   try {
     const r = await fetch("data.json?t=" + Date.now(), {cache:"no-store"});
     if (!r.ok) throw new Error(r.status);
