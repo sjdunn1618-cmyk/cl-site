@@ -337,9 +337,6 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
     <div class="sec">
       <div class="range" id="day-label">Waiting for today's sync</div>
       <p class="how" id="day-updated">Today's stats use Mountain time.</p>
-      <div class="sec-head"><div><h2>Tier Rankings</h2><div class="range" id="day-tier-range"></div></div></div>
-      <div id="day-tier-body"><div class="empty">Waiting for today's complete hours.</div></div>
-      <p class="how">Provisional ranking only. Daily tiers do not award raffle points.</p>
     </div>
     <div class="sec">
       <div class="sec-head"><div><h2>True Save %</h2><div class="range" id="day-save-range"></div></div></div>
@@ -488,7 +485,6 @@ function renderDay(){
   $("#day-label").textContent = d.range + " · Mountain time";
   $("#day-updated").textContent = (stale ? "Previous snapshot. Waiting for today's sync. " : "") +
     (d.syncedAt ? "Updated " + new Date(d.syncedAt).toLocaleString("en-US", {timeZone:"America/Denver", month:"short", day:"numeric", hour:"numeric", minute:"2-digit"}) + " Mountain" : "Waiting for sync");
-  renderTiers(d.tiers, "day-tier");
   renderSaves(d.saves, "day-save");
   renderRen(d.renewals, "day-ren", "current");
 }
