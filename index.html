@@ -547,7 +547,6 @@ function renderAgents(){
   el.querySelectorAll(".agent").forEach(b => b.onclick = () => {
     const a = state.agents.find(x => x.id === b.dataset.id);
     if (state.payload[a.id]){
-      if (state.saved[a.id] && !state.loggedSaved[a.id]){ state.loggedSaved[a.id] = true; logUse(a.name, "Saved login"); }
       openRep(a);
     } else askPin(a);
   });
@@ -571,11 +570,11 @@ async function restoreSaved(){
   }
 }
 function forget(id){ const o = readSaved(); delete o[id]; writeSaved(o); delete state.keys[id]; delete state.saved[id]; delete state.payload[id]; }
-/* Usage log: each PIN login is sent to the Apps Script web app (URL from the Banner tab) */
-function logUse(name, result, viewing){
+/* Usage tally: successful agent PIN entries only. No PIN, metrics or device data. */
+function logUse(name){
   if (!state.logUrl) return;
   try { fetch(state.logUrl, {method:"POST", mode:"no-cors", keepalive:true, headers:{"Content-Type":"text/plain;charset=utf-8"},
-    body:JSON.stringify({name, result, viewing:viewing || "", device:/iPhone|iPad|Android|Mobi/i.test(navigator.userAgent) ? "Phone" : "Computer"})}); } catch(e){}
+    body:JSON.stringify({name})}).catch(() => {}); } catch(e){}
 }
 async function unseal(k, box){
   const pt = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64d(box.iv)}, k, b64d(box.ct));
@@ -649,7 +648,7 @@ async function checkPin(){
     }
   } catch(e) {}
   $("#pin-hint").textContent = mgr ? "Enter the manager PIN" : "Enter your 4-digit PIN";
-  if (box) logUse(mgr ? "Manager" : a.name, ok ? (mgr ? "Manager PIN" : "PIN") : "Wrong PIN", mgr ? a.name : "");
+  if (ok && !mgr) logUse(a.name);
   if (ok){
     closePin(); renderAgents(); openRep(a);
   } else {
