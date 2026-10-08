@@ -112,7 +112,7 @@ h2{font-family:var(--display);font-weight:700;font-size:34px;letter-spacing:.02e
 .srow.m1 .r{color:var(--gold)} .srow.m2 .r{color:var(--silver)} .srow.m3 .r{color:var(--bronze)}
 .srow .n{font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .srow .n .short{display:none}
-.srow .v{font-family:var(--display);font-weight:700;font-size:16px;text-align:right}
+.srow .v{color:var(--accent);font-family:var(--display);font-weight:700;font-size:16px;text-align:right}
 .srow .v small{display:block;font-family:var(--body);font-size:10.5px;font-weight:500;color:var(--muted);line-height:1.1}
 
 /* Prizes */
@@ -226,7 +226,7 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
 @media (max-width:640px){
   .wrap,.top-in,.banner-in{padding-inline:16px}
   h2{font-size:28px}
-  nav{width:100%;justify-content:space-between} nav button{flex:1;padding-inline:4px;font-size:13px}
+  nav{width:100%;justify-content:space-between} nav button{flex:1;padding-inline:5px;font-size:11px;white-space:normal;line-height:1.2} nav button[data-view="tiers"]{flex:2}
   .hl{padding:18px}
   .hl h3{font-size:22px}
   .hl p{font-size:14.5px}
@@ -281,7 +281,6 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
 .team-volume{display:block;text-align:right;color:var(--muted);font-size:11px;line-height:1.5;letter-spacing:0;font-weight:500;margin-top:2px}
 </style>
 
-<div class="banner" id="banner"><div class="banner-in"><span id="banner-label">Pending Cancel Count</span><b id="banner-val">–</b></div></div>
 
 </head>
 <body>
@@ -292,10 +291,9 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
       <div><div class="brand-name">BROOKS</div><div class="brand-sub">Customer Loyalty</div></div>
     </div>
     <nav aria-label="Sections">
-      <button id="nav-board" data-view="board" aria-current="page">Leaderboard</button>
-      <button id="nav-day" data-view="day">Day</button>
-      <button id="nav-highlights" data-view="highlights">Highlights</button>
-      <button id="nav-tiers" data-view="tiers">Tiers</button>
+      <button id="nav-day" data-view="day" aria-current="page">Day</button>
+      <button id="nav-board" data-view="board">Week</button>
+      <button id="nav-tiers" data-view="tiers">Tier Points &amp; Prizes</button>
       <button id="nav-agents" data-view="agents">Agents</button>
     </nav>
   </div>
@@ -305,7 +303,7 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
   <div class="status" id="status"><span class="dot off"></span><span>Loading the latest numbers…</span></div>
 
   <!-- LEADERBOARD -->
-  <section id="view-board">
+  <section id="view-board" hidden>
     <div class="sec">
       <div class="sec-head">
         <div><h2>Tier Rankings</h2><div class="range" id="tier-range">This week</div></div>
@@ -335,28 +333,21 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
   </section>
 
   <!-- DAY -->
-  <section id="view-day" hidden>
+  <section id="view-day">
     <div class="sec">
-      <div class="sec-head"><div><h2>Day</h2><div class="range" id="day-label">Waiting for today's sync</div></div></div>
+      <div class="range" id="day-label">Waiting for today's sync</div>
       <p class="how" id="day-updated">Today's stats use Mountain time.</p>
-      <div class="sec-head"><div><h2>Today's tiers</h2><div class="range" id="day-tier-range"></div></div></div>
+      <div class="sec-head"><div><h2>Tier Rankings</h2><div class="range" id="day-tier-range"></div></div></div>
+      <div id="day-tier-body"><div class="empty">Waiting for today's complete hours.</div></div>
       <p class="how">Provisional ranking only. Daily tiers do not award raffle points.</p>
-      <div style="margin-bottom:28px" id="day-tier-body"><div class="empty">Waiting for today's complete hours.</div></div>
+    </div>
+    <div class="sec">
       <div class="sec-head"><div><h2>True Save %</h2><div class="range" id="day-save-range"></div></div></div>
-      <p class="how">Each row shows Save %, then saves / cancels.</p>
       <div id="day-save-body"><div class="empty">Today's save rankings appear after the next FieldRoutes sync.</div></div>
     </div>
     <div class="sec">
       <div class="sec-head"><div><h2>Renewal Rankings</h2><div class="range" id="day-ren-range">Signed renewals only</div></div></div>
       <div id="day-ren-body"><div class="empty">Today's renewal rankings appear after the next FieldRoutes sync.</div></div>
-    </div>
-  </section>
-
-  <!-- HIGHLIGHTS -->
-  <section id="view-highlights" hidden>
-    <div class="sec">
-      <div class="sec-head"><div><h2>Weekly Highlights</h2><div class="range" id="hl-range">This week</div></div></div>
-      <div id="hl-body"><div class="empty">This week's highlights are on the way.</div></div>
     </div>
   </section>
 
@@ -406,10 +397,10 @@ const initials = n => n.split(/\s+/).map(w => w[0]).slice(0,2).join("").toUpperC
 const medal = r => r === 1 ? "m1" : r === 2 ? "m2" : r === 3 ? "m3" : "";
 const TIER_CLASS = {"Leader":"lead","Tier 1":"t1","Tier 2":"t2","Tier 3":"t3"};
 
-const state = { view:"board", saveK:"overall", renK:"current", day:null, saves:null, ren:null, tiers:null, attendance:null, highlights:null, points:null, banner:null, meta:null, access:null, agents:[], hasManager:false, payload:{}, keys:{}, mgrKey:null, current:null, logUrl:"", saved:{}, loggedSaved:{} };
+const state = { view:"day", saveK:"overall", renK:"current", day:null, saves:null, ren:null, tiers:null, attendance:null, highlights:null, points:null, banner:null, meta:null, access:null, agents:[], hasManager:false, payload:{}, keys:{}, mgrKey:null, current:null, logUrl:"", saved:{}, loggedSaved:{} };
 
 /* ---------- views ---------- */
-const VIEWS = ["board","day","highlights","tiers","agents"];
+const VIEWS = ["day","board","tiers","agents"];
 function show(view){
   state.view = view;
   renderMeta();
@@ -430,11 +421,7 @@ function segment(groupSel, key, cb){
 segment('[aria-label="Renewal range"]', "renK", () => renderRen());
 
 /* ---------- banner ---------- */
-function renderBanner(){
-  const b = state.banner || {};
-  $("#banner-label").textContent = b.label || "Pending Cancel Count";
-  $("#banner-val").textContent = (b.value ?? "") === "" ? "–" : b.value;
-}
+
 
 /* ---------- tier rankings ---------- */
 function gapLine(rows, i){
@@ -473,10 +460,10 @@ function renderSaves(d = state.saves, prefix = "save"){
   if (!d) return;
   $("#"+prefix+"-range").textContent = d.range || "";
   const short = n => String(n).split(" ")[0];
-  const list = (title, rows, tot) => `<div class="slist"><h4>${title}${tot ? `<span>Team ${fmtPct(tot.pct)}<small class="team-volume">${fmtInt(tot.saves)} / ${fmtInt(tot.cancels)}</small></span>` : ""}</h4>${
+  const list = (title, rows, tot) => `<div class="slist"><h4>${title}${tot ? `<span>Team ${fmtInt(tot.saves)} / ${fmtInt(tot.cancels)}<small class="team-volume">${fmtPct(tot.pct)}</small></span>` : ""}</h4>${
     (rows || []).map(r => `<div class="srow ${medal(r.rank)}"><span class="r">${fmtInt(r.rank)}</span>
       <span class="n"><span class="full">${esc(r.name)}</span><span class="short">${esc(short(r.name))}</span></span>
-      <span class="v">${fmtPct(r.pct)}<small>${fmtInt(r.saves)} / ${fmtInt(r.cancels)}</small></span></div>`).join("") || `<div class="srow"><span></span><span class="n" style="color:var(--muted)">No data</span><span></span></div>`}</div>`;
+      <span class="v">${fmtInt(r.saves)} / ${fmtInt(r.cancels)}<small>${fmtPct(r.pct)}</small></span></div>`).join("") || `<div class="srow"><span></span><span class="n" style="color:var(--muted)">No data</span><span></span></div>`}</div>`;
   $("#"+prefix+"-body").innerHTML = `<div class="trio">${list("Overall", d.overall, d.overallTotal)}${list("In Contract", d.inContract, d.inContractTotal)}${list("Out of Contract", d.outContract, d.outContractTotal)}</div>`;
 }
 
@@ -551,12 +538,7 @@ function fillTokens(text){
   const v = hlTokens();
   return esc(text).replace(/\{([a-z0-9_]+)\}/gi, (m, k) => v[k.toLowerCase()] != null && v[k.toLowerCase()] !== "" ? `<b class="tok">${esc(v[k.toLowerCase()])}</b>` : m);
 }
-function renderHighlights(){
-  const h = state.highlights;
-  $("#hl-range").textContent = state.tiers?.range || "This week";
-  if (!h || (!h.headline && !(h.paragraphs || []).length)){ $("#hl-body").innerHTML = `<div class="empty">This week's highlights are on the way.</div>`; return; }
-  $("#hl-body").innerHTML = `<article class="hl">${h.headline ? `<h3>${fillTokens(h.headline)}</h3>` : ""}${(h.paragraphs || []).map(p => `<p>${fillTokens(p)}</p>`).join("")}</article>`;
-}
+
 
 /* ---------- agents ---------- */
 function renderAgents(){
@@ -844,7 +826,7 @@ async function load(){
       attendance:b.attendance, highlights:b.highlights, meta:b.meta, hasManager:!!d.hasManager,
       agents:[...(d.agents || [])].sort((x,y) => x.order - y.order), logUrl:d.logUrl || ""});
     await restoreSaved(); await unsealAll();
-    renderBanner(); renderTiers(); renderSaves(); renderRen(); renderDay(); renderPoints(); renderHighlights(); renderMeta(); renderAgents();
+    renderTiers(); renderSaves(); renderRen(); renderDay(); renderPoints(); renderMeta(); renderAgents();
     if (state.current) reopen();
   } catch(e) {
     if (!state.meta) setStatus(false, "Couldn't load the numbers. Check your connection and refresh.");
