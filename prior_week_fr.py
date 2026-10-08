@@ -23,6 +23,6 @@ def as_site(current,closed):
 
 def main():
  start,end=validate_period(os.environ['PERIOD_START'],os.environ['PERIOD_END']);site=json.load(open('data.json'));roster=[a['name'] for a in site['agents']]
- offices=[fetch_office(n,start,end) for n in HOSTS];out=aggregates(offices,roster,start,end,dt.datetime.now(dt.timezone.utc).isoformat())
+ offices=[fetch_office(n,start,end,roster) for n in HOSTS];out=aggregates(offices,roster,start,end,dt.datetime.now(dt.timezone.utc).isoformat())
  ciphertext=encrypt(out,os.environ['VALIDATION_PUBLIC_KEY']);open('prior-week.enc','w').write(ciphertext);print('Closed-period read and private encryption complete; no publication')
 if __name__=='__main__':main()
