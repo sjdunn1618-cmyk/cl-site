@@ -80,7 +80,46 @@ def required_rows(response, key):
 
 def between(a, b): return {"operator": "BETWEEN", "value": [a + " 00:00:00", b + " 23:59:59"]}
 
-def fetch_office(n, a, b):
+def contract_links(value):
+    if isinstance(value, list): return [str(x) for x in value]
+    if value is None: raise RuntimeError("Contract subscription relation missing")
+    return [x.strip() for x in str(value).split(",") if x.strip()]
+
+def contract_signed(contract):
+    state = contract.get("documentState")
+    # These states and date values were verified against the Sales Report.
+    if state not in ("WIP", "COMPLETED"):
+        raise RuntimeError("Unverified contract document state; refusing publication")
+    value = contract.get("dateSigned")
+    if value in (None, "", "0000-00-00 00:00:00", "0000-00-00"):
+        if state == "COMPLETED":
+            raise RuntimeError("Completed contract lacks signing date")
+        return False
+    try:
+        parsed = dt.datetime.fromisoformat(value)
+    except (ValueError, TypeError):
+        raise RuntimeError("Invalid contract signing date") from None
+    if parsed.year < 2000 or state != "COMPLETED":
+        raise RuntimeError("Contradictory contract signing evidence")
+    return True
+
+def subscription_signing(fr, subscriptions):
+    signing = {str(s["subscriptionID"]): False for s in subscriptions}
+    for i in range(0, len(subscriptions), 500):
+        batch = [s["subscriptionID"] for s in subscriptions[i:i+500]]
+        ids = required_rows(fr.call("contract/search", includeData=0, subscriptionIDs=batch), "contractIDs")
+        contracts = fr.bulk(ids, "contract", "contracts")
+        batch_keys = {str(x) for x in batch}
+        for contract in contracts:
+            links = set(contract_links(contract.get("subscriptionIDs", contract.get("subscriptionID"))))
+            if not links & batch_keys:
+                raise RuntimeError("Unmatched contract relation; refusing publication")
+            signed = contract_signed(contract)
+            for sid in links & batch_keys:
+                signing[sid] = signing[sid] or signed
+    return signing
+
+def fetch_office(n, a, b, roster=None):
     """Returns minimal rows: notes [{t,e,r}] and renewal subs [{rep,src,cv,signed,da}]. No customer fields."""
     fr = FR(n)
     emp = {}
@@ -91,12 +130,16 @@ def fetch_office(n, a, b):
               "e": norm(x.get("employeeName")), "r": x.get("cancellationReason")}
              for x in fr.bulk(ids, "note", "notes")]
     sid = required_rows(fr.call("subscription/search", includeData=0, dateAdded=between(a, b)), "subscriptionIDs")
+    renewal_subscriptions = [s for s in fr.bulk(sid, "subscription", "subscriptions")
+                             if norm(s.get("source") or "").lower() in RENEWAL_SRC
+                             and (roster is None or roster_name(emp.get(str(s.get("soldBy")), ""), roster))]
+    signing = subscription_signing(fr, renewal_subscriptions)
     subs = []
-    for s in fr.bulk(sid, "subscription", "subscriptions"):
+    for s in renewal_subscriptions:
         src = norm(s.get("source") or "")
         if src.lower() in RENEWAL_SRC:
             subs.append({"rep": emp.get(str(s.get("soldBy")), ""), "src": src, "cv": s.get("contractValue") or "0",
-                         "ca": s.get("contractAdded"), "da": s.get("dateAdded")})
+                         "signed": signing[str(s["subscriptionID"])], "da": s.get("dateAdded")})
     return {"notes": notes, "subs": subs}
 
 # ---------------- aggregation (pure, testable) ----------------
@@ -141,7 +184,7 @@ def agg_renewals(subs, roster, a, b):
     for s in subs:
         r = roster_name(s["rep"], roster)
         if r not in c or not (a <= (s["da"] or "")[:10] <= b): continue
-        if s["ca"]:   # Signed Agreement = Yes
+        if s["signed"] is True:   # Verified contract signing, never contract creation
             c[r][RENEWAL_SRC[s["src"].lower()]] += float(s["cv"]); c[r]["n"] += 1
         else:
             c[r]["un"] += 1
@@ -185,7 +228,7 @@ def main():
     else:
         if any(not os.environ.get(f"FR_{kind}_{n}") for n in HOSTS for kind in ("KEY", "TOKEN")):
             sys.exit("missing FR_KEY/FR_TOKEN secrets for some offices")
-        offices = [fetch_office(n, a0, b0) for n in HOSTS]
+        offices = [fetch_office(n, a0, b0, roster) for n in HOSTS]
     all_notes = [x for o in offices for x in o["notes"]]
     if any(not x.get("d") for x in all_notes):
         raise RuntimeError("Note date missing; refusing to publish")
