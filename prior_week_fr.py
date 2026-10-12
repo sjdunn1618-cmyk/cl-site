@@ -1,7 +1,7 @@
 """Read-only closed Mon-Fri FR aggregate; encrypted artifact only, no site mutations."""
 import datetime as dt,json,os
 from zoneinfo import ZoneInfo
-from fr_pull import HOSTS,fetch_office,agg_renewals,saves_board
+from fr_pull import HOSTS,fetch_office,agg_renewals,saves_board,renewals_list
 from hours_crypto import encrypt
 
 def validate_period(start,end,now=None):
@@ -10,7 +10,7 @@ def validate_period(start,end,now=None):
  return a.isoformat(),b.isoformat()
 def aggregates(offices,roster,start,end,asof):
  notes=[n for o in offices for n in o['notes'] if start<=n['d']<=end];subs=[s for o in offices for s in o['subs']];ren=agg_renewals(subs,roster,start,end);sv=saves_board(notes,roster)
- return {'period':{'start':start,'end':end},'fetchedAt':asof,'saves':sv['overall'],'saveTotals':{k:sv[k] for k in ('overallTotal','inContractTotal','outContractTotal')},'renewals':[{'name':r,'count':v['n'],'signedRevenue':round(sum(v[k] for k in ('ic','ooc','nc','oth')),2)} for r,v in ren.items()]}
+ return {'period':{'start':start,'end':end},'fetchedAt':asof,'saves':sv['overall'],'savesBoard':sv,'renewalsBoard':renewals_list(ren),'saveTotals':{k:sv[k] for k in ('overallTotal','inContractTotal','outContractTotal')},'renewals':[{'name':r,'count':v['n'],'signedRevenue':round(sum(v[k] for k in ('ic','ooc','nc','oth')),2)} for r,v in ren.items()]}
 def as_site(current,closed):
  # Wrap the private closed FR aggregate for the same local sealer.
  import copy
