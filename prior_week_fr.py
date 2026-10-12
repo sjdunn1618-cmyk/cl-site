@@ -9,8 +9,8 @@ def validate_period(start,end,now=None):
  if a.weekday()!=0 or b!=a+dt.timedelta(days=4) or b>=today:raise ValueError('Expected closed Mon-Fri period')
  return a.isoformat(),b.isoformat()
 def aggregates(offices,roster,start,end,asof):
- notes=[n for o in offices for n in o['notes'] if start<=n['d']<=end];subs=[s for o in offices for s in o['subs']];ren=agg_renewals(subs,roster,start,end)
- return {'period':{'start':start,'end':end},'fetchedAt':asof,'saves':saves_board(notes,roster)['overall'],'renewals':[{'name':r,'count':v['n'],'signedRevenue':round(sum(v[k] for k in ('ic','ooc','nc','oth')),2)} for r,v in ren.items()]}
+ notes=[n for o in offices for n in o['notes'] if start<=n['d']<=end];subs=[s for o in offices for s in o['subs']];ren=agg_renewals(subs,roster,start,end);sv=saves_board(notes,roster)
+ return {'period':{'start':start,'end':end},'fetchedAt':asof,'saves':sv['overall'],'saveTotals':{k:sv[k] for k in ('overallTotal','inContractTotal','outContractTotal')},'renewals':[{'name':r,'count':v['n'],'signedRevenue':round(sum(v[k] for k in ('ic','ooc','nc','oth')),2)} for r,v in ren.items()]}
 def as_site(current,closed):
  # Wrap the private closed FR aggregate for the same local sealer.
  import copy
