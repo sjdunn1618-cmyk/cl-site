@@ -110,7 +110,7 @@ jobs:
           import json
           d=json.load(open("data.json"))
           for b in (d["board"]["tiers"], d["board"]["day"]["tiers"]):
-              assert b["status"] in ("ok","unavailable","tie-review")
+              assert b["status"] in ("ok","partial","unavailable","tie-review")
               assert all("hours" not in r for r in b["rows"])
           print("Tier schema and private-hours exclusion passed.")
           PYCODE
