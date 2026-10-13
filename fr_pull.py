@@ -209,7 +209,13 @@ def load_hours(roster):
     try:
         from hours_crypto import decrypt
         raw=decrypt(payload,os.environ["HOURS_PRIVATE_KEY"])
-        return validate(raw, roster), {"source":"homebase", "fetchedAt":raw["fetchedAt"], "status":"ok"}
+        checked=validate(raw, roster)
+        # Owner-approved site-only fixed weekday hours. Never edits Homebase.
+        local=dt.datetime.now(ZoneInfo('America/Denver'))
+        weekdays=min(local.weekday(),5)
+        if local.weekday()==4 and local.hour>=19:weekdays=5
+        checked['week']['hours']['Christofer Manzanera']=8*weekdays
+        return checked, {"source":"homebase", "fetchedAt":raw["fetchedAt"], "status":"ok", "fixedHoursRule":"Christofer: prior weekdays 8 each; Friday credited after 7pm Mountain"}
     except Exception:
         return None, {"status":"unavailable", "reason":"Hours snapshot validation failed"}
 
