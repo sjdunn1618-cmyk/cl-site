@@ -316,7 +316,7 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
     <div class="sec">
       <div class="sec-head">
         <div><h2>True Save %</h2><div class="range" id="save-range">Range loads with the data</div></div>
-        <div class="seg" role="group" aria-label="Save range"><button data-k="current" class="active">Week</button><button data-k="month">Month</button><button data-k="ytd">YTD</button></div>
+        <div class="seg" role="group" aria-label="Save range"><button data-k="current" aria-pressed="true">Week</button><button data-k="month" aria-pressed="false">Month</button><button data-k="ytd" aria-pressed="false">YTD</button></div>
       </div>
       <div id="save-body"><div class="empty">Save rankings appear here once the first sync runs.</div></div>
     </div>
@@ -326,6 +326,7 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
         <div><h2>Renewal Rankings</h2><div class="range" id="ren-range">Signed renewals only</div></div>
         <div class="seg" role="group" aria-label="Renewal range">
           <button id="rn-cur" data-k="current" aria-pressed="true">Week</button>
+          <button data-k="month" aria-pressed="false">Month</button>
           <button id="rn-ytd" data-k="ytd" aria-pressed="false">YTD</button>
         </div>
       </div>
