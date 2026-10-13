@@ -27,7 +27,7 @@ def tiers(names,revenue,hours,saves,cancels,*,tie_policy=None,zero_hours_policy=
             if key!=prior:place=i+1
             prior=key
             rows.append(dict(name=n,place=place,rph=rv[n],savePct=pct[n],revPts=rp[n],savePts=sp[n],total=rp[n]+sp[n],tier=None,reward=None))
-        return dict(status='partial',rows=rows,missing=missing,zeroHours=zeros,reason='Partial rankings: tier bands and rewards wait for all 11 reps with valid rev/hr.')
+        return dict(status='partial',rows=rows,missing=missing,zeroHours=zeros,reason='Partial rankings: tier bands and rewards wait for all roster reps with valid rev/hr.')
     if missing and not day:return {'status':'unavailable','missing':missing,'rows':[]}
     if day and any(revenue.get(n,0) or saves.get(n,0) or cancels.get(n,0) for n in missing):
         return {'status':'unavailable','reason':'Activity without matching hours','missing':missing,'rows':[]}
