@@ -34,6 +34,7 @@ AGENTS = {
     "Jonah": "Jonah Layton", "Joe": "Joseph Black", "Luke": "Luke Thayn",
     "Marcus": "Marcus Neubert", "Mitch": "Mitch McGuire", "Spencer": "Spencer Bishop",
     "Teagan": "Teagan McCune", "Wyatt": "Wyatt Brownell",
+    "Christofer": "Christofer Manzanera",
 }
 SALT = "cl-site"
 
