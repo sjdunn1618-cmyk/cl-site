@@ -484,11 +484,13 @@ function renderRen(d = state.ren, prefix = "ren", rangeKey = state.renK){
   const range = rangeKey === "ytd" ? d.ytdRange : rangeKey === "month" ? d.monthRange : d.range;
   $("#"+prefix+"-range").textContent = range ? range + " · signed renewals only" : "Signed renewals only";
   const rows = d[rangeKey] || [], tot = d[rangeKey+"Total"];
+  const showHours = prefix === "ren" && rangeKey === "current";
+  const weekHours = name => Number.isFinite(d.weekHours?.[name]) ? d.weekHours[name].toFixed(2) : "Unavailable";
   if (!rows.length){ $("#"+prefix+"-body").innerHTML = `<div class="empty">No rows in this table yet.</div>`; return; }
   $("#"+prefix+"-body").innerHTML = `<div class="board"><table>
-    <thead><tr><th>#</th><th class="l">Agent</th><th>Signed Revenue</th><th>Renewals</th><th class="hide-sm">ACV</th><th class="hide-sm">Unsigned</th><th>Signed %</th></tr></thead>
-    <tbody>${rows.map(r => `<tr class="${medal(r.rank)}"><td class="rk">${fmtInt(r.rank)}</td><td class="nm l">${esc(r.name)}</td><td class="big">${fmtMoney(r.total)}</td><td>${fmtInt(r.count)}</td><td class="hide-sm">${fmtMoney(r.acv)}</td><td class="hide-sm">${fmtInt(r.unsigned)}</td><td>${fmtPct(r.signedPct)}</td></tr>`).join("")}
-    ${tot ? `<tr class="total"><td></td><td class="nm l">Team</td><td>${fmtMoney(tot.total)}</td><td>${fmtInt(tot.count)}</td><td class="hide-sm">${fmtMoney(tot.acv)}</td><td class="hide-sm">${fmtInt(tot.unsigned)}</td><td>${fmtPct(tot.signedPct)}</td></tr>` : ""}
+    <thead><tr><th>#</th><th class="l">Agent</th><th>Signed Revenue</th>${showHours ? "<th>Week Hours</th>" : ""}<th>Renewals</th><th class="hide-sm">ACV</th><th class="hide-sm">Unsigned</th><th>Signed %</th></tr></thead>
+    <tbody>${rows.map(r => `<tr class="${medal(r.rank)}"><td class="rk">${fmtInt(r.rank)}</td><td class="nm l">${esc(r.name)}</td><td class="big">${fmtMoney(r.total)}</td>${showHours ? `<td>${weekHours(r.name)}</td>` : ""}<td>${fmtInt(r.count)}</td><td class="hide-sm">${fmtMoney(r.acv)}</td><td class="hide-sm">${fmtInt(r.unsigned)}</td><td>${fmtPct(r.signedPct)}</td></tr>`).join("")}
+    ${tot ? `<tr class="total"><td></td><td class="nm l">Team</td><td>${fmtMoney(tot.total)}</td>${showHours ? "<td></td>" : ""}<td>${fmtInt(tot.count)}</td><td class="hide-sm">${fmtMoney(tot.acv)}</td><td class="hide-sm">${fmtInt(tot.unsigned)}</td><td>${fmtPct(tot.signedPct)}</td></tr>` : ""}
     </tbody></table></div>`;
 }
 
