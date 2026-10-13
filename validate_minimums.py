@@ -8,7 +8,7 @@ def validate(obj,site):
   if d.tzinfo is None:raise ValueError('Timezone missing')
  if obj['sourceFieldroutesAt']!=site['board']['metricsMeta']['fieldroutesAt']:raise ValueError('FR snapshot mismatch')
  ids={a['id'] for a in site['agents']}
- optional={a['id'] for a in site['agents'] if a.get('lock') is None and a.get('mlock') is None}
+ optional={a['id'] for a in site['agents'] if a['id']=='christofer' and a.get('lock') is None}
  if not set(obj['agents'])<=ids or not ids-set(obj['agents'])<=optional:raise ValueError('Roster mismatch')
  for a in obj['agents'].values():
   if set(a)-{'lock','mlock'} or 'lock' not in a:raise ValueError('Plaintext/unknown field')
