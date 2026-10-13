@@ -6,9 +6,11 @@ def validate(before,after):
  def sheet(d):return {k:({s:v for s,v in val.items() if s not in OWNED} if k=='board' else val) for k,val in d.items() if k!='meta'}
  if {k:v for k,v in before.get('meta',{}).items() if k not in ('syncedAt','source')}!={k:v for k,v in after.get('meta',{}).items() if k not in ('syncedAt','source')}:raise RuntimeError('Other top-level meta changed')
  if sheet(before)!=sheet(after):raise RuntimeError('Sheet-owned fields changed')
+ for b in (after['board']['tiers'],after['board']['day']['tiers']):
+  if b.get('status')=='partial' and any(r.get('tier') is not None or r.get('reward') is not None or r.get('rph') is None for r in b['rows']):raise RuntimeError('Invalid partial ranking')
  if after.get('meta',{}).get('source')!='fieldroutes':raise RuntimeError('Invalid source')
  for b in (after['board']['tiers'],after['board']['day']['tiers']):
-  if b['status'] not in ('ok','unavailable','tie-review') or any('hours' in r for r in b['rows']):raise RuntimeError('Private hours/tier validation failed')
+  if b['status'] not in ('ok','partial','unavailable','tie-review') or any('hours' in r for r in b['rows']):raise RuntimeError('Private hours/tier validation failed')
 def next_time(data):
  value=os.environ.get('NEXT_UPDATE_AT','').strip();meta=data['board']['metricsMeta']
  if value:
