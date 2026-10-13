@@ -434,6 +434,15 @@ function renderTiers(d = state.tiers, prefix = "tier"){
   const hoursAt = state.metricsMeta?.hours?.fetchedAt;
   const oldHours = hoursAt && Date.now() - new Date(hoursAt).getTime() > 90*60*1000;
   if (oldHours){ $("#"+prefix+"-body").innerHTML = `<div class="empty">Homebase hours are stale. Waiting for a fresh snapshot.</div>`; return; }
+  if (d.status === "partial"){
+    const missing = d.missing || [], zeros = d.zeroHours || [];
+    $("#"+prefix+"-body").innerHTML = `<div class="empty">Partial weekly rankings. Tier bands and rewards are unavailable until all 11 reps have valid rev/hr.</div><div class="board tiers"><table>
+      <thead><tr><th>#</th><th class="l">Agent</th><th>Rev / Hr</th><th>Save %</th><th>Total</th></tr></thead>
+      <tbody>${rows.map(r => `<tr><td class="rk">${fmtInt(r.place)}</td><td class="nm l">${esc(r.name)}<small>Partial ranking</small></td><td>${fmtRph(r.rph)}<span class="pts">${fmtInt(r.revPts)} pts</span></td><td>${fmtPct(r.savePct)}<span class="pts">${fmtInt(r.savePts)} pts</span></td><td class="big">${fmtInt(r.total)}</td></tr>`).join("")}
+      ${zeros.map(n=>`<tr><td>-</td><td class="nm l">${esc(n)}<small>Homebase: 0 hours. No rev/hr or tier.</small></td><td colspan="3">Unavailable</td></tr>`).join("")}
+      ${missing.map(n=>`<tr><td>-</td><td class="nm l">${esc(n)}<small>Hours unavailable. Not ranked.</small></td><td colspan="3">Unavailable</td></tr>`).join("")}
+      </tbody></table></div>`; return;
+  }
   if (d.status && d.status !== "ok"){
     $("#"+prefix+"-body").innerHTML = `<div class="empty">${d.status === "tie-review" ? "Tier placement needs review: points and rev/hr are tied at a reward boundary." : "Waiting for complete, current Homebase hours. Tiers are unavailable."}</div>`; return;
   }
@@ -673,9 +682,9 @@ function openRep(a){
   let attHtml = "", attSub = "";
   if (pts != null){
     const cur = [...lv].reverse().find(l => pts >= l.at), next = lv.find(l => pts < l.at);
-    const cls = !cur ? "" : cur === lv[0] ? "warn" : "bad";
+    const cls = pts >= 11 ? "bad" : pts >= 7 ? "warn" : "";
     attHtml = `<span class="att ${cls}">${fmtInt(pts)}<small>Attendance ${pts === 1 ? "pt" : "pts"}</small></span>`;
-    attSub = `<b>${esc(cur ? cur.name.trim() : "Good standing")}</b>${next ? ` · ${fmtInt(next.at - pts)} ${next.at - pts === 1 ? "pt" : "pts"} until ${esc(next.name.trim())}` : ""}`;
+    attSub = `${fmtInt(Math.max(0, 14 - pts))} ${14 - pts === 1 ? "pt" : "pts"} from 14`;
   } else if (state.payload[a.id]) {
     attHtml = `<span class="att none">–<small>Attendance pts</small></span>`;
   }
@@ -684,7 +693,7 @@ function openRep(a){
   const tr = state.tiers?.rows || [], ti = tr.findIndex(x => x.name.toLowerCase() === a.name.toLowerCase()), t = tr[ti];
   const ORDER = ["Leader","Tier 1","Tier 2","Tier 3"];
   let push = "";
-  if (t){
+  if (t && state.tiers?.status !== "partial"){
     const myT = ORDER.indexOf(t.tier), cls = TIER_CLASS[t.tier] || "t3";
     if (ti === 0){
       const lead = tr[1] ? (t.total ?? 0) - (tr[1].total ?? 0) : null;
@@ -698,7 +707,9 @@ function openRep(a){
       }
     }
   }
-  const tierBlock = t ? `${push}<div class="tiles">
+  const partial = state.tiers?.status === "partial";
+  const hoursMissing = state.tiers?.missing?.includes(a.name), zeroHours = state.tiers?.zeroHours?.includes(a.name);
+  const tierBlock = partial ? (t ? `<div class="soon"><b>Partial weekly ranking.</b> Tier bands and rewards are unavailable.</div><div class="tiles">${tile("Partial rank",fmtInt(t.place),"Among reps with valid rev/hr")}${tile("Total Points",fmtInt(t.total),"Partial ranking")}${tile("Rev / Hr Points",fmtInt(t.revPts),fmtRph(t.rph)+" per hour")}${tile("Save % Points",fmtInt(t.savePts),fmtPct(t.savePct)+" saved")}</div>` : `<div class="soon"><b>${zeroHours ? "Homebase: 0 hours. No rev/hr or tier." : hoursMissing ? "Hours unavailable. Not ranked." : "Not ranked."}</b> Partial weekly rankings; no tier or reward assigned.</div>`) : t ? `${push}<div class="tiles">
       ${tile("Tier", esc(t.tier), `+${fmtInt(t.reward)} reward pts if the week ended now`, t.place)}
       ${tile("Total Points", fmtInt(t.total), gapLine(tr, ti))}
       ${tile("Rev / Hr Points", `${fmtInt(t.revPts)}<small> / 60</small>`, `${fmtRph(t.rph)} per hour · +3 for each rep you pass`)}
