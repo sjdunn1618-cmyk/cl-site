@@ -683,7 +683,7 @@ function openRep(a){
   if (pts != null){
     const cur = [...lv].reverse().find(l => pts >= l.at), next = lv.find(l => pts < l.at);
     const cls = pts >= 11 ? "bad" : pts >= 7 ? "warn" : "";
-    attHtml = `<span class="att ${cls}">${fmtInt(pts)}<small>Attendance ${pts === 1 ? "pt" : "pts"}</small></span>`;
+    attHtml = `<span class="att ${cls}">${new Intl.NumberFormat("en-US",{maximumFractionDigits:2}).format(pts)}<small>Attendance ${pts === 1 ? "pt" : "pts"}</small></span>`;
     attSub = `${fmtInt(Math.max(0, 14 - pts))} ${14 - pts === 1 ? "pt" : "pts"} from 14`;
   } else if (state.payload[a.id]) {
     attHtml = `<span class="att none">–<small>Attendance pts</small></span>`;
