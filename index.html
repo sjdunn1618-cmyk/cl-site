@@ -316,6 +316,7 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
     <div class="sec">
       <div class="sec-head">
         <div><h2>True Save %</h2><div class="range" id="save-range">Range loads with the data</div></div>
+        <div class="seg" role="group" aria-label="Save range"><button data-k="current" class="active">Week</button><button data-k="month">Month</button><button data-k="ytd">YTD</button></div>
       </div>
       <div id="save-body"><div class="empty">Save rankings appear here once the first sync runs.</div></div>
     </div>
@@ -324,7 +325,7 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
       <div class="sec-head">
         <div><h2>Renewal Rankings</h2><div class="range" id="ren-range">Signed renewals only</div></div>
         <div class="seg" role="group" aria-label="Renewal range">
-          <button id="rn-cur" data-k="current" aria-pressed="true">Current Range</button>
+          <button id="rn-cur" data-k="current" aria-pressed="true">Week</button>
           <button id="rn-ytd" data-k="ytd" aria-pressed="false">YTD</button>
         </div>
       </div>
@@ -394,7 +395,7 @@ const initials = n => n.split(/\s+/).map(w => w[0]).slice(0,2).join("").toUpperC
 const medal = r => r === 1 ? "m1" : r === 2 ? "m2" : r === 3 ? "m3" : "";
 const TIER_CLASS = {"Leader":"lead","Tier 1":"t1","Tier 2":"t2","Tier 3":"t3"};
 
-const state = { view:"day", saveK:"overall", renK:"current", day:null, saves:null, ren:null, tiers:null, attendance:null, highlights:null, points:null, banner:null, meta:null, access:null, agents:[], hasManager:false, payload:{}, keys:{}, mgrKey:null, current:null, logUrl:"", saved:{}, loggedSaved:{} };
+const state = { view:"day", saveK:"current", renK:"current", day:null, saves:null, ren:null, tiers:null, attendance:null, highlights:null, points:null, banner:null, meta:null, access:null, agents:[], hasManager:false, payload:{}, keys:{}, mgrKey:null, current:null, logUrl:"", saved:{}, loggedSaved:{} };
 
 /* ---------- views ---------- */
 const VIEWS = ["day","board","tiers","agents"];
@@ -416,6 +417,7 @@ function segment(groupSel, key, cb){
   });
 }
 segment('[aria-label="Renewal range"]', "renK", () => renderRen());
+segment('[aria-label="Save range"]', "saveK", () => renderSaves());
 
 /* ---------- banner ---------- */
 
@@ -465,6 +467,7 @@ function renderTiers(d = state.tiers, prefix = "tier"){
 /* ---------- saves ---------- */
 function renderSaves(d = state.saves, prefix = "save"){
   if (!d) return;
+  if (prefix === "save" && state.saveK !== "current") d=d[state.saveK] || {range:"Waiting for this range"};
   $("#"+prefix+"-range").textContent = d.range || "";
   const short = n => String(n).split(" ")[0];
   const list = (title, rows, tot) => `<div class="slist"><h4>${title}${tot ? `<span>Team ${fmtInt(tot.saves)} / ${fmtInt(tot.cancels)}<small class="team-volume">${fmtPct(tot.pct)}</small></span>` : ""}</h4>${
@@ -477,8 +480,8 @@ function renderSaves(d = state.saves, prefix = "save"){
 /* ---------- renewals ---------- */
 function renderRen(d = state.ren, prefix = "ren", rangeKey = state.renK){
   if (!d) return;
-  const ytd = rangeKey === "ytd";
-  $("#"+prefix+"-range").textContent = ytd ? "Year to date · signed renewals only" : (d.range ? d.range + " · signed renewals only" : "Signed renewals only");
+  const range = rangeKey === "ytd" ? d.ytdRange : rangeKey === "month" ? d.monthRange : d.range;
+  $("#"+prefix+"-range").textContent = range ? range + " · signed renewals only" : "Signed renewals only";
   const rows = d[rangeKey] || [], tot = d[rangeKey+"Total"];
   if (!rows.length){ $("#"+prefix+"-body").innerHTML = `<div class="empty">No rows in this table yet.</div>`; return; }
   $("#"+prefix+"-body").innerHTML = `<div class="board"><table>
