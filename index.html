@@ -436,7 +436,7 @@ function renderTiers(d = state.tiers, prefix = "tier"){
   if (oldHours){ $("#"+prefix+"-body").innerHTML = `<div class="empty">Homebase hours are stale. Waiting for a fresh snapshot.</div>`; return; }
   if (d.status === "partial"){
     const missing = d.missing || [], zeros = d.zeroHours || [];
-    $("#"+prefix+"-body").innerHTML = `<div class="empty">Partial weekly rankings. Tier bands and rewards are unavailable until all 11 reps have valid rev/hr.</div><div class="board tiers"><table>
+    $("#"+prefix+"-body").innerHTML = `<div class="empty">Partial weekly rankings. Tier bands and rewards are unavailable until all roster reps have valid rev/hr.</div><div class="board tiers"><table>
       <thead><tr><th>#</th><th class="l">Agent</th><th>Rev / Hr</th><th>Save %</th><th>Total</th></tr></thead>
       <tbody>${rows.map(r => `<tr><td class="rk">${fmtInt(r.place)}</td><td class="nm l">${esc(r.name)}<small>Partial ranking</small></td><td>${fmtRph(r.rph)}<span class="pts">${fmtInt(r.revPts)} pts</span></td><td>${fmtPct(r.savePct)}<span class="pts">${fmtInt(r.savePts)} pts</span></td><td class="big">${fmtInt(r.total)}</td></tr>`).join("")}
       ${zeros.map(n=>`<tr><td>-</td><td class="nm l">${esc(n)}<small>Homebase: 0 hours. No rev/hr or tier.</small></td><td colspan="3">Unavailable</td></tr>`).join("")}
@@ -714,7 +714,7 @@ function openRep(a){
       ${tile("Total Points", fmtInt(t.total), gapLine(tr, ti))}
       ${tile("Rev / Hr Points", `${fmtInt(t.revPts)}<small> / 60</small>`, `${fmtRph(t.rph)} per hour · +3 for each rep you pass`)}
       ${tile("Save % Points", `${fmtInt(t.savePts)}<small> / 40</small>`, `${fmtPct(t.savePct)} saved · +2 for each rep you pass`)}
-    </div>` : `<div class="soon"><b>Not in this week's tiers.</b> Tiers include the 11 reps on the team roster.</div>`;
+    </div>` : `<div class="soon"><b>Not in this week's tiers.</b> Tiers include the reps on the team roster.</div>`;
 
   /* weekly minimums (live week) + history (finished weeks from the History tab) */
   const m = a.metrics;
