@@ -422,6 +422,7 @@ segment('[aria-label="Renewal range"]', "renK", () => renderRen());
 
 /* ---------- tier rankings ---------- */
 function gapLine(rows, i){
+  if (rows[i].hoursUnavailable) return "Hours unavailable. Not ranked.";
   if (rows[i].notWorking) return "Not working today";
   if (i === 0) return "Leading the team";
   const a = rows[i-1], gap = (a.total ?? 0) - (rows[i].total ?? 0);
@@ -449,7 +450,7 @@ function renderTiers(d = state.tiers, prefix = "tier"){
   if (!rows.length){ $("#"+prefix+"-body").innerHTML = `<div class="empty">No tier data yet.</div>`; return; }
   $("#"+prefix+"-body").innerHTML = `<div class="board tiers"><table>
     <thead><tr><th>#</th><th class="l">Agent</th><th class="l hide-sm">Tier</th><th>Rev / Hr</th><th>Save %</th><th>Total</th><th class="hide-sm">Reward</th></tr></thead>
-    <tbody>${rows.map((r,i) => { const c = TIER_CLASS[r.tier] || "t3", brk = i > 0 && rows[i-1].tier !== r.tier ? " brk" : "";
+    <tbody>${rows.map((r,i) => { if(r.hoursUnavailable) return `<tr><td>-</td><td class="nm l">${esc(r.name)}<small>Hours unavailable. Not ranked.</small></td><td colspan="5">Unavailable</td></tr>`; const c = TIER_CLASS[r.tier] || "t3", brk = i > 0 && rows[i-1].tier !== r.tier ? " brk" : "";
       return `<tr class="${c}${brk}">
         <td class="rk">${fmtInt(r.place)}</td>
         <td class="nm l">${esc(r.name)}<small>${gapLine(rows,i)}</small></td>
@@ -693,7 +694,7 @@ function openRep(a){
   const tr = state.tiers?.rows || [], ti = tr.findIndex(x => x.name.toLowerCase() === a.name.toLowerCase()), t = tr[ti];
   const ORDER = ["Leader","Tier 1","Tier 2","Tier 3"];
   let push = "";
-  if (t && state.tiers?.status !== "partial"){
+  if (t && !t.hoursUnavailable && state.tiers?.status !== "partial"){
     const myT = ORDER.indexOf(t.tier), cls = TIER_CLASS[t.tier] || "t3";
     if (ti === 0){
       const lead = tr[1] ? (t.total ?? 0) - (tr[1].total ?? 0) : null;
@@ -709,7 +710,7 @@ function openRep(a){
   }
   const partial = state.tiers?.status === "partial";
   const hoursMissing = state.tiers?.missing?.includes(a.name), zeroHours = state.tiers?.zeroHours?.includes(a.name);
-  const tierBlock = partial ? (t ? `<div class="soon"><b>Partial weekly ranking.</b> Tier bands and rewards are unavailable.</div><div class="tiles">${tile("Partial rank",fmtInt(t.place),"Among reps with valid rev/hr")}${tile("Total Points",fmtInt(t.total),"Partial ranking")}${tile("Rev / Hr Points",fmtInt(t.revPts),fmtRph(t.rph)+" per hour")}${tile("Save % Points",fmtInt(t.savePts),fmtPct(t.savePct)+" saved")}</div>` : `<div class="soon"><b>${zeroHours ? "Homebase: 0 hours. No rev/hr or tier." : hoursMissing ? "Hours unavailable. Not ranked." : "Not ranked."}</b> Partial weekly rankings; no tier or reward assigned.</div>`) : t ? `${push}<div class="tiles">
+  const tierBlock = partial ? (t ? `<div class="soon"><b>Partial weekly ranking.</b> Tier bands and rewards are unavailable.</div><div class="tiles">${tile("Partial rank",fmtInt(t.place),"Among reps with valid rev/hr")}${tile("Total Points",fmtInt(t.total),"Partial ranking")}${tile("Rev / Hr Points",fmtInt(t.revPts),fmtRph(t.rph)+" per hour")}${tile("Save % Points",fmtInt(t.savePts),fmtPct(t.savePct)+" saved")}</div>` : `<div class="soon"><b>${zeroHours ? "Homebase: 0 hours. No rev/hr or tier." : hoursMissing ? "Hours unavailable. Not ranked." : "Not ranked."}</b> Partial weekly rankings; no tier or reward assigned.</div>`) : t?.hoursUnavailable ? `<div class="soon"><b>Hours unavailable.</b> No rev/hr or tier assigned.</div>` : t ? `${push}<div class="tiles">
       ${tile("Tier", esc(t.tier), `+${fmtInt(t.reward)} reward pts if the week ended now`, t.place)}
       ${tile("Total Points", fmtInt(t.total), gapLine(tr, ti))}
       ${tile("Rev / Hr Points", `${fmtInt(t.revPts)}<small> / 60</small>`, `${fmtRph(t.rph)} per hour · +3 for each rep you pass`)}
