@@ -14,6 +14,20 @@ def tiers(names,revenue,hours,saves,cancels,*,tie_policy=None,zero_hours_policy=
     if tie_policy!='revhr-only' or zero_hours_policy!='zero-bottom':
         raise ValueError('Unconfirmed scoring policy: tiers held')
     missing=[n for n in names if n not in hours]
+    if not day and (missing or any(hours[n]==0 for n in names if n in hours)):
+        eligible=[n for n in names if n in hours and hours[n]>0]
+        zeros=[n for n in names if n in hours and hours[n]==0]
+        rv={n:revenue.get(n,0)/hours[n] for n in eligible}
+        pct={n:(100*saves.get(n,0)/(saves.get(n,0)+cancels.get(n,0)) if saves.get(n,0)+cancels.get(n,0) else 0) for n in eligible}
+        rp=metric_points(rv,60,3);sp=metric_points(pct,40,2)
+        order=sorted(eligible,key=lambda n:(-(rp[n]+sp[n]),-rv[n],n.casefold()))
+        rows=[];prior=None;place=0
+        for i,n in enumerate(order):
+            key=(rp[n]+sp[n],rv[n])
+            if key!=prior:place=i+1
+            prior=key
+            rows.append(dict(name=n,place=place,rph=rv[n],savePct=pct[n],revPts=rp[n],savePts=sp[n],total=rp[n]+sp[n],tier=None,reward=None))
+        return dict(status='partial',rows=rows,missing=missing,zeroHours=zeros,reason='Partial rankings: tier bands and rewards wait for all 11 reps with valid rev/hr.')
     if missing and not day:return {'status':'unavailable','missing':missing,'rows':[]}
     if day and any(revenue.get(n,0) or saves.get(n,0) or cancels.get(n,0) for n in missing):
         return {'status':'unavailable','reason':'Activity without matching hours','missing':missing,'rows':[]}
