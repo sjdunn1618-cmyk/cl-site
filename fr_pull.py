@@ -264,6 +264,9 @@ def main():
                  "syncedAt": synced_at}
     from tier_scoring import tiers
     hours, hours_meta = load_hours(roster)
+    # Approved public weekly totals only. No raw CSV, daily hours or payroll fields.
+    bd['renewals']['weekHours']={r:hours['week']['hours'].get(r) if hours else None for r in roster}
+    bd['renewals']['weekHoursRange']=label(*cur)
     def score(period, revenue, notes):
         if hours is None:return {"status":"unavailable", "rows":[], "reason":hours_meta["reason"]}
         save=agg_saves(notes,roster)
