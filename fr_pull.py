@@ -244,6 +244,9 @@ def main():
     sv = saves_board(notes, roster)
     bd = data["board"]
     bd["saves"] = dict(range=label(*cur), **sv)
+    month=[today[:7]+'-01',today]
+    bd['saves']['month']=dict(range=label(*month),**saves_board([n for n in all_notes if month[0]<=n['d']<=month[1]],roster))
+    bd['saves']['ytd']=dict(range=label(*ytd),**saves_board([n for n in all_notes if ytd[0]<=n['d']<=ytd[1]],roster))
     rc, ry = agg_renewals(subs, roster, *cur), agg_renewals(subs, roster, *ytd)
     def tot(c): return {"total": sum(v["ic"] + v["ooc"] + v["nc"] + v["oth"] for v in c.values()), "n": sum(v["n"] for v in c.values()), "un": sum(v["un"] for v in c.values())}
     def tv(c):
@@ -251,6 +254,8 @@ def main():
                             "unsigned": float(t["un"]), "signedPct": round(100 * t["n"] / (t["n"] + t["un"]), 2) if t["n"] + t["un"] else 0.0}
     bd["renewals"] = {"range": label(*cur), "current": renewals_list(rc), "currentTotal": tv(rc),
                       "ytd": renewals_list(ry), "ytdTotal": tv(ry)}
+    rm=agg_renewals(subs,roster,*month)
+    bd['renewals'].update(month=renewals_list(rm),monthTotal=tv(rm),monthRange=label(*month),ytdRange=label(*ytd))
     synced_at = dt.datetime.now(dt.timezone.utc).isoformat()
     daily_renewals = agg_renewals(subs, roster, today, today)
     bd["day"] = {"date": today, "range": label(today, today),
