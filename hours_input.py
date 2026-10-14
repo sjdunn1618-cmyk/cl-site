@@ -42,7 +42,8 @@ def validate(payload, roster, now=None):
         for name,value in item['hours'].items():
             if isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value) or value<0 or value>168: raise ValueError('Invalid hours')
             valid[name]=float(value)
-        if not valid: raise ValueError('No roster hours')
+        if not valid and not (period == 'day' and (now.astimezone(ZoneInfo('America/Denver')).hour, now.astimezone(ZoneInfo('America/Denver')).minute) < (9,30)):
+            raise ValueError('No roster hours')
         out[period]={'hours':valid,'missing':[n for n in roster if n not in valid], 'start':item['start'],'end':item['end']}
     return out
 
