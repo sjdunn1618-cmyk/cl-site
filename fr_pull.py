@@ -147,6 +147,11 @@ def fetch_office(n, a, b, roster=None):
     return {"notes": notes, "subs": subs}
 
 # ---------------- aggregation (pure, testable) ----------------
+PENDING_CXL_REASON = "Pending Cxl List"  # Verified global FieldRoutes reason 16003.
+PENDING_CXL_EXCLUSION_FROM = "2026-10-12"
+def excluded_cancel(note):
+    return note.get("r") in EXCLUDE_CANCEL or (note.get("r") == PENDING_CXL_REASON and note.get("d", "") >= PENDING_CXL_EXCLUSION_FROM)
+
 def agg_saves(notes, roster):
     c = {r: dict(s=0, c=0, si=0, ci=0, so=0, co=0) for r in roster}
     for x in notes:
@@ -155,7 +160,7 @@ def agg_saves(notes, roster):
         if x["t"] in IC_SAVE | OOC_SAVE:
             c[r]["s"] += 1
             c[r]["si" if x["t"] in IC_SAVE else "so"] += 1
-        elif x["t"] == 16 and x["r"] not in EXCLUDE_CANCEL:
+        elif x["t"] == 16 and not excluded_cancel(x):
             c[r]["c"] += 1
             if x["r"] == IC_CANCEL: c[r]["ci"] += 1
             if x["r"] == OOC_CANCEL: c[r]["co"] += 1
@@ -247,6 +252,10 @@ def main():
     subs = [x for o in offices for x in o["subs"]]
     # saves/cancels are fetched for the full span; range them by office pull (live pulls use cur range)
     sv = saves_board(notes, roster)
+    # Public aggregates only: before/after counts on this same fresh source.
+    affected = [x for x in notes if x["t"] == 16 and x.get("r") == PENDING_CXL_REASON and x["d"] >= PENDING_CXL_EXCLUSION_FROM and roster_name(x["e"], roster)]
+    counts = {r:sum(roster_name(x["e"], roster)==r for x in affected) for r in roster}
+    print("Pending Cxl List WTD exclusion " + json.dumps({"effectiveFrom":PENDING_CXL_EXCLUSION_FROM,"excluded":counts,"team":len(affected),"afterSaveTotals":{k:sv[k] for k in ("overallTotal","inContractTotal","outContractTotal")}}, separators=(",",":")))
     bd = data["board"]
     bd["saves"] = dict(range=label(*cur), **sv)
     month=[today[:7]+'-01',today]
