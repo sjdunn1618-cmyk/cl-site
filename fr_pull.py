@@ -35,6 +35,10 @@ def ranges(today=None):
     cur = CFG.get("current") or [mon.isoformat(), fri.isoformat()]
     ytd = CFG.get("ytd") or [dt.date(t.year, 1, 1).isoformat(), t.isoformat()]
     return cur, ytd
+def day_display_date(now=None):
+    local = (now or dt.datetime.now(ZoneInfo("America/Denver"))).astimezone(ZoneInfo("America/Denver"))
+    return (local.date() - dt.timedelta(days=1) if (local.hour, local.minute) < (9, 30) else local.date()).isoformat()
+
 def label(a, b):
     f = lambda s: dt.date.fromisoformat(s).strftime("%B %-d, %Y")
     return f"{f(a)} - {f(b)}"
@@ -226,7 +230,8 @@ def main():
              [r["name"] for r in data["board"]["saves"]["overall"]]
     cur, ytd = ranges()
     today = dt.datetime.now(ZoneInfo("America/Denver")).date().isoformat()
-    a0 = min(cur[0], ytd[0], today); b0 = max(cur[1], ytd[1], today)
+    day_date = day_display_date()
+    a0 = min(cur[0], ytd[0], day_date); b0 = max(cur[1], ytd[1], today)
     if "--fixture" in sys.argv:
         d = sys.argv[sys.argv.index("--fixture") + 1]
         offices = [json.load(open(f"{d}/h{n}.json")) for n in HOSTS]
@@ -257,10 +262,10 @@ def main():
     rm=agg_renewals(subs,roster,*month)
     bd['renewals'].update(month=renewals_list(rm),monthTotal=tv(rm),monthRange=label(*month),ytdRange=label(*ytd))
     synced_at = dt.datetime.now(dt.timezone.utc).isoformat()
-    daily_renewals = agg_renewals(subs, roster, today, today)
-    bd["day"] = {"date": today, "range": label(today, today),
-                 "saves": dict(range=label(today, today), **saves_board([x for x in all_notes if x["d"] == today], roster)),
-                 "renewals": {"range": label(today, today), "current": renewals_list(daily_renewals), "currentTotal": tv(daily_renewals)},
+    daily_renewals = agg_renewals(subs, roster, day_date, day_date)
+    bd["day"] = {"date": day_date, "range": label(day_date, day_date),
+                 "saves": dict(range=label(day_date, day_date), **saves_board([x for x in all_notes if x["d"] == day_date], roster)),
+                 "renewals": {"range": label(day_date, day_date), "current": renewals_list(daily_renewals), "currentTotal": tv(daily_renewals)},
                  "syncedAt": synced_at}
     from tier_scoring import tiers
     hours, hours_meta = load_hours(roster)
@@ -274,8 +279,8 @@ def main():
         return tiers(roster,values,hours[period]["hours"],{r:v["s"] for r,v in save.items()},
                      {r:v["c"] for r,v in save.items()},tie_policy="revhr-only",zero_hours_policy="zero-bottom",day=period=="day")
     bd["tiers"] = dict(range=label(*cur), provisional=True, **score("week",rc,notes))
-    bd["day"]["tiers"] = dict(range=label(today,today), provisional=True,
-        **score("day",daily_renewals,[x for x in all_notes if x["d"]==today]))
+    bd["day"]["tiers"] = dict(range=label(day_date,day_date), provisional=True,
+        **score("day",daily_renewals,[x for x in all_notes if x["d"]==day_date]))
     bd["metricsMeta"] = {"fieldroutesAt":synced_at,"hours":hours_meta}
     data.setdefault("meta", {})["syncedAt"] = synced_at
     data["meta"]["source"] = "fieldroutes"
