@@ -262,7 +262,7 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
   h3.sub{font-size:19px;margin-top:22px}
   .tiles{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:10px}
   .tiles.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .mins{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+  .mins{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
   .min{padding:9px 8px;border-width:2px}
   .min-k{font-size:9px;letter-spacing:.06em}
   .min-v{font-size:21px}
@@ -733,7 +733,7 @@ function openRep(a){
   if (m && m.weeks && m.weeks.length){
     const lower = n => /lower|aht|handle time/i.test(n||"");
     const hit = (v, tg, n) => v == null || tg == null ? null : (lower(n) ? v <= tg : v >= tg);
-    const cols = m.names.map((n,i) => ({n, i})).filter(c => c.n);
+    const cols = m.names.map((n,i) => ({n, i})).filter(c => c.n && c.n.trim().toLowerCase() !== "utilization");
     const hasT = cols.some(c => m.targets[c.i] != null);
     const wk = m.weeks[0];
     const past = m.weeks.filter(w => w !== wk);
