@@ -497,9 +497,12 @@ function renderRen(d = state.ren, prefix = "ren", rangeKey = state.renK){
 function renderDay(){
   const d = state.day; if (!d) return;
   const today = new Intl.DateTimeFormat("en-CA", {timeZone:"America/Denver", year:"numeric", month:"2-digit", day:"2-digit"}).format(new Date());
+  const localClock = new Intl.DateTimeFormat("en-GB", {timeZone:"America/Denver", hour:"2-digit", minute:"2-digit", hourCycle:"h23"}).format(new Date());
+  const yesterday = new Date(today + "T12:00:00Z"); yesterday.setUTCDate(yesterday.getUTCDate() - 1);
+  const morningYesterday = localClock < "09:30" && d.date === yesterday.toISOString().slice(0,10);
   const stale = d.date !== today;
   $("#day-label").textContent = d.range + " · Mountain time";
-  $("#day-updated").textContent = (stale ? "Previous snapshot. Waiting for today's sync. " : "") +
+  $("#day-updated").textContent = (morningYesterday ? "Yesterday's numbers. Today starts with the 9:30 AM Mountain run. " : stale ? "Previous snapshot. Waiting for today's sync. " : "") +
     (d.syncedAt ? "Updated " + new Date(d.syncedAt).toLocaleString("en-US", {timeZone:"America/Denver", month:"short", day:"numeric", hour:"numeric", minute:"2-digit"}) + " Mountain" : "Waiting for sync");
   renderSaves(d.saves, "day-save");
   renderRen(d.renewals, "day-ren", "current");
