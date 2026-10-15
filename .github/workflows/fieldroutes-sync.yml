@@ -96,11 +96,13 @@ jobs:
           for key, value in before.items():
               if key == "board":
                   for section, original in value.items():
-                      if section not in ("saves", "renewals", "tiers", "day", "metricsMeta"):
+                      if section not in ("saves", "renewals", "tiers", "day", "metricsMeta", "competition"):
                           assert after["board"][section] == original, section
-                  assert set(after["board"]) - set(value) <= {"day", "metricsMeta"}
+                  assert set(after["board"]) - set(value) <= {"day", "metricsMeta", "competition"}
               elif key != "meta":
                   assert after[key] == value, key
+          from guarded_publish import validate_competition
+          validate_competition(before, after)
           assert after["meta"]["source"] == "fieldroutes"
           print("Section preservation validation passed.")
           PYCODE
