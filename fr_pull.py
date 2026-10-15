@@ -290,6 +290,11 @@ def main():
     bd["tiers"] = dict(range=label(*cur), provisional=True, **score("week",rc,notes))
     bd["day"]["tiers"] = dict(range=label(day_date,day_date), provisional=True,
         **score("day",daily_renewals,[x for x in all_notes if x["d"]==day_date]))
+    # Competition preview and actual week share existing weekly save aggregates.
+    # Freeze the final competition snapshot when normal boards roll to a later week.
+    if tuple(cur) in (("2026-10-12", "2026-10-16"), ("2026-10-19", "2026-10-23")):
+        bd["competition"] = {"v":1,"period":{"start":cur[0],"end":cur[1]},
+            "sourceFieldroutesAt":synced_at,"overall":sv["overall"],"outContract":sv["outContract"]}
     bd["metricsMeta"] = {"fieldroutesAt":synced_at,"hours":hours_meta}
     data.setdefault("meta", {})["syncedAt"] = synced_at
     data["meta"]["source"] = "fieldroutes"
