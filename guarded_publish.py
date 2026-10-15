@@ -1,8 +1,18 @@
 """One bounded rebuild on data-only upstream change. Never rebase/replay old data."""
 import datetime as dt,json,os,pathlib,subprocess,sys,tempfile
-OWNED={'saves','renewals','tiers','day','metricsMeta'}
+OWNED={'saves','renewals','tiers','day','metricsMeta','competition'}
 def git(root,*args):return subprocess.check_output(['git','-C',str(root),*args],text=True).strip()
+def validate_competition(before,after):
+ c=after['board'].get('competition');old=before['board'].get('competition')
+ if c==old:return
+ if not isinstance(c,dict) or set(c)!={'v','period','sourceFieldroutesAt','overall','outContract'}:raise RuntimeError('Invalid competition schema')
+ if c['v']!=1 or c['period'] not in ({'start':'2026-10-12','end':'2026-10-16'},{'start':'2026-10-19','end':'2026-10-23'}):raise RuntimeError('Invalid competition period')
+ if c['sourceFieldroutesAt']!=after['board']['metricsMeta']['fieldroutesAt']:raise RuntimeError('Competition source mismatch')
+ for k in ('overall','outContract'):
+  if c[k]!=after['board']['saves'][k]:raise RuntimeError('Competition counts mismatch')
+
 def validate(before,after):
+ validate_competition(before,after)
  def sheet(d):return {k:({s:v for s,v in val.items() if s not in OWNED} if k=='board' else val) for k,val in d.items() if k!='meta'}
  if {k:v for k,v in before.get('meta',{}).items() if k not in ('syncedAt','source')}!={k:v for k,v in after.get('meta',{}).items() if k not in ('syncedAt','source')}:raise RuntimeError('Other top-level meta changed')
  if sheet(before)!=sheet(after):raise RuntimeError('Sheet-owned fields changed')
