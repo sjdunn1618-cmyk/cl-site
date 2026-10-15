@@ -297,6 +297,16 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
  .comp-row{font-size:13px;padding:11px 0;grid-template-columns:20px minmax(0,1fr) auto auto;gap:10px}
 }
 
+/* Fixed team identity, separate from the live winner. Text labels remain visible. */
+.comp-justin{--team-color:#a9d4ed;--team-tint:rgba(169,212,237,.045)}
+.comp-cannon{--team-color:#f4bc95;--team-tint:rgba(244,188,149,.045)}
+.comp-team h3,.comp-team.leading h3,.comp-team .comp-score,.comp-duo .comp-side,.comp-duo .comp-points,.comp-duo.winning .comp-points{color:var(--team-color)}
+.comp-row{border-left:3px solid var(--team-color);padding:10px 8px;background:var(--team-tint);row-gap:5px}
+.comp-row .comp-name,.comp-row .comp-name small,.comp-row .comp-pts{color:var(--team-color)}
+.comp-row .comp-name small{font-size:11px;font-weight:500;margin-top:2px}
+.comp-volume{grid-column:2 / -1;font-size:15px;line-height:1.5;font-weight:500;color:var(--fg)}
+@media(max-width:640px){.comp-row{padding:11px 7px;column-gap:7px}.comp-volume{font-size:15px}}
+
 </style>
 
 
@@ -548,13 +558,13 @@ function renderCompetition(){
   const d=competitionStandings(c),title=side=>side==='justin'?'Team Justin':'Team Cannon';
   $('#comp-range').textContent=preview?'Live preview · October 12-16, 2026':'Competition · October 19-23, 2026';
   $('#comp-description').textContent=preview?'Competition runs October 19-23, Mountain time. This preview uses this week\'s totals; preview points do not carry over.':'Monday-Friday, Mountain time. Win at least 2 of the 3 pod matchups to win the competition.';
-  const summary=['justin','cannon'].map(side=>`<div class="comp-team ${d.wins[side]>d.wins[side==='justin'?'cannon':'justin']?'leading':''}"><h3>${title(side)}</h3><div class="comp-score">${d.wins[side]}<small>of 3 pods ${final?'won':'leading'}</small></div></div>`);
+  const summary=['justin','cannon'].map(side=>`<div class="comp-team comp-${side} ${d.wins[side]>d.wins[side==='justin'?'cannon':'justin']?'leading':''}"><h3>${title(side)}</h3><div class="comp-score">${d.wins[side]}<small>of 3 pods ${final?'won':'leading'}</small></div></div>`);
   const tied=d.wins.tied?` · ${d.wins.tied} tied pod${d.wins.tied===1?'':'s'}`:'';
   const pending=d.wins.pending?` · ${d.wins.pending} waiting for data`:'';
   const outcome=d.leader?`${title(d.leader)} ${final?'wins':'is ahead'} with ${d.wins[d.leader]} of 3 pods.`:'No team has 2 pod wins yet.';
   const short=name=>({'Joseph Black':'Joe','Spencer Bishop':'Bishop','Christofer Manzanera':'Christofer'}[name]||name.split(' ')[0]);
-  const metric=(rows,label)=>`<div class="comp-metric"><h4>${label}</h4>${rows.map(r=>`<div class="comp-row"><span class="comp-place">${r.place||'-'}</span><span class="comp-name">${esc(r.name)}<small>${COMP_PODS.some(p=>p.justin.includes(r.name))?'Justin':'Cannon'} · ${r.attempts?`${fmtInt(r.saves)} saves / ${fmtInt(r.cancels)} cancels`:'No attempts yet'}</small></span><span class="comp-pct">${r.pct==null?'-':r.pct.toFixed(2)+'%'}</span><span class="comp-pts">${pt(r.points)}<small> pts</small></span></div>`).join('')}</div>`;
-  $('#comp-body').innerHTML=`<div class="comp-summary">${summary[0]}<div class="comp-versus">vs</div>${summary[1]}</div><p class="comp-result"><b>${esc(outcome)}</b>${tied}${pending}</p>`+d.pods.map(p=>`<article class="comp-pod"><div class="comp-pod-head"><h3>Pod ${p.index+1}</h3><p class="comp-pod-status">${p.leader==='pending'?'Waiting for attempts in both metrics':p.leader==='tied'?'Tied matchup':title(p.leader)+(final?' wins this pod':' leads this pod')}</p></div><div class="comp-duos">${['justin','cannon'].map(side=>`<div class="comp-duo ${p.leader===side?'winning':''}"><span class="comp-side">${title(side)}</span><strong>${p[side].map(short).map(esc).join(' &amp; ')}</strong><div class="comp-points">${pt(p.points[side])} <small>pts</small></div></div>`).join('')}</div><div class="comp-metrics">${metric(p.overall,'Overall save %')}${metric(p.out,'Out-of-contract save %')}</div></article>`).join('')+`<p class="comp-rule">Points within each four-person pod: Overall 2 / 1 / 0 / 0. Out of contract 3 / 2 / 1 / 0. Add both reps' points to score each duo. Standings use exact percentages from the week's total saves and cancels, not rounded display percentages. Equal percentages split the points for the occupied places; the next place skips those spots. A tied matchup counts for neither team. No attempts means no points until data is available. Competition points are separate from raffle points.</p>`;
+  const metric=(rows,label)=>`<div class="comp-metric"><h4>${label}</h4>${rows.map(r=>`<div class="comp-row comp-${COMP_PODS.some(p=>p.justin.includes(r.name))?'justin':'cannon'}"><span class="comp-place">${r.place||'-'}</span><span class="comp-name">${esc(r.name)}<small>Team ${COMP_PODS.some(p=>p.justin.includes(r.name))?'Justin':'Cannon'}</small></span><span class="comp-pct">${r.pct==null?'-':r.pct.toFixed(2)+'%'}</span><span class="comp-pts">${pt(r.points)}<small> pts</small></span><span class="comp-volume">${r.attempts?`${fmtInt(r.saves)} saves / ${fmtInt(r.cancels)} cancels`:"No attempts yet"}</span></div>`).join('')}</div>`;
+  $('#comp-body').innerHTML=`<div class="comp-summary">${summary[0]}<div class="comp-versus">vs</div>${summary[1]}</div><p class="comp-result"><b>${esc(outcome)}</b>${tied}${pending}</p>`+d.pods.map(p=>`<article class="comp-pod"><div class="comp-pod-head"><h3>Pod ${p.index+1}</h3><p class="comp-pod-status">${p.leader==='pending'?'Waiting for attempts in both metrics':p.leader==='tied'?'Tied matchup':title(p.leader)+(final?' wins this pod':' leads this pod')}</p></div><div class="comp-duos">${['justin','cannon'].map(side=>`<div class="comp-duo comp-${side} ${p.leader===side?'winning':''}"><span class="comp-side">${title(side)}</span><strong>${p[side].map(short).map(esc).join(' &amp; ')}</strong><div class="comp-points">${pt(p.points[side])} <small>pts</small></div></div>`).join('')}</div><div class="comp-metrics">${metric(p.overall,'Overall save %')}${metric(p.out,'Out-of-contract save %')}</div></article>`).join('')+`<p class="comp-rule">Points within each four-person pod: Overall 2 / 1 / 0 / 0. Out of contract 3 / 2 / 1 / 0. Add both reps' points to score each duo. Standings use exact percentages from the week's total saves and cancels, not rounded display percentages. Equal percentages split the points for the occupied places; the next place skips those spots. A tied matchup counts for neither team. No attempts means no points until data is available. Competition points are separate from raffle points.</p>`;
 }
 
 /* ---------- saves ---------- */
