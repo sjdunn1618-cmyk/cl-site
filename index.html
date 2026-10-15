@@ -930,7 +930,7 @@ async function load(){
     const r = await fetch("data.json?t=" + Date.now(), {cache:"no-store"});
     if (!r.ok) throw new Error(r.status);
     const d = await r.json(), b = d.board || {};
-    Object.assign(state, {competition:b.competition, metricsMeta:b.metricsMeta, day:b.day, tiers:b.tiers, saves:b.saves, ren:b.renewals, points:b.points, banner:b.banner,
+    Object.assign(state, {competition:b.competition || ({"October 12, 2026 - October 16, 2026":"2026-10-12","October 19, 2026 - October 23, 2026":"2026-10-19"}[b.saves?.range] ? {period:{start:({"October 12, 2026 - October 16, 2026":"2026-10-12","October 19, 2026 - October 23, 2026":"2026-10-19"})[b.saves.range]},sourceFieldroutesAt:b.metricsMeta?.fieldroutesAt,overall:b.saves.overall,outContract:b.saves.outContract} : null), metricsMeta:b.metricsMeta, day:b.day, tiers:b.tiers, saves:b.saves, ren:b.renewals, points:b.points, banner:b.banner,
       attendance:b.attendance, highlights:b.highlights, meta:b.meta, hasManager:!!d.hasManager,
       agents:[...(d.agents || [])].sort((x,y) => x.order - y.order), logUrl:d.logUrl || ""});
     await restoreSaved(); await unsealAll();
