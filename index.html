@@ -695,10 +695,14 @@ async function unseal(k, box){
 function mergeMinimums(base, overlay){
   if (!base || !overlay || !Array.isArray(overlay.weeks)) return base;
   const names = base.names || [], at = n => names.findIndex(x => x.toLowerCase() === n.toLowerCase());
-  const normalized = label => { const d = new Date(label + (/^\d{4}-\d{2}-\d{2}$/.test(label) ? "T12:00:00" : "")); if (!Number.isFinite(d.getTime())) return label; d.setDate(d.getDate() - (d.getDay()+6)%7); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); };
+  // Legacy sheet-era weeks are labeled by their STARTING Sunday (Sun-Sat; Points Log carries the explicit ranges).
+  // The same working week keys as the Monday after that label, so map legacy Sunday labels to the next Monday before dedup.
+  const normalized = label => { const iso = /^\d{4}-\d{2}-\d{2}$/.test(label); const d = new Date(label + (iso ? "T12:00:00" : "")); if (!Number.isFinite(d.getTime())) return label; if (!iso && d.getDay() === 0) d.setDate(d.getDate() + 1); d.setDate(d.getDate() - (d.getDay()+6)%7); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); };
   const overlayDates = new Set(overlay.weeks.map(w => w.week));
-  const old = (base.weeks || []).filter(w => !overlayDates.has(normalized(w.week)));
-  const fresh = overlay.weeks.map(w => ({...w, values:names.map(n => {const i=overlay.names.indexOf(n);return i<0?null:w.values[i];}), display:names.map(n=>{const i=overlay.names.indexOf(n);return i<0?"":w.display[i];})}));
+  const oldRows = base.weeks || [];
+  const old = oldRows.filter(w => !overlayDates.has(normalized(w.week)));
+  const legacyByKey = new Map(oldRows.map(w => [normalized(w.week), w]));
+  const fresh = overlay.weeks.map(w => { const legacy = legacyByKey.get(normalized(w.week)); return {...w, tier:w.tier ?? legacy?.tier ?? null, reward:w.reward ?? legacy?.reward ?? null, values:names.map(n => {const i=overlay.names.indexOf(n);return i<0?null:w.values[i];}), display:names.map(n=>{const i=overlay.names.indexOf(n);return i<0?"":w.display[i];})}; });
   return {...base, weeks:[...fresh,...old].sort((a,b)=>normalized(b.week).localeCompare(normalized(a.week)))};
 }
 async function applyMinimums(a){
@@ -811,13 +815,14 @@ function openRep(a){
     }
   }
   const partial = state.tiers?.status === "partial";
+  const tieReview = state.tiers?.status === "tie-review";
   const hoursMissing = state.tiers?.missing?.includes(a.name), zeroHours = state.tiers?.zeroHours?.includes(a.name);
   const tierBlock = partial ? (t ? `<div class="soon"><b>Partial weekly ranking.</b> Tier bands and rewards are unavailable.</div><div class="tiles">${tile("Partial rank",fmtInt(t.place),"Among reps with valid rev/hr")}${tile("Total Points",fmtInt(t.total),"Partial ranking")}${tile("Rev / Hr Points",fmtInt(t.revPts),fmtRph(t.rph)+" per hour")}${tile("Save % Points",fmtInt(t.savePts),fmtPct(t.savePct)+" saved")}</div>` : `<div class="soon"><b>${zeroHours ? "Homebase: 0 hours. No rev/hr or tier." : hoursMissing ? "Hours unavailable. Not ranked." : "Not ranked."}</b> Partial weekly rankings; no tier or reward assigned.</div>`) : t?.hoursUnavailable ? `<div class="soon"><b>Hours unavailable.</b> No rev/hr or tier assigned.</div>` : t ? `${push}<div class="tiles">
       ${tile("Tier", esc(t.tier), `+${fmtInt(t.reward)} reward pts if the week ended now`, t.place)}
       ${tile("Total Points", fmtInt(t.total), gapLine(tr, ti))}
       ${tile("Rev / Hr Points", `${fmtInt(t.revPts)}<small> / 60</small>`, `${fmtRph(t.rph)} per hour · +3 for each rep you pass`)}
       ${tile("Save % Points", `${fmtInt(t.savePts)}<small> / 40</small>`, `${fmtPct(t.savePct)} saved · +2 for each rep you pass`)}
-    </div>` : `<div class="soon"><b>Not in this week's tiers.</b> Tiers include the reps on the team roster.</div>`;
+    </div>` : tieReview ? `<div class="soon"><b>Tier placement needs review.</b> Points and rev/hr are tied at a reward boundary; this week's tiers and rewards are pending.</div>` : `<div class="soon"><b>Not in this week's tiers.</b> Tiers include the reps on the team roster.</div>`;
 
   /* weekly minimums (live week) + history (finished weeks from the History tab) */
   const m = a.metrics;
