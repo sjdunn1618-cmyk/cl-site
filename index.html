@@ -79,6 +79,7 @@ h2{font-family:var(--display);font-weight:700;font-size:34px;letter-spacing:.02e
 .board tr.m1 td.rk{color:var(--gold)} .board tr.m2 td.rk{color:var(--silver)} .board tr.m3 td.rk{color:var(--bronze)}
 .board td.nm{font-weight:600;white-space:normal;min-width:140px;font-size:14px}
 .board td.nm small{display:block;font-weight:500;font-size:12px;color:var(--muted);margin-top:1px}
+.board td small.rn{display:block;font-weight:500;font-size:11px;color:var(--muted);margin-top:1px}
 .board td.big{font-family:var(--display);font-size:18px;font-weight:700}
 .board td .pts{display:block;font-size:11.5px;color:var(--muted);font-weight:500}
 .board td .pts b{color:var(--accent);font-weight:700}
@@ -839,6 +840,7 @@ function openRep(a){
         return `<div class="min ${h === null ? "" : h ? "ok" : "bad"}">
           <div class="min-k">${esc(c.n)}</div>
           <div class="min-v">${esc(wk.display[c.i] || "–")}</div>
+          ${/renewals\/hour/i.test(c.n) && wk.renCount != null && wk.renHours != null ? `<div class="min-t">${fmtInt(wk.renCount)} renewals · ${Number(wk.renHours).toFixed(2)} hrs</div>` : ""}
           <div class="min-t">Minimum <b>${tg != null ? esc(m.targetDisplay[c.i]) : "–"}</b></div>
           <div class="min-s">${h === true ? "✓ " : h === false ? "✕ " : ""}${status}</div></div>`; }).join("")}</div>`;
     if (past.length){
@@ -865,7 +867,7 @@ function openRep(a){
         ${tcols.length ? `<div class="trends">${tcols.map(spark).join("")}</div>` : ""}
         <div class="board hist-t" style="margin-top:8px"><table><thead><tr><th class="l">Week Of</th>${hcols.map(c => `<th>${esc(c.n)}</th>`).join("")}${hasT ? `<th class="hide-sm">Minimums Hit</th>` : ""}${anyTier ? "<th>Tier</th><th class=\"hide-sm\">Reward</th>" : ""}</tr></thead>
         <tbody>${past.map(w => { const tc = TIER_CLASS[w.tier] || "t3";
-          return `<tr><td class="l nm">${esc(w.week)}${!w.final ? `<small>Provisional</small>` : ""}</td>${hcols.map(c => `<td${mark(w,c)}>${esc(w.display[c.i] || "–")}</td>`).join("")}${hasT ? `<td class="hide-sm">${cols.filter(c => hit(w.values[c.i], m.targets[c.i], c.n)).length} of ${cols.filter(c => m.targets[c.i] != null).length}</td>` : ""}${anyTier ? `<td class="${tc}">${w.tier ? `<span class="pill">${esc(w.tier)}</span>` : "–"}</td><td class="hide-sm ${tc}">${w.reward != null ? `<span class="reward">+${fmtInt(w.reward)}</span>` : "–"}</td>` : ""}</tr>`; }).join("")}</tbody></table></div>`;
+          return `<tr><td class="l nm">${esc(w.week)}${!w.final ? `<small>Provisional</small>` : ""}</td>${hcols.map(c => `<td${mark(w,c)}>${esc(w.display[c.i] || "–")}${/renewals\/hour/i.test(c.n) && w.renCount != null && w.renHours != null ? `<small class="rn">${fmtInt(w.renCount)} renewals · ${Number(w.renHours).toFixed(2)} hrs</small>` : ""}</td>`).join("")}${hasT ? `<td class="hide-sm">${cols.filter(c => hit(w.values[c.i], m.targets[c.i], c.n)).length} of ${cols.filter(c => m.targets[c.i] != null).length}</td>` : ""}${anyTier ? `<td class="${tc}">${w.tier ? `<span class="pill">${esc(w.tier)}</span>` : "–"}</td><td class="hide-sm ${tc}">${w.reward != null ? `<span class="reward">+${fmtInt(w.reward)}</span>` : "–"}</td>` : ""}</tr>`; }).join("")}</tbody></table></div>`;
     }
   } else {
     metricsHtml = `<div class="soon"><b>Weekly minimums are coming soon.</b> This week will show here once your tab has numbers in it.</div>`;
