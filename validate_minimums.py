@@ -1,12 +1,24 @@
 """Ciphertext-only public sidecar validator. Never handles PINs or keys."""
-import base64,datetime as dt,json,sys
+import base64,datetime as dt,json,os,re,sys
+from zoneinfo import ZoneInfo
 
 def validate(obj,site):
  if set(obj)!= {'v','updatedAt','sourceFieldroutesAt','agents'} or obj['v']!=1:raise ValueError('Invalid overlay schema')
  for k in ('updatedAt','sourceFieldroutesAt'):
   d=dt.datetime.fromisoformat(obj[k].replace('Z','+00:00'))
   if d.tzinfo is None:raise ValueError('Timezone missing')
- if obj['sourceFieldroutesAt']!=site['board']['metricsMeta']['fieldroutesAt']:raise ValueError('FR snapshot mismatch')
+ if obj['sourceFieldroutesAt']!=site['board']['metricsMeta']['fieldroutesAt']:
+  # Past-week mode: a closed week's freshly read source timestamp is acceptable
+  # when HISTORICAL_PERIOD names that closed week; every other check is unchanged.
+  hist=os.environ.get('HISTORICAL_PERIOD','').strip()
+  if not re.fullmatch(r'\d{4}-\d{2}-\d{2}',hist):raise ValueError('FR snapshot mismatch')
+  hd=dt.date.fromisoformat(hist)
+  if hd.weekday()!=0:raise ValueError('Historical period must begin Monday')
+  today=dt.datetime.now(dt.timezone.utc).astimezone(ZoneInfo('America/Denver')).date()
+  if not hd+dt.timedelta(days=4)<today:raise ValueError('Historical period not closed')
+  src=dt.datetime.fromisoformat(obj['sourceFieldroutesAt'].replace('Z','+00:00'))
+  age=(dt.datetime.now(dt.timezone.utc)-src).total_seconds()
+  if not -60<=age<=10800:raise ValueError('Historical source not freshly read')
  ids={a['id'] for a in site['agents']}
  optional={a['id'] for a in site['agents'] if a['id']=='christofer' and a.get('lock') is None}
  if not set(obj['agents'])<=ids or not ids-set(obj['agents'])<=optional:raise ValueError('Roster mismatch')
