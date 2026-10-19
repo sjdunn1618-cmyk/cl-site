@@ -279,31 +279,26 @@ h3.sub{font-family:var(--display);font-size:24px;text-transform:uppercase;letter
 }
 @media (prefers-reduced-motion:reduce){.dots.shake{animation:none}}
 .team-volume{display:block;text-align:right;color:#fff;font-size:12px;line-height:1.5;letter-spacing:0;font-weight:500;margin-top:2px}
-/* Competition: same site palette, weekly points separate from raffle rewards. */
-.comp-summary{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;background:var(--panel);border-radius:14px;padding:22px;margin-top:18px}
-.comp-team{text-align:center;min-width:0}.comp-team h3{font-size:19px;margin:0;font-weight:600}.comp-score{font:700 48px/1.15 var(--display);color:var(--accent)}.comp-score small{display:block;font:500 12px/1.4 var(--body);color:var(--muted)}
-.comp-versus{color:var(--muted);font-size:12px;text-transform:uppercase}.comp-team.leading h3{color:var(--good)}
-.comp-result{font-size:14px;margin:14px 0 0}.comp-result b{color:var(--accent)}
+/* Competition: three independent head-to-head pods; each pod has its own winner, no team layer. */
 .comp-pod{margin-top:28px;background:var(--panel);border-radius:14px;overflow:hidden}.comp-pod-head{padding:18px 18px 14px;border-bottom:1px solid var(--line-2)}
 .comp-pod-head h3{font:700 23px/1.2 var(--display);text-transform:uppercase;margin:0}.comp-pod-head p{font-size:12px;color:var(--muted);margin:5px 0 0}
-.comp-duos{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px 18px;background:var(--panel-2)}.comp-duo{min-width:0}.comp-duo:last-child{text-align:right}.comp-duo strong{display:block;font-size:15px;overflow-wrap:anywhere}.comp-duo .comp-side{font-size:11px;color:var(--muted)}.comp-duo .comp-points{font:700 28px/1.2 var(--display);color:var(--accent);margin-top:5px}.comp-duo.winning .comp-points{color:var(--good)}
+.comp-duos{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px 18px;background:var(--panel-2)}.comp-duo{min-width:0}.comp-duo:last-child{text-align:right}.comp-duo strong{display:block;font-size:15px;overflow-wrap:anywhere}.comp-duo .comp-points{font:700 28px/1.2 var(--display);color:var(--accent);margin-top:5px}.comp-duo.winning .comp-points{color:var(--good)}
 .comp-metrics{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:16px 18px 18px}.comp-metric{min-width:0}.comp-metric h4{font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px;color:var(--muted)}
-.comp-row{display:grid;grid-template-columns:20px 1fr auto auto;gap:8px;align-items:center;border-top:1px solid var(--line);padding:10px 0;font-size:13px;font-variant-numeric:tabular-nums}.comp-row .comp-name{min-width:0;overflow-wrap:anywhere;font-weight:600}.comp-row .comp-name small{display:block;font-size:10px;font-weight:400;color:var(--muted)}.comp-row .comp-place{color:var(--muted)}.comp-row .comp-pct{color:var(--fg)}.comp-row .comp-pts{color:var(--accent);font-weight:700;min-width:30px;text-align:right}.comp-row .comp-pts small{font-size:10px;font-weight:400}
-.comp-rule{font-size:12px;color:var(--muted);line-height:1.6}.comp-pod-status{color:var(--fg)!important}
+.comp-row{display:grid;grid-template-columns:20px 1fr auto auto;gap:8px;align-items:center;border-top:1px solid var(--line);padding:10px 0;font-size:13px;font-variant-numeric:tabular-nums}.comp-row .comp-name{min-width:0;overflow-wrap:anywhere;font-weight:600}.comp-row .comp-place{color:var(--muted)}.comp-row .comp-pct{color:var(--fg)}.comp-row .comp-pts{color:var(--accent);font-weight:700;min-width:30px;text-align:right}.comp-row .comp-pts small{font-size:10px;font-weight:400}
+.comp-pod-status{color:var(--fg)!important}
 @media(max-width:640px){
  nav button[data-view="competition"]{flex:1.5}
- .comp-summary{gap:8px;padding:18px 10px}.comp-team h3{font-size:15px}.comp-score{font-size:42px}.comp-versus{font-size:10px}
  .comp-metrics{grid-template-columns:1fr;gap:22px}.comp-duos{gap:10px}.comp-duo strong{font-size:13px}.comp-pod-head h3{font-size:22px}
  .comp-row{font-size:13px;padding:11px 0;grid-template-columns:20px minmax(0,1fr) auto auto;gap:10px}
 }
 
-/* Fixed team identity, separate from the live winner. Text labels remain visible. */
-.comp-justin{--team-color:#a9d4ed;--team-tint:rgba(169,212,237,.045)}
-.comp-cannon{--team-color:#f4bc95;--team-tint:rgba(244,188,149,.045)}
-.comp-team h3,.comp-team.leading h3,.comp-team .comp-score,.comp-duo .comp-side,.comp-duo .comp-points,.comp-duo.winning .comp-points{color:var(--team-color)}
-.comp-row{border-left:3px solid var(--team-color);padding:10px 8px;background:var(--team-tint);row-gap:5px}
-.comp-row .comp-name,.comp-row .comp-name small,.comp-row .comp-pts{color:var(--team-color)}
-.comp-row .comp-name small{font-size:11px;font-weight:500;margin-top:2px}
+/* Fixed duo colors within each pod: first duo blue, second peach. */
+.comp-side-0{--side-color:#a9d4ed;--side-tint:rgba(169,212,237,.045)}
+.comp-side-1{--side-color:#f4bc95;--side-tint:rgba(244,188,149,.045)}
+.comp-duo .comp-points,.comp-duo.winning .comp-points{color:var(--side-color)}
+.comp-tag{display:block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--good);margin-top:4px}
+.comp-row{border-left:3px solid var(--side-color);padding:10px 8px;background:var(--side-tint);row-gap:5px}
+.comp-row .comp-name,.comp-row .comp-pts{color:var(--side-color)}
 .comp-volume{grid-column:2 / -1;font-size:15px;line-height:1.5;font-weight:500;color:var(--fg)}
 @media(max-width:640px){.comp-row{padding:11px 7px;column-gap:7px}.comp-volume{font-size:15px}}
 
@@ -506,9 +501,9 @@ function renderTiers(d = state.tiers, prefix = "tier"){
 /* Public weekly save aggregates only. No source reads or reward-ledger writes. */
 const COMP_START = '2026-10-19', COMP_END = '2026-10-23';
 const COMP_PODS = [
-  {justin:['Colby Earl','Teagan McCune'],cannon:['Gabe Layton','Jonah Layton']},
-  {justin:['Wyatt Brownell','Marcus Neubert'],cannon:['Carter Bishop','Spencer Bishop']},
-  {justin:['Joseph Black','Christofer Manzanera'],cannon:['Mitch McGuire','Luke Thayn']}
+  [['Colby Earl','Teagan McCune'],['Gabe Layton','Jonah Layton']],
+  [['Wyatt Brownell','Marcus Neubert'],['Carter Bishop','Spencer Bishop']],
+  [['Joseph Black','Christofer Manzanera'],['Mitch McGuire','Luke Thayn']]
 ];
 function competitionMetric(names, rows, points){
   const byName=new Map((rows||[]).map(r=>[r.name,r]));
@@ -531,19 +526,17 @@ function competitionMetric(names, rows, points){
   return out;
 }
 function competitionStandings(saves){
-  const wins={justin:0,cannon:0,tied:0,pending:0};
-  const pods=COMP_PODS.map((pod,index)=>{
-    const names=[...pod.justin,...pod.cannon];
+  const pods=COMP_PODS.map((duos,index)=>{
+    const names=duos.flat();
     const overall=competitionMetric(names,saves?.overall,[2,1,0,0]);
     const out=competitionMetric(names,saves?.outContract,[3,2,1,0]);
-    const reps=names.map(name=>({name,side:pod.justin.includes(name)?'justin':'cannon',overall:overall.find(r=>r.name===name),out:out.find(r=>r.name===name)}));
-    const points=Object.fromEntries(['justin','cannon'].map(side=>[side,reps.filter(r=>r.side===side).reduce((n,r)=>n+r.overall.pointUnits+r.out.pointUnits,0)/12]));
+    const reps=names.map(name=>({name,side:duos.findIndex(d=>d.includes(name)),overall:overall.find(r=>r.name===name),out:out.find(r=>r.name===name)}));
+    const points=duos.map((_,side)=>reps.filter(r=>r.side===side).reduce((n,r)=>n+r.overall.pointUnits+r.out.pointUnits,0)/12);
     const complete=reps.every(r=>r.overall.pct!=null&&r.out.pct!=null);
-    const leader=!complete?'pending':points.justin===points.cannon?'tied':points.justin>points.cannon?'justin':'cannon';
-    wins[leader]++;
-    return {...pod,index,reps,overall,out,points,leader};
+    const leader=!complete?'pending':points[0]===points[1]?'tied':(points[0]>points[1]?0:1);
+    return {duos,index,reps,overall,out,points,leader};
   });
-  return {pods,wins,leader:wins.justin>=2?'justin':wins.cannon>=2?'cannon':null};
+  return {pods};
 }
 
 function renderCompetition(){
@@ -555,16 +548,13 @@ function renderCompetition(){
   const preview=c.period.start==='2026-10-12';
   const nowDay=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Denver',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
   const final=!preview&&nowDay>COMP_END;
-  const d=competitionStandings(c),title=side=>side==='justin'?'Team Justin':'Team Cannon';
+  const d=competitionStandings(c);
   $('#comp-range').textContent=preview?'Live preview · October 12-16, 2026':'Competition · October 19-23, 2026';
-  $('#comp-description').textContent=preview?'Competition runs October 19-23, Mountain time. This preview uses this week\'s totals; preview points do not carry over.':'Monday-Friday, Mountain time. Win at least 2 of the 3 pod matchups to win the competition.';
-  const summary=['justin','cannon'].map(side=>`<div class="comp-team comp-${side} ${d.wins[side]>d.wins[side==='justin'?'cannon':'justin']?'leading':''}"><h3>${title(side)}</h3><div class="comp-score">${d.wins[side]}<small>of 3 pods ${final?'won':'leading'}</small></div></div>`);
-  const tied=d.wins.tied?` · ${d.wins.tied} tied pod${d.wins.tied===1?'':'s'}`:'';
-  const pending=d.wins.pending?` · ${d.wins.pending} waiting for data`:'';
-  const outcome=d.leader?`${title(d.leader)} ${final?'wins':'is ahead'} with ${d.wins[d.leader]} of 3 pods.`:'No team has 2 pod wins yet.';
+  $('#comp-description').textContent=preview?'Competition runs October 19-23, Mountain time. This preview uses this week\'s totals; preview points do not carry over.':'Monday-Friday, Mountain time. Three head-to-head pods; each pod has its own winner.';
   const short=name=>({'Joseph Black':'Joe','Spencer Bishop':'Bishop','Christofer Manzanera':'Christofer'}[name]||name.split(' ')[0]);
-  const metric=(rows,label)=>`<div class="comp-metric"><h4>${label}</h4>${rows.map(r=>`<div class="comp-row comp-${COMP_PODS.some(p=>p.justin.includes(r.name))?'justin':'cannon'}"><span class="comp-place">${r.place||'-'}</span><span class="comp-name">${esc(r.name)}<small>Team ${COMP_PODS.some(p=>p.justin.includes(r.name))?'Justin':'Cannon'}</small></span><span class="comp-pct">${r.pct==null?'-':r.pct.toFixed(2)+'%'}</span><span class="comp-pts">${pt(r.points)}<small> pts</small></span><span class="comp-volume">${r.attempts?`${fmtInt(r.saves)} saves / ${fmtInt(r.cancels)} cancels`:"No attempts yet"}</span></div>`).join('')}</div>`;
-  $('#comp-body').innerHTML=`<div class="comp-summary">${summary[0]}<div class="comp-versus">vs</div>${summary[1]}</div><p class="comp-result"><b>${esc(outcome)}</b>${tied}${pending}</p>`+d.pods.map(p=>`<article class="comp-pod"><div class="comp-pod-head"><h3>Pod ${p.index+1}</h3><p class="comp-pod-status">${p.leader==='pending'?'Waiting for attempts in both metrics':p.leader==='tied'?'Tied matchup':title(p.leader)+(final?' wins this pod':' leads this pod')}</p></div><div class="comp-duos">${['justin','cannon'].map(side=>`<div class="comp-duo comp-${side} ${p.leader===side?'winning':''}"><span class="comp-side">${title(side)}</span><strong>${p[side].map(short).map(esc).join(' &amp; ')}</strong><div class="comp-points">${pt(p.points[side])} <small>pts</small></div></div>`).join('')}</div><div class="comp-metrics">${metric(p.overall,'Overall save %')}${metric(p.out,'Out-of-contract save %')}</div></article>`).join('');
+  const duoName=names=>names.map(short).map(esc).join(' &amp; ');
+  const metric=(pod,rows,label)=>`<div class="comp-metric"><h4>${label}</h4>${rows.map(r=>`<div class="comp-row comp-side-${pod.duos.findIndex(duo=>duo.includes(r.name))}"><span class="comp-place">${r.place||'-'}</span><span class="comp-name">${esc(r.name)}</span><span class="comp-pct">${r.pct==null?'-':r.pct.toFixed(2)+'%'}</span><span class="comp-pts">${pt(r.points)}<small> pts</small></span><span class="comp-volume">${r.attempts?`${fmtInt(r.saves)} saves / ${fmtInt(r.cancels)} cancels`:"No attempts yet"}</span></div>`).join('')}</div>`;
+  $('#comp-body').innerHTML=d.pods.map(p=>`<article class="comp-pod"><div class="comp-pod-head"><h3>Pod ${p.index+1}</h3><p class="comp-pod-status">${p.leader==='pending'?'Waiting for attempts in both metrics':p.leader==='tied'?'Tied matchup':duoName(p.duos[p.leader])+(final?' win this pod':' lead this pod')}</p></div><div class="comp-duos">${p.duos.map((duo,side)=>`<div class="comp-duo comp-side-${side} ${p.leader===side?'winning':''}"><strong>${duoName(duo)}</strong>${p.leader===side?`<span class="comp-tag">${final?"Winner":"Leading"}</span>`:""}<div class="comp-points">${pt(p.points[side])} <small>pts</small></div></div>`).join('')}</div><div class="comp-metrics">${metric(p,p.overall,'Overall save %')}${metric(p,p.out,'Out-of-contract save %')}</div></article>`).join('');
 }
 
 /* ---------- saves ---------- */
