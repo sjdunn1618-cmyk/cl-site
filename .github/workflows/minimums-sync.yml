@@ -11,6 +11,10 @@ on:
         required: true
         default: false
         type: boolean
+      historical_period:
+        description: 'Closed-week Monday YYYY-MM-DD when sealing a past week; enables past-week mode'
+        required: false
+        type: string
 permissions:
   contents: write
 concurrency:
@@ -24,6 +28,7 @@ jobs:
       - name: Validate ciphertext only
         env:
           MINIMUMS_CIPHERTEXT: ${{ inputs.minimums_ciphertext }}
+          HISTORICAL_PERIOD: ${{ inputs.historical_period }}
         run: python validate_minimums.py
       - name: Publish encrypted minimums only
         if: inputs.publish == true
