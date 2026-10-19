@@ -180,7 +180,8 @@ def saves_board(notes, roster):
     c = agg_saves(notes, roster)
     def mk(sk, ck):
         rows = [{"name": r, "pct": round(pct(v[sk], v[ck])), "saves": float(v[sk]), "cancels": float(v[ck])} for r, v in c.items()]
-        return ranked(rows, lambda x: (x["pct"], x["saves"]))
+        # Rank on the exact save fraction, not the rounded display pct; saves count breaks exact-fraction ties.
+        return ranked(rows, lambda x: (x["saves"] / (x["saves"] + x["cancels"]) if x["saves"] + x["cancels"] else 0.0, x["saves"]))
     def tot(sk, ck):
         S, C = sum(v[sk] for v in c.values()), sum(v[ck] for v in c.values())
         return {"name": "Total", "rank": None, "pct": round(pct(S, C), 1), "saves": float(S), "cancels": float(C)}
