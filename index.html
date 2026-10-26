@@ -506,7 +506,9 @@ const COMP_PODS = [
   [['Wyatt Brownell','Marcus Neubert'],['Carter Bishop','Spencer Bishop']],
   [['Joseph Black','Christofer Manzanera'],['Mitch McGuire','Luke Thayn']]
 ];
-function competitionMetric(names, rows, points){
+/* Owner instruction 2026-10-26: for the 2026-10-19 week Colby Earl receives no competition points. Performance facts (saves, cancels, percentages, places) are unchanged; only the point award is withheld. */
+const COMP_POINT_EXCLUSIONS={'2026-10-19':['Colby Earl']};
+function competitionMetric(names, rows, points, excluded){
   const byName=new Map((rows||[]).map(r=>[r.name,r]));
   const ranked=names.map(name=>{
     const r=byName.get(name),s=r?.saves,c=r?.cancels;
@@ -524,13 +526,14 @@ function competitionMetric(names, rows, points){
     for(let k=i;k<end;k++)out.push({...ranked[k],place:i+1,points:shared,pointUnits:Math.round(shared*12)});
     i=end;
   }
-  return out;
+  return out.map(r=>excluded&&excluded.includes(r.name)?{...r,points:0,pointUnits:0}:r);
 }
 function competitionStandings(saves){
   const pods=COMP_PODS.map((duos,index)=>{
     const names=duos.flat();
-    const overall=competitionMetric(names,saves?.overall,[2,1,0,0]);
-    const out=competitionMetric(names,saves?.outContract,[3,2,1,0]);
+    const excluded=(typeof COMP_POINT_EXCLUSIONS!=='undefined'&&COMP_POINT_EXCLUSIONS[saves?.period?.start])||[];
+    const overall=competitionMetric(names,saves?.overall,[2,1,0,0],excluded);
+    const out=competitionMetric(names,saves?.outContract,[3,2,1,0],excluded);
     const reps=names.map(name=>({name,side:duos.findIndex(d=>d.includes(name)),overall:overall.find(r=>r.name===name),out:out.find(r=>r.name===name)}));
     const points=duos.map((_,side)=>reps.filter(r=>r.side===side).reduce((n,r)=>n+r.overall.pointUnits+r.out.pointUnits,0)/12);
     const complete=reps.every(r=>r.overall.pct!=null&&r.out.pct!=null);
