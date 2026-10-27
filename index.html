@@ -547,6 +547,8 @@ function competitionStandings(saves){
 }
 
 function renderCompetition(){
+  /* Owner instruction 2026-10-27: competition tab blanked after the 2026-10-19 awards were recorded (pod 2 Carter & Bishop, pod 3 Mitch & Luke; pod 1 not awarded). Weekly facts remain in data.json and git history. */
+  $('#comp-range').textContent='';$('#comp-description').textContent='';$('#comp-body').innerHTML='';return;
   const c=state.competition;
   const pt=v=>new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(v);
   if(!c||!['2026-10-12',COMP_START].includes(c.period?.start)){
