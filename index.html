@@ -508,6 +508,8 @@ const COMP_PODS = [
 ];
 /* Owner instruction 2026-10-26: for the 2026-10-19 week Colby Earl receives no competition points. Performance facts (saves, cancels, percentages, places) are unchanged; only the point award is withheld. */
 const COMP_POINT_EXCLUSIONS={'2026-10-19':['Colby Earl']};
+/* Owner instruction 2026-10-27: for the 2026-10-19 week pod 1 is not awarded competition points (the tied matchup pays nothing). Performance facts and places are unchanged. Pod 2 stands to Carter & Bishop and pod 3 to Mitch & Luke as computed. */
+const COMP_POD_POINT_EXCLUSIONS={'2026-10-19':[0]};
 function competitionMetric(names, rows, points, excluded){
   const byName=new Map((rows||[]).map(r=>[r.name,r]));
   const ranked=names.map(name=>{
@@ -536,6 +538,7 @@ function competitionStandings(saves){
     const out=competitionMetric(names,saves?.outContract,[3,2,1,0],excluded);
     const reps=names.map(name=>({name,side:duos.findIndex(d=>d.includes(name)),overall:overall.find(r=>r.name===name),out:out.find(r=>r.name===name)}));
     const points=duos.map((_,side)=>reps.filter(r=>r.side===side).reduce((n,r)=>n+r.overall.pointUnits+r.out.pointUnits,0)/12);
+    if((typeof COMP_POD_POINT_EXCLUSIONS!=='undefined')&&(COMP_POD_POINT_EXCLUSIONS[saves?.period?.start]||[]).includes(index)){points[0]=0;points[1]=0;}
     const complete=reps.every(r=>r.overall.pct!=null&&r.out.pct!=null);
     const leader=!complete?'pending':points[0]===points[1]?'tied':(points[0]>points[1]?0:1);
     return {duos,index,reps,overall,out,points,leader};
